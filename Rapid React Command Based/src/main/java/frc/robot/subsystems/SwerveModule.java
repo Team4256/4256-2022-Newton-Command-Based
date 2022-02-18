@@ -20,9 +20,7 @@ public final class SwerveModule {
 	private double tractionPreviousPathLength = 0.0;
 
 	private final PIDController turningPidController;
-
-    private final AnalogInput absoluteEncoder;
-    private final double tareAngle;
+  private final double tareAngle;
 
 	// This constructor is intended for use with the module which has an encoder on
 	// the traction motor.
@@ -30,8 +28,6 @@ public final class SwerveModule {
 	public SwerveModule(int driveMotorId, int turningMotorId, int absoluteEncoderId, double tareAngle) {
 
         this.tareAngle = tareAngle;
-        
-        absoluteEncoder = new AnalogInput(absoluteEncoderId);
 
         driveMotor = new TractionControl(driveMotorId);
         turningMotor = new RotationControl(turningMotorId, absoluteEncoderId);
