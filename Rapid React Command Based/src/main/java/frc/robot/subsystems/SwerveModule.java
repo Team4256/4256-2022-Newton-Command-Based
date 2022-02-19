@@ -10,7 +10,9 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
+import frc.robot.Robot.*;
+import frc.robot.Parameters;
+
 public final class SwerveModule {
 	public static final double ROTATOR_GEAR_RATIO = 1.0;
 	public static final double TRACTION_GEAR_RATIO = 52.0 / 9.0;// updated 2019
@@ -20,9 +22,10 @@ public final class SwerveModule {
 	private double decapitated = 1.0;
 	private double tractionDeltaPathLength = 0.0;
 	private double tractionPreviousPathLength = 0.0;
-	private final PIDController turningPidController;
+	public final PIDController turningPidController;
   	private final double tareAngle;
 	public String moduleName;
+	
 
 	// This constructor is intended for use with the module which has an encoder on
 	// the traction motor.
@@ -33,9 +36,7 @@ public final class SwerveModule {
 		moduleName = name;
         driveMotor = new TractionControl(driveMotorId);
         turningMotor = new RotationControl(turningMotorId, absoluteEncoderId);
-
-
-        turningPidController = new PIDController(2., 0, 0);
+		turningPidController = new PIDController(2, 0, 0);
         turningPidController.enableContinuousInput(-180, 180);
 
         driveMotor.resetEncoder();
@@ -53,8 +54,9 @@ public final class SwerveModule {
     }
 
     public void setDesiredState(SwerveModuleState state) {
-        if (Math.abs(state.speedMetersPerSecond) < 0.001) {
-            //stop();
+        if (Math.abs(state.speedMetersPerSecond) < .5
+		) {
+            stop();
             return;
         }
         state = SwerveModuleState.optimize(state, getState().angle);
@@ -72,6 +74,7 @@ public final class SwerveModule {
 
     public void stop() {
         driveMotor.set(0);
+		turningMotor.SetAngle(0);
     }
    
 }

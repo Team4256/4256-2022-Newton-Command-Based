@@ -20,10 +20,11 @@ public class MotorFactory {
             
             return new TalonFXFalcon(deviceID, false);
 
-        } else if (tractionMotorType == MotorType.NEO) { 
-                return new SparkMaxNeo(deviceID, IdleMode.kBrake, false);
+        } 
+        // else if (tractionMotorType == MotorType.NEO) { 
+        //         return new SparkMaxNeo(deviceID, IdleMode.kBrake, false);
 
-        }
+        // }
         return null;
         
  }
@@ -34,9 +35,10 @@ public class MotorFactory {
            // SmartDashboard.putBoolean("isDevIDLegal", isDevIDLegal);
             return new TalonFXFalcon(deviceID, NeutralMode.Brake, true, analogEncoderID);
 
-        } else if (tractionMotorType == MotorType.NEO) {
-            return new SparkMaxNeo(deviceID, IdleMode.kCoast, false);
-        }
+        } 
+        // else if (tractionMotorType == MotorType.NEO) {
+        //     return new SparkMaxNeo(deviceID, IdleMode.kCoast, false);
+        // }
         return null;
     }
 

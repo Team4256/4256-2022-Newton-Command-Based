@@ -7,7 +7,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.*;
 public class SwerveSubsystem extends SubsystemBase {
 
@@ -67,7 +66,7 @@ public class SwerveSubsystem extends SubsystemBase {
     return odometer.getPoseMeters();
   }
 
-  public void resetOdometry(Pose2d pose) {
+  public void resetOdometer(Pose2d pose) {
     odometer.resetPosition(pose, getRotation2d());
   }
 
@@ -82,11 +81,13 @@ public class SwerveSubsystem extends SubsystemBase {
     );
     SmartDashboard.putNumber("Robot Heading", getHeading());
     SmartDashboard.putNumber("moduleAPos", moduleA.getAngle());
+    
     SmartDashboard.putString(
       "Robot Location",
       getPose().getTranslation().toString()
     );
   }
+
 
   public void stopModules() {
     moduleA.stop();
@@ -104,12 +105,10 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public void setModuleStates(SwerveModuleState[] desiredStates) {
-    SmartDashboard.putString("B4Swerve[A] state", desiredStates[0].toString());
     SwerveDriveKinematics.desaturateWheelSpeeds(
       desiredStates,
       Parameters.MAX_METERS_PER_SECOND
     );
-    SmartDashboard.putString("!B4Swerve[A] state", desiredStates[0].toString());
     
     moduleA.setDesiredState(desiredStates[0]);
     moduleB.setDesiredState(desiredStates[1]);

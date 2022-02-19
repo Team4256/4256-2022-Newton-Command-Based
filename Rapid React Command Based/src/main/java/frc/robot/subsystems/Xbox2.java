@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.DPad.Direction;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.Joystick;
@@ -22,6 +23,7 @@ public class Xbox2 extends Joystick{
 	public JoystickButton selectButton = new JoystickButton(this, 7);
 	public JoystickButton leftStickButton = new JoystickButton(this, 9);
 	public JoystickButton rightStickButton = new JoystickButton(this, 10);
+	public JoystickButton DPadUpButton = new JoystickButton(this, 11);
 	public Button leftTriggerButton = new LeftTrigger(this);
 	public Button rightTriggerButton = new RightTrigger(this);
     
@@ -29,8 +31,10 @@ public class Xbox2 extends Joystick{
 	private short m_leftRumble;
 	private short m_rightRumble;
 
-	// public DPadUp dPadUp = new DPadUp(this);
-	// public DPadDown dPadDown = new DPadDown(this);
+	public DPad dPadUp = new DPad(this, Direction.UP);
+	public DPad dPadDown = new DPad(this, Direction.DOWN);
+	public DPad dPadLeft = new DPad(this, Direction.LEFT);
+	public DPad dPadRight = new DPad(this, Direction.RIGHT);
 
 	public double getTriggerTwist() {
 		double leftTriggerValue = this.getRawAxis(2);

@@ -3,22 +3,16 @@ package frc.robot;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.controller.PIDController;
 
 public class Parameters {
+    // Controller
+    public static final double CONTROLLER_DEADBAND = 0.25;
+    
     // Gyro
     public static final byte GYRO_UPDATE_HZ = 50;
     public static final double GYRO_OFFSET = 0;
-
-    // Automomous
-    public static final double AUTO1_DISTANCE_FROM_BALL_TO_PORT = 20;
-    public static final double AUTO_SPEED = .5;
-    public static final double AUTO1_HEADING_TO_BALL = 180;
-    public static final double AUTO1_HEADING_TO_HUB = 0;
-    public static final double AUTO2_DISTANCE_FROM_BALL_TO_PORT = 20;
-    public static final double AUTO2_HEADING_TO_BALL = 225;
-    public static final double AUTO2_HEADING_TO_HUB = 25;
-    public static final double AUTO2_SPIN_TO_BALL = 25;
-    public static final double AUTO2_SPIN_TO_HUB = 25;
 
     // Ball Chute
     public static final int BALL_SENSOR_ID = 0;
@@ -53,14 +47,20 @@ public class Parameters {
     public static final double ABSOLUTE_ENCODER_B_TARE = 2.9; // Front Left
     public static final double ABSOLUTE_ENCODER_C_TARE = 2.4; // Front Left
     public static final double ABSOLUTE_ENCODER_D_TARE = 3.4033; // Front Left
-    public static final double MAX_METERS_PER_SECOND = 3.83; // Front Left
-
+    public static final double MAX_METERS_PER_SECOND = 3.83; // Max Speed
     public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * 2 * Math.PI;
-
-    public static final double TELEOP_SPEED_LIMIT_MPS = MAX_METERS_PER_SECOND / 2;
+    public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = Math.PI / 4;
+    public static final double TELEOP_SPEED_LIMIT_MPS = MAX_METERS_PER_SECOND / 1.5;
     public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 4;
-    public static final double TELEOP_MAX_ACCELERATION = 3;
+    public static final double MAX_ACCELERATION = 3;
     public static final double TELEOP_MAX_ANGULAR_ACCELERATION = 3;
+
+
+    // Automomous
+    public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = //
+    new TrapezoidProfile.Constraints(
+    MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
+    MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
 
     // Climber
     public static final int CLIMBER_LOCK_FORWARD_CHANNEL = 4; // Lock gear engage for climbing on Falcons

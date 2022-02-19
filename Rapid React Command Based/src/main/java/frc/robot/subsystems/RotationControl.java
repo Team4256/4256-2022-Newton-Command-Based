@@ -9,33 +9,23 @@ public class RotationControl{
     double TareAngle = 0;
     private double lastLegalDirection = 1.0;
 
-
-
     //constructor
    public RotationControl(int deviceID, int analogEncoderID){
           rotationMotor = MotorFactory.createRotationMotor(deviceID, analogEncoderID);  
    }
 
-
-
    public void SetAngle(double angle){
         rotationMotor.setAngle(angle);
    }
-
-
 
    public void SetTareAngle(double inputAngle){
        TareAngle=inputAngle;
    }
    
-
-
-
    public double GetTareAngle(){  
     return TareAngle;
    }
 
-   
    public void completeLoopUpdate(){  
     rotationMotor.completeLoopUpdate();
    }
@@ -72,15 +62,6 @@ public class RotationControl{
    public double getAbsoluteEncoder() {
        return rotationMotor.getPosition();
    }
-
-   public double pathTo(double target) {//ANGLE
-    final double current = getCurrentAngle();
-    double path = Compass.legalPath(current, target);
-    if (current == Compass.legalize(current)) lastLegalDirection = Math.signum(path);
-    else if (Math.signum(path) != -lastLegalDirection) path -= Math.copySign(360, path);
-    
-    return path;
-}
 
 }
 

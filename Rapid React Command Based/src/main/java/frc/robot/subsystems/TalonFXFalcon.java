@@ -217,7 +217,6 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
         double targetPoint = Math.toDegrees(targetAngle);
         int channelID = encoderPort.getChannel();
         double encoderPosition = getCurrentAngle();
-        SmartDashboard.putNumber("targetAngle", targetPoint);
         while (targetPoint <= -180) {
             targetPoint += 360;
         } 
@@ -244,7 +243,9 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
         super.set(percentSpeed);
         updated = true;
         lastSetpoint = percentSpeed; 
-        SmartDashboard.putNumber("TurnSet", percentSpeed);
+        SmartDashboard.putNumber("targetPoint", targetPoint);
+        SmartDashboard.putNumber("encoderPosition", encoderPosition);
+        SmartDashboard.putNumber("percentSpeed", percentSpeed);
 
     }
 

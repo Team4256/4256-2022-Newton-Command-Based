@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.*;
+import frc.robot.Parameters;
 
 
 
@@ -50,7 +51,7 @@ public class RobotContainer {
             () -> -driver.getRightStickX(),
             () -> !driver.getRawButtonPressed(Xbox.BUTTON_START)));
     configureButtonBindings();
-    SmartDashboard.putNumber("XLeftAxis", driver.getLeftStickX());
+    
   }
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -62,8 +63,48 @@ public class RobotContainer {
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
     driver.xButton.whenPressed(() -> swerveSubsystem.stopModules());
     driver.yButton.whenPressed(() -> swerveSubsystem.driveModules());
+    driver.dPadUp.whenPressed(() -> swerveSubsystem.resetOdometer(new Pose2d(0, 0, new Rotation2d(0))));
   }
+  public Command getAutonomousCommand() {
+    // 1. Create trajectory settings
+    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
+            Parameters.MAX_METERS_PER_SECOND,
+            Parameters.MAX_ACCELERATION)
+                    .setKinematics(Parameters.DRIVE_KINEMATICS);
 
+    // 2. Generate trajectory
+    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
+            new Pose2d(0, 0, new Rotation2d(0)),
+            List.of(
+                    new Translation2d(1, 0),
+                    new Translation2d(1, -1)),
+            new Pose2d(2, -1, Rotation2d.fromDegrees(180)),
+            trajectoryConfig);
+
+    // 3. Define PID controllers for tracking trajectory
+    PIDController xController = new PIDController(1.5, 0, 0);
+    PIDController yController = new PIDController(1.5, 0, 0);
+    ProfiledPIDController thetaController = new ProfiledPIDController(
+            3, 0, 0, Parameters.THETA_CONTROLLER_CONSTRAINTS);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+    // 4. Construct command to follow trajectory
+    SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+            trajectory,
+            swerveSubsystem::getPose,
+            Parameters.DRIVE_KINEMATICS,
+            xController,
+            yController,
+            thetaController,
+            swerveSubsystem::setModuleStates,
+            swerveSubsystem);
+
+    // 5. Add some init and wrap-up, and return everything
+    return new SequentialCommandGroup(
+            new InstantCommand(() -> swerveSubsystem.resetOdometer(trajectory.getInitialPose())),
+            swerveControllerCommand,
+            new InstantCommand(() -> swerveSubsystem.stopModules()));
+}
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

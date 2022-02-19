@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import java.util.function.Supplier;
+
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -26,8 +27,8 @@ public class SwerveXboxCmd extends CommandBase {
     this.ySpdFunction = ySpdFunction;
     this.turningSpdFunction = turningSpdFunction;
     this.fieldOrientedFunction = fieldOrientedFunction;
-    this.xLimiter = new SlewRateLimiter(Parameters.TELEOP_MAX_ACCELERATION);
-    this.yLimiter = new SlewRateLimiter(Parameters.TELEOP_MAX_ACCELERATION);
+    this.xLimiter = new SlewRateLimiter(Parameters.MAX_ACCELERATION);
+    this.yLimiter = new SlewRateLimiter(Parameters.MAX_ACCELERATION);
     this.turningLimiter = new SlewRateLimiter(Parameters.TELEOP_MAX_ANGULAR_ACCELERATION);
     addRequirements(swerveSubsystem);
   }
@@ -44,7 +45,12 @@ public class SwerveXboxCmd extends CommandBase {
      double xSpeed = xSpdFunction.get();
      double ySpeed = ySpdFunction.get();
      double turningSpeed = turningSpdFunction.get();
-
+     SmartDashboard.putNumber("xSpd", xSpeed);
+     SmartDashboard.putNumber("ySpd", ySpeed);
+     // 2. Apply deadband
+     xSpeed = Math.abs(xSpeed) > Parameters.CONTROLLER_DEADBAND ? xSpeed : 0.0;
+     ySpeed = Math.abs(ySpeed) > Parameters.CONTROLLER_DEADBAND ? ySpeed : 0.0;
+     turningSpeed = Math.abs(turningSpeed) > Parameters.CONTROLLER_DEADBAND ? turningSpeed : 0.0;
      // 3. Make the driving smoother
      xSpeed = xLimiter.calculate(xSpeed) * Parameters.TELEOP_SPEED_LIMIT_MPS;
      ySpeed = yLimiter.calculate(ySpeed) * Parameters.TELEOP_SPEED_LIMIT_MPS;
