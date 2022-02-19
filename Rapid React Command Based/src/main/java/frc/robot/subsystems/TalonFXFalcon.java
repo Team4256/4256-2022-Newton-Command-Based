@@ -36,7 +36,7 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
     public final Compass compass = new Compass();
     private double lastLegalDirection = 1.0;
     private AnalogInput encoderPort;
-    private AnalogEncoder angleEncoder;
+    public AnalogEncoder angleEncoder;
     private double encoderMinVoltage;
     private double encoderMaxVoltage;
     private double encoderTareVoltage;
@@ -168,7 +168,7 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
     // get angle
     public double getCurrentAngle() {
 
-        return 360 - (encoderPort.getVoltage() - encoderTareVoltage)/(encoderMaxVoltage - encoderMinVoltage) * 360;
+        return Math.toRadians(360 - (encoderPort.getVoltage() - encoderTareVoltage)/(encoderMaxVoltage - encoderMinVoltage) * 360);
 
     }
 
@@ -216,27 +216,28 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
 
     // Set Angle
     public void setAngle(double targetAngle) {
-
+        double targetPoint = Math.toDegrees(targetAngle);
         int channelID = encoderPort.getChannel();
         double encoderPosition = getCurrentAngle();
-        while (targetAngle <= -180) {
-            targetAngle += 360;
+        SmartDashboard.putNumber("targetAngle", targetPoint);
+        while (targetPoint <= -180) {
+            targetPoint += 360;
         } 
 
-        while (targetAngle > 180) {
-            targetAngle -= 360;
+        while (targetPoint > 180) {
+            targetPoint -= 360;
         }
-        double error = targetAngle - encoderPosition;
+        double error = targetPoint - encoderPosition;
 
-        while (targetAngle - encoderPosition > 180) {
+        while (targetPoint - encoderPosition > 180) {
             encoderPosition += 360;
         }
 
-        while (targetAngle - encoderPosition < -180) {
+        while (targetPoint - encoderPosition < -180) {
             encoderPosition -= 360;
         }
 
-        double percentSpeed = anglePIDController.calculate(encoderPosition, targetAngle);
+        double percentSpeed = anglePIDController.calculate(encoderPosition, targetPoint);
 
         if (Math.abs(percentSpeed) > .5) {
             percentSpeed = Math.signum(percentSpeed) * .5;
@@ -245,7 +246,7 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
         super.set(percentSpeed);
         updated = true;
         lastSetpoint = percentSpeed; 
-        
+        SmartDashboard.putNumber("TurnSet", percentSpeed);
 
     }
 
@@ -282,11 +283,5 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
     public void getCurrentAngle(double angle) {
 
     }
-
-    
-
-    
-    
-
     
 }

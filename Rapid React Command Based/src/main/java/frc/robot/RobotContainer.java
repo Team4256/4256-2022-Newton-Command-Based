@@ -35,21 +35,19 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
-  private final Xbox driver = new Xbox(0);
-  private final Xbox gunner = new Xbox(1);
-  public Xbox2 driver2 = new Xbox2(0);
-  public Xbox2 gunner2 = new Xbox2(1);
-  XboxController exampleController = new XboxController(2);
+  
+  public Xbox2 driver = new Xbox2(0);
+  public Xbox2 gunner = new Xbox2(1);
+  
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new SwerveXboxCmd(
             swerveSubsystem,
-            () -> -driver.getDeadbandedAxis(Xbox.AXIS_LEFT_X),
-            () -> driver.getDeadbandedAxis(Xbox.AXIS_RIGHT_Y),
-            () -> driver.getDeadbandedAxis(Xbox.AXIS_RIGHT_X),
+            () -> driver.getLeftStickX(),
+            () -> driver.getLeftStickY(),
+            () -> driver.getRightStickX(),
             () -> !driver.getRawButtonPressed(Xbox.BUTTON_START)));
-
     configureButtonBindings();
   }
   /**
@@ -60,7 +58,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     new JoystickButton(driver, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
-    driver2.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
+    driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
   }
 
   /**

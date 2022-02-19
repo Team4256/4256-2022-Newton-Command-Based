@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
+import java.security.cert.TrustAnchor;
+import java.time.chrono.ThaiBuddhistChronology;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import java.util.logging.Logger;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.math.controller.PIDController;
@@ -18,9 +21,10 @@ public final class SwerveModule {
 	private double decapitated = 1.0;
 	private double tractionDeltaPathLength = 0.0;
 	private double tractionPreviousPathLength = 0.0;
-
+	private static NetworkTableInstance nt;
+	private static NetworkTable zeus;
 	private final PIDController turningPidController;
-  private final double tareAngle;
+  	private final double tareAngle;
 
 	// This constructor is intended for use with the module which has an encoder on
 	// the traction motor.
@@ -33,13 +37,12 @@ public final class SwerveModule {
         turningMotor = new RotationControl(turningMotorId, absoluteEncoderId);
 
 
-        turningPidController = new PIDController(.03, 0, 0);
+        turningPidController = new PIDController(1, 0, 0);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
         driveMotor.resetEncoder();
 		turningMotor.resetEncoder();
     }
-
 
 	/**
 	 * This function prepares each motor individually, including setting PID values
@@ -223,7 +226,7 @@ public final class SwerveModule {
 		return turningMotor.getCurrentAngle();
 	}
 	public SwerveModuleState getState() {
-        return new SwerveModuleState(getRPM(), new Rotation2d(turningMotor.getPositionFromIntegratedSensor()));
+        return new SwerveModuleState(getRPM(), new Rotation2d(getAngle()));
     }
 
     public void setDesiredState(SwerveModuleState state) {
@@ -232,14 +235,15 @@ public final class SwerveModule {
             return;
         }
         state = SwerveModuleState.optimize(state, getState().angle);
+		
         driveMotor.set(state.speedMetersPerSecond / 3.83);
-        turningMotor.SetAngle(turningPidController.calculate(turningMotor.getPositionFromIntegratedSensor(), state.angle.getRadians()));
-		//SmartDashboard.putString("Swerve[" + absoluteEncoder.getChannel() + "] state", state.toString());
+        turningMotor.SetAngle(turningPidController.calculate(getAngle(), state.angle.getRadians()));
+		SmartDashboard.putNumber("angle", getAngle());
+		SmartDashboard.putString("Swerve[] state", state.toString());
     }
 
     public void stop() {
         driveMotor.set(0);
-        turningMotor.SetAngle(0);
     }
-    
+   
 }

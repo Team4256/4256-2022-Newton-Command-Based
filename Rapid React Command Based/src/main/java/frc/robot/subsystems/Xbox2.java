@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Xbox2 extends Joystick{
     public Xbox2(int port) {
 		super(port);
-		
 	}
 
     public JoystickButton xButton = new JoystickButton(this, 3);
