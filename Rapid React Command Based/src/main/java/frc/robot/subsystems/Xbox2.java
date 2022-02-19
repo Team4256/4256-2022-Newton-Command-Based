@@ -22,7 +22,6 @@ public class Xbox2 extends Joystick{
 	public JoystickButton selectButton = new JoystickButton(this, 7);
 	public JoystickButton leftStickButton = new JoystickButton(this, 9);
 	public JoystickButton rightStickButton = new JoystickButton(this, 10);
-
 	public Button leftTriggerButton = new LeftTrigger(this);
 	public Button rightTriggerButton = new RightTrigger(this);
     

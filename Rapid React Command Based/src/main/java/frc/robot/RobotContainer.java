@@ -7,6 +7,7 @@ package frc.robot;
 import java.util.List;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -49,6 +50,7 @@ public class RobotContainer {
             () -> driver.getRightStickX(),
             () -> !driver.getRawButtonPressed(Xbox.BUTTON_START)));
     configureButtonBindings();
+    SmartDashboard.putNumber("XLeftAxis", driver.getLeftStickX());
   }
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -57,8 +59,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(driver, 2).whenPressed(() -> swerveSubsystem.zeroHeading());
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
+    driver.xButton.whenPressed(() -> swerveSubsystem.stopModules());
   }
 
   /**

@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import java.security.cert.TrustAnchor;
 import java.time.chrono.ThaiBuddhistChronology;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -21,8 +20,6 @@ public final class SwerveModule {
 	private double decapitated = 1.0;
 	private double tractionDeltaPathLength = 0.0;
 	private double tractionPreviousPathLength = 0.0;
-	private static NetworkTableInstance nt;
-	private static NetworkTable zeus;
 	private final PIDController turningPidController;
   	private final double tareAngle;
 
@@ -37,7 +34,7 @@ public final class SwerveModule {
         turningMotor = new RotationControl(turningMotorId, absoluteEncoderId);
 
 
-        turningPidController = new PIDController(1, 0, 0);
+        turningPidController = new PIDController(.3, 0, 0);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
         driveMotor.resetEncoder();
@@ -237,7 +234,7 @@ public final class SwerveModule {
         state = SwerveModuleState.optimize(state, getState().angle);
 		
         driveMotor.set(state.speedMetersPerSecond / 3.83);
-        turningMotor.SetAngle(turningPidController.calculate(getAngle(), state.angle.getRadians()));
+        turningMotor.SetAngle(turningPidController.calculate(getAngle(), Math.PI - state.angle.getRadians()));
 		SmartDashboard.putNumber("angle", getAngle());
 		SmartDashboard.putString("Swerve[] state", state.toString());
     }

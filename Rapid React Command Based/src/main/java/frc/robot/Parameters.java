@@ -33,10 +33,10 @@ public class Parameters {
     public static final double kWheelBase = Units.inchesToMeters(25.5);
 
     public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
-            new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-            new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
-            new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
+        new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+        new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+        new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
+        new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
     public static final int ROTATION_MOTOR_A_ID = 11; // Front Left
     public static final int ROTATION_MOTOR_B_ID = 12; // Front Right
     public static final int ROTATION_MOTOR_C_ID = 13; // AFT Left
