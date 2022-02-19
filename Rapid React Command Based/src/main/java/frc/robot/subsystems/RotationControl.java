@@ -68,8 +68,10 @@ public class RotationControl{
    public double getPositionFromIntegratedSensor(){
        return rotationMotor.getPositionFromIntegratedSensor();
    }
-
-
+   
+   public double getAbsoluteEncoder() {
+       return rotationMotor.getPosition();
+   }
 
    public double pathTo(double target) {//ANGLE
     final double current = getCurrentAngle();

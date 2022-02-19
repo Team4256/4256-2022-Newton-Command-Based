@@ -45,9 +45,9 @@ public class RobotContainer {
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new SwerveXboxCmd(
             swerveSubsystem,
-            () -> driver.getLeftStickX(),
+            () -> -driver.getLeftStickX(),
             () -> driver.getLeftStickY(),
-            () -> driver.getRightStickX(),
+            () -> -driver.getRightStickX(),
             () -> !driver.getRawButtonPressed(Xbox.BUTTON_START)));
     configureButtonBindings();
     SmartDashboard.putNumber("XLeftAxis", driver.getLeftStickX());

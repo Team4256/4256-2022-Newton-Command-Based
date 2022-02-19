@@ -20,14 +20,12 @@ import frc.robot.*;
  * <i>Do not attempt to use followers with this class as it is not intended to
  * be used in such a way and may cause errors.</i>
  * 
- * @author Ian Woodard
  */
 public class TalonFXFalcon extends WPI_TalonFX implements Motor {
 
     private final int deviceID;
     public final NeutralMode idleMode;
     private final boolean isInverted;
-    
     private boolean updated = false;
     private double lastSetpoint = 0.0;
     private Logger logger;
@@ -144,7 +142,7 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
 
 
     /**
-     * @return Rotations of the motor
+     * @return Rotations of the motor in encoder 
      */
     public double getPosition() {
         return angleEncoder.get();

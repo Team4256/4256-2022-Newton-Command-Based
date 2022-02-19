@@ -22,20 +22,21 @@ public final class SwerveModule {
 	private double tractionPreviousPathLength = 0.0;
 	private final PIDController turningPidController;
   	private final double tareAngle;
+	public String moduleName;
 
 	// This constructor is intended for use with the module which has an encoder on
 	// the traction motor.
 
-	public SwerveModule(int driveMotorId, int turningMotorId, int absoluteEncoderId, double tareAngle) {
+	public SwerveModule(int driveMotorId, int turningMotorId, int absoluteEncoderId, double tareAngle, String name) {
 
         this.tareAngle = tareAngle;
-
+		moduleName = name;
         driveMotor = new TractionControl(driveMotorId);
         turningMotor = new RotationControl(turningMotorId, absoluteEncoderId);
 
 
-        turningPidController = new PIDController(.3, 0, 0);
-        turningPidController.enableContinuousInput(-Math.PI, Math.PI);
+        turningPidController = new PIDController(2., 0, 0);
+        turningPidController.enableContinuousInput(-180, 180);
 
         driveMotor.resetEncoder();
 		turningMotor.resetEncoder();
@@ -234,9 +235,9 @@ public final class SwerveModule {
         state = SwerveModuleState.optimize(state, getState().angle);
 		
         driveMotor.set(state.speedMetersPerSecond / 3.83);
-        turningMotor.SetAngle(turningPidController.calculate(getAngle(), Math.PI - state.angle.getRadians()));
-		SmartDashboard.putNumber("angle", getAngle());
-		SmartDashboard.putString("Swerve[] state", state.toString());
+        turningMotor.SetAngle(turningPidController.calculate(getAngle(), state.angle.getRadians()));
+		SmartDashboard.putNumber("Swerve[" + moduleName + "] angle", turningMotor.getAbsoluteEncoder());
+		SmartDashboard.putString("Swerve[" + moduleName + "] state", state.toString());
     }
 
     public void stop() {

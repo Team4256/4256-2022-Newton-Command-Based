@@ -15,26 +15,29 @@ public class SwerveSubsystem extends SubsystemBase {
     Parameters.TRACTION_MOTOR_A_ID,
     Parameters.ROTATION_MOTOR_A_ID,
     Parameters.ROTATION_ENCODER_A_ID,
-    Parameters.ABSOLUTE_ENCODER_A_TARE
-
+    Parameters.ABSOLUTE_ENCODER_A_TARE,
+    "A"
   );
   private final SwerveModule moduleB = new SwerveModule(
     Parameters.TRACTION_MOTOR_B_ID,
     Parameters.ROTATION_MOTOR_B_ID,
     Parameters.ROTATION_ENCODER_B_ID,
-    Parameters.ABSOLUTE_ENCODER_B_TARE
+    Parameters.ABSOLUTE_ENCODER_B_TARE,
+    "B"
   );
   private final SwerveModule moduleC = new SwerveModule(
     Parameters.TRACTION_MOTOR_C_ID,
     Parameters.ROTATION_MOTOR_C_ID,
     Parameters.ROTATION_ENCODER_C_ID,
-    Parameters.ABSOLUTE_ENCODER_C_TARE
+    Parameters.ABSOLUTE_ENCODER_C_TARE,
+    "C"
   );
   private final SwerveModule moduleD = new SwerveModule(
     Parameters.TRACTION_MOTOR_D_ID,
     Parameters.ROTATION_MOTOR_D_ID,
     Parameters.ROTATION_ENCODER_D_ID,
-    Parameters.ABSOLUTE_ENCODER_D_TARE
+    Parameters.ABSOLUTE_ENCODER_D_TARE,
+    "D"
   );
 
   private Gyro gyro = Gyro.getInstance();
@@ -93,10 +96,12 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public void setModuleStates(SwerveModuleState[] desiredStates) {
+    SmartDashboard.putString("B4Swerve[A] state", desiredStates[0].toString());
     SwerveDriveKinematics.desaturateWheelSpeeds(
       desiredStates,
       Parameters.MAX_METERS_PER_SECOND
     );
+    SmartDashboard.putString("!B4Swerve[A] state", desiredStates[0].toString());
     moduleA.setDesiredState(desiredStates[0]);
     moduleB.setDesiredState(desiredStates[1]);
     moduleC.setDesiredState(desiredStates[2]);
