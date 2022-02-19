@@ -45,8 +45,8 @@ public class RobotContainer {
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new SwerveXboxCmd(
             swerveSubsystem,
-            () -> driver.getLeftStickX(),
-            () -> -driver.getLeftStickY(),
+            () -> driver.getLeftStickY(),
+            () -> -driver.getLeftStickX(),
             () -> -driver.getRightStickX(),
             () -> !driver.getRawButtonPressed(Xbox.BUTTON_START)));
     configureButtonBindings();
@@ -61,6 +61,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
     driver.xButton.whenPressed(() -> swerveSubsystem.stopModules());
+    driver.yButton.whenPressed(() -> swerveSubsystem.driveModules());
   }
 
   /**

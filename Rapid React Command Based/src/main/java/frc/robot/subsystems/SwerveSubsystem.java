@@ -93,6 +93,14 @@ public class SwerveSubsystem extends SubsystemBase {
     moduleB.stop();
     moduleC.stop();
     moduleD.stop();
+    SmartDashboard.putBoolean("I'm Stopped! :D", true);
+  }
+
+  public void driveModules() {
+    moduleA.driveToDirection(0);
+    moduleB.driveToDirection(0);
+    moduleC.driveToDirection(0);
+    moduleD.driveToDirection(0);
   }
 
   public void setModuleStates(SwerveModuleState[] desiredStates) {
