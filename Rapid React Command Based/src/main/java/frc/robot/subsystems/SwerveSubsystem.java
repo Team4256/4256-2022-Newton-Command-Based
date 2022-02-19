@@ -102,6 +102,7 @@ public class SwerveSubsystem extends SubsystemBase {
       Parameters.MAX_METERS_PER_SECOND
     );
     SmartDashboard.putString("!B4Swerve[A] state", desiredStates[0].toString());
+    
     moduleA.setDesiredState(desiredStates[0]);
     moduleB.setDesiredState(desiredStates[1]);
     moduleC.setDesiredState(desiredStates[2]);
