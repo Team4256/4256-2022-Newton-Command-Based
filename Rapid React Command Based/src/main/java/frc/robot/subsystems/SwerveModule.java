@@ -63,7 +63,7 @@ public final class SwerveModule {
 		
         driveMotor.set(state.speedMetersPerSecond / 3.83);
         turningMotor.SetAngle(turningPidController.calculate(getAngle(), state.angle.getRadians()));
-		SmartDashboard.putNumber("Swerve[" + moduleName + "] angle", turningMotor.getAbsoluteEncoder());
+		SmartDashboard.putNumber("Swerve[" + moduleName + "] angle", getAngle());
 		SmartDashboard.putString("Swerve[" + moduleName + "] state", state.toString());
     }
 	
