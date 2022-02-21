@@ -1,11 +1,9 @@
-package frc.robot.subsystems.Swerve;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax.IdleMode;
 
-import frc.robot.subsystems.Utility.Parameters;
-import frc.robot.subsystems.Utility.TalonFXFalcon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MotorFactory {

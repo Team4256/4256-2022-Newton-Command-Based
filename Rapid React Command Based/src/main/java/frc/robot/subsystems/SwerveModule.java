@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Swerve;
+package frc.robot.subsystems;
 
 import java.time.chrono.ThaiBuddhistChronology;
 import edu.wpi.first.networktables.NetworkTable;
@@ -10,8 +10,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Robot.Robot.*;
-import frc.robot.subsystems.Utility.Parameters;
 
 public final class SwerveModule {
 	public static final double ROTATOR_GEAR_RATIO = 1.0;

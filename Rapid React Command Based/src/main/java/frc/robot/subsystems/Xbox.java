@@ -1,9 +1,9 @@
-package frc.robot.subsystems.Controller;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Controller.DPad.Direction;
+import frc.robot.subsystems.DPad.Direction;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.Joystick;

@@ -1,4 +1,4 @@
-package frc.robot.subsystems.Utility;//COMPLETE 2016
+package frc.robot.subsystems;//COMPLETE 2016
 
 public class Compass {
 		

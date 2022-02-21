@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.Robot;
+package frc.robot;
 
 import java.util.List;
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,12 +20,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.Controller.Xbox;
-import frc.robot.subsystems.Swerve.SwerveSubsystem;
-import frc.robot.subsystems.Utility.Parameters;
-import frc.robot.commands.Auto.*;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
+import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.Xbox;
 
 
 
@@ -41,7 +38,6 @@ public class RobotContainer {
   
   public Xbox driver = new Xbox(0);
   public Xbox gunner = new Xbox(1);
-  private Auto1 auto1 = new Auto1(swerveSubsystem);  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(new SwerveXboxCmd(
@@ -100,13 +96,12 @@ public class RobotContainer {
             swerveSubsystem::setModuleStates,
             swerveSubsystem);
 
-    // // 5. Add some init and wrap-up, and return everything
-    // return new SequentialCommandGroup(
-    //             new InstantCommand(() -> swerveSubsystem.resetOdometer(trajectory.getInitialPose())),
-    //             swerveControllerCommand,
-    //             new InstantCommand(() -> swerveSubsystem.stopModules()));
-    return swerveControllerCommand;
-                
+    // 5. Add some init and wrap-up, and return everything
+    return new SequentialCommandGroup(
+                new InstantCommand(() -> swerveSubsystem.resetOdometer(trajectory.getInitialPose())),
+                swerveControllerCommand,
+                new InstantCommand(() -> swerveSubsystem.stopModules()));
+
 }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
