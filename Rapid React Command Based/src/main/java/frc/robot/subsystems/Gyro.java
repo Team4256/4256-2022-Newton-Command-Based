@@ -33,9 +33,10 @@ public class Gyro extends AHRS {
 	
 	/**
 	 * Cleans up and returns gyro input, accounting for the tare angle
+	 * There is a negative because the gyro returns clockwise positive.
 	 * @return gyro heading in the range [0, 360)
 	 */
-	public double getCurrentAngle() {return Compass.validate((double)getAngle()) ;}
+	public double getCurrentAngle() {return -Compass.validate((double)getAngle());}
 	
 	/**
 	 * Uses <code>compass.legalPath(start, end)</code> to find the most efficient arc from <code>getCurrentAngle()</code> to target
