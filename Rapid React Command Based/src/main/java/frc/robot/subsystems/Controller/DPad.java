@@ -1,13 +1,13 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Controller;
 
 import edu.wpi.first.wpilibj2.command.button.Button;
 
 public class DPad extends Button {
 
-    Xbox2 controller;
+    Xbox controller;
     Direction direction;
 
-    public DPad(Xbox2 controller, Direction direction) {
+    public DPad(Xbox controller, Direction direction) {
         this.controller = controller;
         this.direction = direction;
     }

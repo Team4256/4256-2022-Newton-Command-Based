@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Utility;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.*;
+import frc.robot.subsystems.Swerve.Motor;
 
 /**
  * SparkMax Motor Controller Used With a Neo Brushless Motor.

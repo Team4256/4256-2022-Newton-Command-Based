@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Swerve;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -8,6 +8,8 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.*;
+import frc.robot.subsystems.Utility.Gyro;
+import frc.robot.subsystems.Utility.Parameters;
 public class SwerveSubsystem extends SubsystemBase {
 
   private final SwerveModule moduleA = new SwerveModule(

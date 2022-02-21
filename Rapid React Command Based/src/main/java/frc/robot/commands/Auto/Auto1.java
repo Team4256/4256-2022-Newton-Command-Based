@@ -22,10 +22,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.SwerveXboxCmd;
-import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.*;
-import frc.robot.Parameters;
+import frc.robot.subsystems.Swerve.SwerveSubsystem;
+import frc.robot.subsystems.Utility.Parameters;
 public class Auto1 extends CommandBase {
   SwerveSubsystem swerve;
   public Auto1(SwerveSubsystem swerve) {

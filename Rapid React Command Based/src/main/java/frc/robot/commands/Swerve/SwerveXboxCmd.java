@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Swerve;
 
 import java.util.function.Supplier;
 
@@ -11,8 +11,9 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.*;
+import frc.robot.subsystems.Swerve.SwerveSubsystem;
+import frc.robot.subsystems.Utility.Parameters;
 public class SwerveXboxCmd extends CommandBase {
   private final SwerveSubsystem swerveSubsystem;
   private final Supplier<Double> xSpdFunction, ySpdFunction, turningSpdFunction;

@@ -1,8 +1,7 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.Utility;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
-import frc.robot.Parameters;
 public class Gyro extends AHRS {
 	public final Compass compass;
 	public static Gyro instance = null;
