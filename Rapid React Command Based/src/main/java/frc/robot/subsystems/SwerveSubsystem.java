@@ -70,6 +70,10 @@ public class SwerveSubsystem extends SubsystemBase {
     odometer.resetPosition(pose, getRotation2d());
   }
 
+  public void resetGyro() {
+    gyro.reset();
+  }
+
   @Override
   public void periodic() {
     odometer.update(
@@ -79,6 +83,7 @@ public class SwerveSubsystem extends SubsystemBase {
       moduleC.getState(),
       moduleD.getState()
     );
+    SmartDashboard.putString("Odometer", odometer.getPoseMeters().toString());
   }
 
 

@@ -4,10 +4,9 @@
 
 package frc.robot;
 
-import java.util.List;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -16,6 +15,9 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -23,8 +25,7 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
-
-
+import java.util.List;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -33,22 +34,26 @@ import frc.robot.subsystems.Xbox;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
   private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
 
-  
   public Xbox driver = new Xbox(0);
   public Xbox gunner = new Xbox(1);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    swerveSubsystem.setDefaultCommand(new SwerveXboxCmd(
-            swerveSubsystem,
-            () -> driver.getLeftStickY(),
-            () -> -driver.getLeftStickX(),
-            () -> -driver.getRightStickX(),
-            () -> !driver.startButton.get()));
+    swerveSubsystem.setDefaultCommand(
+      new SwerveXboxCmd(
+        swerveSubsystem,
+        () -> driver.getLeftStickY(),
+        () -> -driver.getLeftStickX(),
+        () -> -driver.getRightStickX(),
+        () -> !driver.startButton.get()
+      )
+    );
     configureButtonBindings();
-    
   }
+
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -59,50 +64,42 @@ public class RobotContainer {
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
     driver.xButton.whenPressed(() -> swerveSubsystem.stopModules());
     driver.yButton.whenPressed(() -> swerveSubsystem.driveModules());
-    driver.dPadUp.whenPressed(() -> swerveSubsystem.resetOdometer(new Pose2d(0, 0, new Rotation2d(0))));
+    driver.dPadUp.whenPressed(
+      () -> swerveSubsystem.resetOdometer(new Pose2d(0, 0, new Rotation2d(0)))
+    );
   }
+
   public Command getAutonomousCommand() {
-    // 1. Create trajectory settings
-    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
-            Parameters.MAX_METERS_PER_SECOND,
-            Parameters.MAX_ACCELERATION)
-                    .setKinematics(Parameters.DRIVE_KINEMATICS);
-
-    // 2. Generate trajectory
-    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-          trajectoryConfig);
-
     // 3. Define PID controllers for tracking trajectory
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(
-            3, 0, 0, Parameters.THETA_CONTROLLER_CONSTRAINTS);
+      5,
+      0,
+      0,
+      Parameters.THETA_CONTROLLER_CONSTRAINTS
+    );
     thetaController.enableContinuousInput(-180, 180);
 
-    // 4. Construct command to follow trajectory
-    SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-            trajectory,
-            swerveSubsystem::getPose,
-            Parameters.DRIVE_KINEMATICS,
-            xController,
-            yController,
-            thetaController,
-            swerveSubsystem::setModuleStates,
-            swerveSubsystem);
-
-    // 5. Add some init and wrap-up, and return everything
+    PathPlannerTrajectory auto1Path = PathPlanner.loadPath("Auto2", 1, 1);
+    PPSwerveControllerCommand command = new PPSwerveControllerCommand(
+      auto1Path,
+      swerveSubsystem::getPose,
+      Parameters.DRIVE_KINEMATICS,
+      xController,
+      yController,
+      thetaController,
+      swerveSubsystem::setModuleStates,
+      swerveSubsystem
+    );
     return new SequentialCommandGroup(
-                new InstantCommand(() -> swerveSubsystem.resetOdometer(trajectory.getInitialPose())),
-                swerveControllerCommand,
-                new InstantCommand(() -> swerveSubsystem.stopModules()));
-
-}
+      new InstantCommand(
+        () -> swerveSubsystem.resetOdometer(auto1Path.getInitialPose())
+      ),
+      command,
+      new InstantCommand(() -> swerveSubsystem.stopModules())
+    );
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
