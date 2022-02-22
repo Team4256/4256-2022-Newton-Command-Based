@@ -83,6 +83,8 @@ public class SwerveSubsystem extends SubsystemBase {
       moduleC.getState(),
       moduleD.getState()
     );
+
+    SmartDashboard.putString("moduleAOdometerFeed", moduleA.getState().toString());
     SmartDashboard.putString("Odometer", odometer.getPoseMeters().toString());
   }
 

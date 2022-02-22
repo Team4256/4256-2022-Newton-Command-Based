@@ -22,15 +22,15 @@ public class Parameters {
 
     // Swerve
     // Distance between right and left wheels
-    public static final double kTrackWidth = Units.inchesToMeters(22.85);
+    public static final double TRACK_WIDTH = Units.inchesToMeters(22.85);
     // Distance between front and back wheels
-    public static final double kWheelBase = Units.inchesToMeters(25.5);
-
+    public static final double WHEEL_BASE = Units.inchesToMeters(25.5);
+    public static final double WHEEL_DIAMETER = Units.inchesToMeters(4); // inches
     public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
-        new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-        new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-        new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-        new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+        new Translation2d(WHEEL_BASE / 2, TRACK_WIDTH / 2),
+        new Translation2d(WHEEL_BASE / 2, -TRACK_WIDTH / 2),
+        new Translation2d(-WHEEL_BASE / 2, TRACK_WIDTH / 2),
+        new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2));
     public static final int ROTATION_MOTOR_A_ID = 11; // Front Left
     public static final int ROTATION_MOTOR_B_ID = 12; // Front Right
     public static final int ROTATION_MOTOR_C_ID = 13; // AFT Left
@@ -54,8 +54,8 @@ public class Parameters {
     public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 2;
     public static final double MAX_ACCELERATION = 3;
     public static final double TELEOP_MAX_ANGULAR_ACCELERATION = 3;
-
-
+    public static final double ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS = 6380 * 2048; //gear ratio * encoder conversion *  
+    public static final double RPS_TO_METERS_PER_SECOND = ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS * Math.PI * WHEEL_DIAMETER;
     // Automomous
     public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = //
     new TrapezoidProfile.Constraints(

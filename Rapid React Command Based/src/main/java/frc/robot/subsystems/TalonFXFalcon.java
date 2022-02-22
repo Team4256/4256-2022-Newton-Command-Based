@@ -149,18 +149,21 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
     }
 
     /**
+     * @Conversion the numbers multiplied are the encoder conversions times 10 to return 
      * @return Revolutions per minute of the motor
      */
     public double getRPM() {
-        return getSensorCollection().getIntegratedSensorVelocity();
+        return getRPS() * 60;
     }
 
+    
     /**
+     * 
+     * @Conversion the numbers multiplied are the encoder conversions times 10 to return 
      * @return Revolutions per second of the motor
      */
     public double getRPS() {
-        return (getRPM() / 60.0);
-        
+        return getSensorCollection().getIntegratedSensorVelocity() / 2048 * 10; 
     }
 
     // get angle
