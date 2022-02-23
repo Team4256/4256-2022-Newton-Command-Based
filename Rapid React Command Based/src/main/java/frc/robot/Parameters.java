@@ -54,7 +54,7 @@ public class Parameters {
     public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 2;
     public static final double MAX_ACCELERATION = 3;
     public static final double TELEOP_MAX_ANGULAR_ACCELERATION = 3;
-    public static final double ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS = 7.04; //gear ratio * encoder conversion *  
+    public static final double ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS = 1/7.04; //gear ratio * encoder conversion *  
     public static final double RPS_TO_METERS_PER_SECOND = ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS * Math.PI * WHEEL_DIAMETER;
     // Automomous
     public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = //

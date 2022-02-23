@@ -81,7 +81,7 @@ public class RobotContainer {
     );
     thetaController.enableContinuousInput(-180, 180);
 
-    PathPlannerTrajectory auto1Path = PathPlanner.loadPath("Auto2", 1, 1);
+    PathPlannerTrajectory auto1Path = PathPlanner.loadPath("Auto3", 1, 1);
     PPSwerveControllerCommand command = new PPSwerveControllerCommand(
       auto1Path,
       swerveSubsystem::getPose,
