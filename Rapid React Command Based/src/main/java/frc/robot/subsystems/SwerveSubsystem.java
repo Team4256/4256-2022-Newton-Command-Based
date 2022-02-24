@@ -10,8 +10,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Parameters;
 public class SwerveSubsystem extends SubsystemBase {
 
-  
+  private static SwerveSubsystem instance = null;
 
+  public synchronized static SwerveSubsystem getInstance() {
+		if (instance == null) {
+			instance = new SwerveSubsystem(); 
+		}
+			return instance;
+    }
 
   private final SwerveModule moduleA = new SwerveModule(
     Parameters.TRACTION_MOTOR_A_ID,

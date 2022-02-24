@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class RobotContainer {
 
-  private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+  private final SwerveSubsystem swerveSubsystem = SwerveSubsystem.getInstance();
 
   public Xbox driver = new Xbox(0);
   public Xbox gunner = new Xbox(1);
@@ -58,10 +58,10 @@ public class RobotContainer {
     );
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
-    chooser.addOption("2 Ball Auto Bottom", threeBallAutoBottom);
+    chooser.addOption("Two Ball Auto Bottom", threeBallAutoBottom);
 
     // Put the chooser on the dashboard
-    Shuffleboard.getTab("Competiton").add(chooser);
+    Shuffleboard.getTab("Competition").add(chooser);
   }
 
   /**
