@@ -17,11 +17,14 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import frc.robot.commands.Auto.ThreeBallAutoBottom;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
@@ -39,6 +42,8 @@ public class RobotContainer {
 
   public Xbox driver = new Xbox(0);
   public Xbox gunner = new Xbox(1);
+  SendableChooser<Command> chooser = new SendableChooser<>();
+  public final Command threeBallAutoBottom = new ThreeBallAutoBottom();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,6 +57,11 @@ public class RobotContainer {
       )
     );
     configureButtonBindings();
+    chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
+    chooser.addOption("2 Ball Auto Bottom", threeBallAutoBottom);
+
+    // Put the chooser on the dashboard
+    Shuffleboard.getTab("Competiton").add(chooser);
   }
 
   /**
@@ -69,44 +79,12 @@ public class RobotContainer {
     );
   }
 
-  public Command getAutonomousCommand() {
-    // 3. Define PID controllers for tracking trajectory
-    PIDController xController = new PIDController(1, 0, 0);
-    PIDController yController = new PIDController(1, 0, 0);
-    ProfiledPIDController thetaController = new ProfiledPIDController(
-      5,
-      0,
-      0,
-      Parameters.THETA_CONTROLLER_CONSTRAINTS
-    );
-    thetaController.enableContinuousInput(-180, 180);
-
-    PathPlannerTrajectory auto1Path = PathPlanner.loadPath("Auto3", 1, 1);
-    PPSwerveControllerCommand command = new PPSwerveControllerCommand(
-      auto1Path,
-      swerveSubsystem::getPose,
-      Parameters.DRIVE_KINEMATICS,
-      xController,
-      yController,
-      thetaController,
-      swerveSubsystem::setModuleStates,
-      swerveSubsystem
-    );
-    return new SequentialCommandGroup(
-      new InstantCommand(
-        () -> swerveSubsystem.resetOdometer(auto1Path.getInitialPose())
-      ),
-      command,
-      new InstantCommand(() -> swerveSubsystem.stopModules())
-    );
-  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-  //   return m_autoCommand;
-  // }
+   public Command getAutonomousCommand() {
+     return chooser.getSelected();
+   }
 }
