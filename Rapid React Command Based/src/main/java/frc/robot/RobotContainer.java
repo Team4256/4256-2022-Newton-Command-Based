@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import frc.robot.commands.Auto.ThreeBallAutoBottom;
+import frc.robot.commands.Auto.*;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
@@ -44,6 +44,10 @@ public class RobotContainer {
   public Xbox gunner = new Xbox(1);
   SendableChooser<Command> chooser = new SendableChooser<>();
   public final Command threeBallAutoBottom = new ThreeBallAutoBottom();
+  public final Command twoBallAutoBottom = new TwoBallAutoBottom();
+  public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
+  public final Command twoBallAutoTop = new TwoBallAutoTop();
+  public final Command newPathAuto = new NewPathAuto();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -56,9 +60,13 @@ public class RobotContainer {
         () -> !driver.startButton.get()
       )
     );
+
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
-    chooser.addOption("Two Ball Auto Bottom", threeBallAutoBottom);
+    chooser.addOption("Two Ball Auto Bottom", twoBallAutoBottom);
+    chooser.addOption("Two Ball Auto middle", twoBallAutoMiddle);
+    chooser.addOption("Two Ball Auto top", twoBallAutoTop);
+    chooser.addOption("New Path Auto", newPathAuto);
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Competition").add(chooser);

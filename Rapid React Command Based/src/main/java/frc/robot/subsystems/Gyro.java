@@ -8,7 +8,7 @@ public class Gyro extends AHRS {
 	public static Gyro instance = null;
 	
 	private Gyro(final byte updateHz) {
-//		super(I2C.Port.kOnboard, updateHz);
+	//		super(I2C.Port.kOnboard, updateHz);
 		super(SPI.Port.kMXP, Parameters.GYRO_UPDATE_HZ);
 		compass = new Compass();
 	}
@@ -38,6 +38,10 @@ public class Gyro extends AHRS {
 	 */
 	public double getCurrentAngle() {return -Compass.validate((double)getAngle());}
 	
+	public void resetWithOffset(double offset) {
+		this.setAngleAdjustment(offset);
+		reset();  
+	}
 	/**
 	 * Uses <code>compass.legalPath(start, end)</code> to find the most efficient arc from <code>getCurrentAngle()</code> to target
 	 * @param target angle, designated in degrees

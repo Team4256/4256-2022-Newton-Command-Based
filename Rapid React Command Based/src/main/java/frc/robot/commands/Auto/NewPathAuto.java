@@ -19,7 +19,7 @@ import frc.robot.commands.Conveyor.*;
 import frc.robot.commands.Swerve.*;
 import frc.robot.subsystems.*;
 
-public class ThreeBallAutoBottom extends SequentialCommandGroup {
+public class NewPathAuto extends SequentialCommandGroup {
 
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
@@ -29,13 +29,13 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(
-      5,
+      4,
       0,
       0,
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball bottom", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("New Path", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -48,9 +48,10 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
-  public ThreeBallAutoBottom() { 
+  public NewPathAuto() { 
     addCommands(
-      new InstantCommand(() -> gyro.resetWithOffset(180)),
+      new InstantCommand(() -> gyro.reset()),
+      new InstantCommand(() -> gyro.resetWithOffset(90)),
       new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       command,

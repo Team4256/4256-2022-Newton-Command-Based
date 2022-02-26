@@ -28,7 +28,7 @@ public class Conveyor extends SubsystemBase {
     public DigitalInput intakeSensor;
     public DigitalInput conveyorSensor;
     private static DoubleSolenoid solenoid;
-  
+      
     public Conveyor() {
       intakeMotor = new TalonSRX(Parameters.INTAKE_MOTOR_ID);
         shooterMotor = new TalonFX(Parameters.SHOOTER_MOTOR_ID);
@@ -37,6 +37,13 @@ public class Conveyor extends SubsystemBase {
         intakeSensor = new DigitalInput(Parameters.INTAKE_BALL_SENSOR_ID);
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.INTAKE_FORWARD_CHANNEL, Parameters.INTAKE_REVERSE_CHANNEL);
     }
+
+	public static synchronized Conveyor getInstance() {
+		if (instance == null) {
+			instance = new Conveyor();
+		} 
+		return instance;
+	}
   /**
      * Runs the intake to take a ball from the field into the conveyor system
      */
