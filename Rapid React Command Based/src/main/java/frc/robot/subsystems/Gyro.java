@@ -53,6 +53,9 @@ public class Gyro extends AHRS {
 		reset();
 	}
 
+	public double getAngleWithOffset() {
+		return getCurrentAngle() + getOffset();
+	}
 	/**
 	 * Uses <code>compass.legalPath(start, end)</code> to find the most efficient arc from <code>getCurrentAngle()</code> to target
 	 * @param target angle, designated in degrees

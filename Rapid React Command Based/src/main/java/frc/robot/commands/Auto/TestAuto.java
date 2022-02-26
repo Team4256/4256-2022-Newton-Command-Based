@@ -50,7 +50,7 @@ public class TestAuto extends SequentialCommandGroup {
   /** Creates a new ThreeBallAutoBottom. */
   public TestAuto() { 
     addCommands(
-      new InstantCommand(() -> gyro.setOffset(270)),
+      new InstantCommand(() -> gyro.setOffset(20)),
       new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       command,

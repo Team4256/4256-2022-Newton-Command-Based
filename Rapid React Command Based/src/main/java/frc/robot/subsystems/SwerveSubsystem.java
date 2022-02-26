@@ -67,10 +67,12 @@ public class SwerveSubsystem extends SubsystemBase {
     gyro.reset();
   }
 
-  public double getHeading() {
-    return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
-  }
-
+public double getHeading() {
+    return Math.IEEEremainder(gyro.getAngleWithOffset(), 360);
+  }//  public double getHeading() {
+//    return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
+//  }
+//
   public Rotation2d getRotation2d() {
     return Rotation2d.fromDegrees(getHeading());
   }
@@ -108,7 +110,7 @@ public class SwerveSubsystem extends SubsystemBase {
     moduleB.stop();
     moduleC.stop();
     moduleD.stop();
-}
+  }
 
   public void driveModules() {
     moduleA.driveToDirection(0);
