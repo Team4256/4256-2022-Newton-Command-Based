@@ -29,6 +29,7 @@ import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
 import java.util.List;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -42,12 +43,13 @@ public class RobotContainer {
 
   public Xbox driver = new Xbox(0);
   public Xbox gunner = new Xbox(1);
+  Gyro gyro = Gyro.getInstance();
   SendableChooser<Command> chooser = new SendableChooser<>();
   public final Command threeBallAutoBottom = new ThreeBallAutoBottom();
   public final Command twoBallAutoBottom = new TwoBallAutoBottom();
   public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
   public final Command twoBallAutoTop = new TwoBallAutoTop();
-  public final Command newPathAuto = new NewPathAuto();
+  public final Command testAuto = new TestAuto();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -66,7 +68,7 @@ public class RobotContainer {
     chooser.addOption("Two Ball Auto Bottom", twoBallAutoBottom);
     chooser.addOption("Two Ball Auto middle", twoBallAutoMiddle);
     chooser.addOption("Two Ball Auto top", twoBallAutoTop);
-    chooser.addOption("New Path Auto", newPathAuto);
+    chooser.addOption("Test Auto", testAuto);
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Competition").add(chooser);
@@ -85,6 +87,8 @@ public class RobotContainer {
     driver.dPadUp.whenPressed(
       () -> swerveSubsystem.resetOdometer(new Pose2d(0, 0, new Rotation2d(0)))
     );
+    driver.dPadDown.whenPressed(() -> gyro.resetWithOffset());
+    driver.dPadRight.whenPressed(() -> gyro.setOffset(0));
   }
 
   /**

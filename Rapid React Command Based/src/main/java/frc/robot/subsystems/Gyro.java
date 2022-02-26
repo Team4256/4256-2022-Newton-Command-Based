@@ -38,10 +38,21 @@ public class Gyro extends AHRS {
 	 */
 	public double getCurrentAngle() {return -Compass.validate((double)getAngle());}
 	
-	public void resetWithOffset(double offset) {
+	public void setOffset(double offset) {
 		this.setAngleAdjustment(offset);
-		reset();  
 	}
+
+	public double getOffset() {
+		return this.getAngleAdjustment();
+	}
+
+	public void resetWithOffset() {
+		double currentHeading = getAngle();
+		setOffset(0);
+		setOffset(currentHeading);
+		reset();
+	}
+
 	/**
 	 * Uses <code>compass.legalPath(start, end)</code> to find the most efficient arc from <code>getCurrentAngle()</code> to target
 	 * @param target angle, designated in degrees

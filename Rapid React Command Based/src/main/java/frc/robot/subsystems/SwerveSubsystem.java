@@ -5,13 +5,17 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Parameters;
 public class SwerveSubsystem extends SubsystemBase {
 
+  private Gyro gyro = Gyro.getInstance();
   private static SwerveSubsystem instance = null;
-
   public synchronized static SwerveSubsystem getInstance() {
 		if (instance == null) {
 			instance = new SwerveSubsystem(); 
@@ -48,7 +52,7 @@ public class SwerveSubsystem extends SubsystemBase {
     "D"
   );
 
-  private Gyro gyro = Gyro.getInstance();
+
 
   private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(
     Parameters.DRIVE_KINEMATICS,
@@ -95,6 +99,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
     SmartDashboard.putString("moduleAOdometerFeed", moduleA.getState().toString());
     SmartDashboard.putString("Odometer", odometer.getPoseMeters().toString());
+    
   }
 
 
@@ -103,8 +108,7 @@ public class SwerveSubsystem extends SubsystemBase {
     moduleB.stop();
     moduleC.stop();
     moduleD.stop();
-    SmartDashboard.putBoolean("I'm Stopped! :D", true);
-  }
+}
 
   public void driveModules() {
     moduleA.driveToDirection(0);
