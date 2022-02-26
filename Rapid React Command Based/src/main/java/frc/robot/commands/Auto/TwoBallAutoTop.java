@@ -35,7 +35,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top Red", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -50,7 +50,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   /** Creates a new ThreeBallAutoBottom. */
   public TwoBallAutoTop() { 
     addCommands(
-       new InstantCommand(() -> gyro.setOffset(-270)),
+       new InstantCommand(() -> gyro.setOffset(-20)),
       new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       command,

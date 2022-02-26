@@ -47,7 +47,7 @@ public class Gyro extends AHRS {
 	}
 
 	public void resetWithOffset() {
-		double currentHeading = getAngle();
+		double currentHeading = getCurrentAngle();
 		setOffset(0);
 		setOffset(currentHeading);
 		reset();
