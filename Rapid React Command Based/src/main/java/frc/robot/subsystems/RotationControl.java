@@ -22,7 +22,7 @@ public class RotationControl{
        TareAngle=inputAngle;
    }
    
-   public double GetTareAngle(){  
+   public double getTareAngle(){  
     return TareAngle;
    }
 

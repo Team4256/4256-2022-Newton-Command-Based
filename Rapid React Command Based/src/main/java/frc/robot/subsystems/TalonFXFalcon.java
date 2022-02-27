@@ -38,7 +38,7 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
     private double encoderMinVoltage;
     private double encoderMaxVoltage;
     private double encoderTareVoltage;
-    private double tractionSppeedAdjustment = 0.0;
+    private double tractionSpeedAdjustment = 0.0;
     double maxAngle = 0;
     double minAngle = 360;
     public static final int kTimeoutMS = 10;
@@ -257,8 +257,13 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
     public double getPIDError() {
         return anglePIDController.getPositionError();
     }
-
-      
+    public double getCurrentAngleDegrees() {
+            return 360 - (encoderPort.getVoltage() - encoderTareVoltage)/(encoderMaxVoltage - encoderMinVoltage) * 360;
+        }
+    
+    public double getTareAngle(double module) {
+            return 360 - (encoderTareVoltage)/(encoderMaxVoltage - encoderMinVoltage) * 360;
+    }
 
     public double pathTo(double target) {// ANGLE
         final double current = getCurrentAngle();
@@ -278,12 +283,4 @@ public class TalonFXFalcon extends WPI_TalonFX implements Motor {
         updated = false;
     }
 
-    public void setParentLogger(final Logger logger) {
-        this.logger = logger;
-    }
-
-    public void getCurrentAngle(double angle) {
-
-    }
-    
 }

@@ -49,7 +49,15 @@ public final class SwerveModule {
 	public double getAngle() {
 		return turningMotor.getCurrentAngle();
 	}
-	
+
+	public RotationControl getTurningMotor() {
+		return turningMotor;
+	}
+
+	public TractionControl getDriveMotor() {
+		return driveMotor;
+	}
+
 	public SwerveModuleState getState() {
         return new SwerveModuleState(getMPS(), new Rotation2d(getAngle()));
     }
@@ -66,6 +74,7 @@ public final class SwerveModule {
         turningMotor.SetAngle(turningPidController.calculate(getAngle(), state.angle.getRadians()));
 		SmartDashboard.putNumber("Swerve[" + moduleName + "] angle", getAngle());
 		SmartDashboard.putString("Swerve[" + moduleName + "] state", state.toString());
+		
     }
 	
 	public void driveToDirection(double direction) {

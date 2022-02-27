@@ -33,6 +33,18 @@ public class Parameters {
     new Translation2d(-WHEEL_BASE / 2, TRACK_WIDTH / 2),
     new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)
   );
+
+  /**
+   * Swerve #1 = 
+   * Swerve #2 = 1.22
+   * Swerve #3 = 4.35
+   * Swerve #4 = 
+   * Swerve #5 = 2.89
+   * Swerve #6 = 
+   * Swerve #7 = 
+   * Swerve #8 = 
+   * Swerve #9 = 1.00
+   */
   public static final int ROTATION_MOTOR_A_ID = 11; // Front Left
   public static final int ROTATION_MOTOR_B_ID = 12; // Front Right
   public static final int ROTATION_MOTOR_C_ID = 13; // AFT Left
@@ -45,24 +57,24 @@ public class Parameters {
   public static final int ROTATION_ENCODER_B_ID = 1; // Front Right
   public static final int ROTATION_ENCODER_C_ID = 2; // Aft Left
   public static final int ROTATION_ENCODER_D_ID = 3; // Aft Right
-  public static final double ABSOLUTE_ENCODER_A_TARE = 3.4; // Front Left
-  public static final double ABSOLUTE_ENCODER_B_TARE = 2.9; // Front Left
-  public static final double ABSOLUTE_ENCODER_C_TARE = 2.4; // Front Left
-  public static final double ABSOLUTE_ENCODER_D_TARE = 3.4033; // Front Left
+  public static final double ABSOLUTE_ENCODER_A_TARE = 1.22; // Front Left
+  public static final double ABSOLUTE_ENCODER_B_TARE = 2.89; // Front Right
+  public static final double ABSOLUTE_ENCODER_C_TARE = 4.29; // Aft Left
+  public static final double ABSOLUTE_ENCODER_D_TARE = 1.01; // Aft Right
+  public static final double ANGLE_A_TARE = 9.074; // Front Left (angle)
+  public static final double ANGLE_B_TARE = 6.264; // Front Right
+  public static final double ANGLE_C_TARE = 3.840; // Aft Left
+  public static final double ANGLE_D_TARE = 6.723; // Aft Right
+  
   public static final double MAX_METERS_PER_SECOND = 3.83; // Max Speed
-  public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND =
-    2 * 2 * Math.PI;
-  public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =
-    Math.PI / 4;
+  public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * 2 * Math.PI;
+  public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 4;
   public static final double TELEOP_SPEED_LIMIT_MPS = MAX_METERS_PER_SECOND;
-  public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND =
-    MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 2;
+  public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 2;
   public static final double MAX_ACCELERATION = 3;
   public static final double TELEOP_MAX_ANGULAR_ACCELERATION = 3;
-  public static final double ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS =
-    1 / 7.04; //gear ratio * encoder conversion *
-  public static final double RPS_TO_METERS_PER_SECOND =
-    ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS * Math.PI * WHEEL_DIAMETER;
+  public static final double ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS = 1 / 7.04; //gear ratio * encoder conversion *
+  public static final double RPS_TO_METERS_PER_SECOND = ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS * Math.PI * WHEEL_DIAMETER;
   // Automomous
   public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints( //
     MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
@@ -99,22 +111,34 @@ public class Parameters {
 
   // COMPETITION ROBOT
   public static final double angleEncoderMinVoltage[] = {
-    .008544921,
-    .020751951,
-    0.01220703,
-    0.026855466,
-  };
+  //   .008544921,
+  //   .020751951,
+  //   0.01220703,
+  //   0.026855466,
+  0.021,
+  0.017,
+  0.010,
+  0.011
+   };
   public static final double angleEncoderMaxVoltage[] = {
-    4.921874496,
-    4.921874496,
-    4.913329475000001,
-    4.887694812,
+    // 4.921874496,
+    // 4.921874496,
+    // 4.913329475000001,
+    // 4.887694812,
+    4.951,
+    4.952,
+    4.952,
+    4.949
   };
   public static final double angleEncoderTareVoltage[] = {
-    3.4033,
-    2.877,
-    2.388,
-    1.355,
+    // 3.4033,
+    // 2.877,
+    // 2.388,
+    // 1.355,
+    1.22,
+    2.89,
+    4.29,
+    1.01
   };
 
   // Aligner tolerances

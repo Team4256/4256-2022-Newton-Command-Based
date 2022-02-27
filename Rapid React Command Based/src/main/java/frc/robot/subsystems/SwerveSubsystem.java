@@ -5,23 +5,37 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Parameters;
+
 public class SwerveSubsystem extends SubsystemBase {
 
   private Gyro gyro = Gyro.getInstance();
   private static SwerveSubsystem instance = null;
-  public synchronized static SwerveSubsystem getInstance() {
-		if (instance == null) {
-			instance = new SwerveSubsystem(); 
-		}
-			return instance;
+  private static NetworkTableInstance nt;
+  private static NetworkTable table;
+  private double modAMax = 0;
+  private double modBMax = 0;
+  private double modCMax = 0;
+  private double modDMax = 0;
+  private double modAMin = 10;
+  private double modBMin = 10;
+  private double modCMin = 10;
+  private double modDMin = 10;
+
+  public static synchronized SwerveSubsystem getInstance() {
+    if (instance == null) {
+      instance = new SwerveSubsystem();
     }
+    return instance;
+  }
 
   private final SwerveModule moduleA = new SwerveModule(
     Parameters.TRACTION_MOTOR_A_ID,
@@ -52,8 +66,6 @@ public class SwerveSubsystem extends SubsystemBase {
     "D"
   );
 
-
-
   private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(
     Parameters.DRIVE_KINEMATICS,
     new Rotation2d(0)
@@ -61,18 +73,21 @@ public class SwerveSubsystem extends SubsystemBase {
 
   public SwerveSubsystem() {
     zeroHeading();
+    nt = NetworkTableInstance.getDefault();
+    table = nt.getTable("table");
   }
 
   public void zeroHeading() {
     gyro.reset();
   }
 
-public double getHeading() {
+  public double getHeading() {
     return Math.IEEEremainder(gyro.getAngleWithOffset(), 360);
-  }//  public double getHeading() {
-//    return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
-//  }
-//
+  } //  public double getHeading() {
+
+  //    return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
+  //  }
+  //
   public Rotation2d getRotation2d() {
     return Rotation2d.fromDegrees(getHeading());
   }
@@ -101,9 +116,51 @@ public double getHeading() {
 
     SmartDashboard.putString("moduleAOdometerFeed", moduleA.getState().toString());
     SmartDashboard.putString("Odometer", odometer.getPoseMeters().toString());
-    
-  }
 
+    SmartDashboard.putNumber("moduleAPosition", moduleA.getAngle());
+    SmartDashboard.putNumber("moduleBPosition", moduleB.getAngle());
+    SmartDashboard.putNumber("moduleCPosition", moduleC.getAngle());
+    SmartDashboard.putNumber("moduleDPosition", moduleD.getAngle());
+
+    double modA = moduleA.getTurningMotor().getEncoderVoltage();
+    double modB = moduleB.getTurningMotor().getEncoderVoltage();
+    double modC = moduleC.getTurningMotor().getEncoderVoltage();
+    double modD = moduleD.getTurningMotor().getEncoderVoltage();
+
+    modAMax = Math.max(modAMax, modA);
+    modBMax = Math.max(modBMax, modB);
+    modCMax = Math.max(modCMax, modC);
+    modDMax = Math.max(modDMax, modD);
+    modAMin = Math.min(modAMin, modA);
+    modBMin = Math.min(modBMin, modB);
+    modCMin = Math.min(modCMin, modC);
+    modDMin = Math.min(modDMin, modD);
+
+    table.getEntry("ModuleA Angle").setNumber(moduleA.getTurningMotor().getCurrentAngle());//angle
+    table.getEntry("ModuleB Angle").setNumber(moduleB.getTurningMotor().getCurrentAngle());
+    table.getEntry("ModuleC Angle").setNumber(moduleC.getTurningMotor().getCurrentAngle());
+    table.getEntry("ModuleD Angle").setNumber(moduleD.getTurningMotor().getCurrentAngle());
+
+    table.getEntry("ModuleA Tare1").setNumber(moduleA.getTurningMotor().getTareAngle());//angle
+    table.getEntry("ModuleB Tare2").setNumber(moduleB.getTurningMotor().getTareAngle());
+    table.getEntry("ModuleC Tare3").setNumber(moduleC.getTurningMotor().getTareAngle());
+    table.getEntry("ModuleD Tare4").setNumber(moduleD.getTurningMotor().getTareAngle());
+
+    table.getEntry("ModuleA Tare").setNumber(modA);//voltage
+    table.getEntry("ModuleB Tare").setNumber(modB);
+    table.getEntry("ModuleC Tare").setNumber(modC);
+    table.getEntry("ModuleD Tare").setNumber(modD);
+
+    table.getEntry("ModuleA Max").setNumber(modAMax);//voltage
+    table.getEntry("ModuleB Max").setNumber(modBMax);
+    table.getEntry("ModuleC Max").setNumber(modCMax);
+    table.getEntry("ModuleD Max").setNumber(modDMax);
+
+    table.getEntry("ModuleA Min").setNumber(modAMin);//voltage
+    table.getEntry("ModuleB Min").setNumber(modBMin);
+    table.getEntry("ModuleC Min").setNumber(modCMin);
+    table.getEntry("ModuleD Min").setNumber(modDMin);
+  }
 
   public void stopModules() {
     moduleA.stop();
@@ -120,11 +177,11 @@ public double getHeading() {
   }
 
   public void setModuleStates(SwerveModuleState[] desiredStates) {
-    SwerveDriveKinematics.desaturateWheelSpeeds(
-      desiredStates,
+    SwerveDriveKinematics.desaturateWheelSpeeds( 
+      desiredStates, 
       Parameters.MAX_METERS_PER_SECOND
-    );
-    
+      );
+
     moduleA.setDesiredState(desiredStates[0]);
     moduleB.setDesiredState(desiredStates[1]);
     moduleC.setDesiredState(desiredStates[2]);
