@@ -5,43 +5,24 @@
 package frc.robot.commands.Conveyor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Conveyor;
 
-public class ShootBalls extends CommandBase {
-  
-  private static ShootBalls instance = null;
-  Conveyor conveyor;
-
-  public static synchronized ShootBalls getInstance() {
-    if (instance == null) {
-      instance = new ShootBalls();
-    }
-    return instance;
+public class RaiseIntake extends CommandBase {
+  /** Creates a new RaiseIntake. */
+  public RaiseIntake() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
-  
-public ShootBalls() {
-   this.conveyor = Conveyor.getInstance();
-   addRequirements(conveyor);
-  }
-
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    conveyor.shootCurrentBalls();
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    conveyor.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

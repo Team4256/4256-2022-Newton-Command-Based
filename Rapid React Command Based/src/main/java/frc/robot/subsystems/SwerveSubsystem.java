@@ -41,28 +41,24 @@ public class SwerveSubsystem extends SubsystemBase {
     Parameters.TRACTION_MOTOR_A_ID,
     Parameters.ROTATION_MOTOR_A_ID,
     Parameters.ROTATION_ENCODER_A_ID,
-    Parameters.ABSOLUTE_ENCODER_A_TARE,
     "A"
   );
   private final SwerveModule moduleB = new SwerveModule(
     Parameters.TRACTION_MOTOR_B_ID,
     Parameters.ROTATION_MOTOR_B_ID,
     Parameters.ROTATION_ENCODER_B_ID,
-    Parameters.ABSOLUTE_ENCODER_B_TARE,
     "B"
   );
   private final SwerveModule moduleC = new SwerveModule(
     Parameters.TRACTION_MOTOR_C_ID,
     Parameters.ROTATION_MOTOR_C_ID,
     Parameters.ROTATION_ENCODER_C_ID,
-    Parameters.ABSOLUTE_ENCODER_C_TARE,
     "C"
   );
   private final SwerveModule moduleD = new SwerveModule(
     Parameters.TRACTION_MOTOR_D_ID,
     Parameters.ROTATION_MOTOR_D_ID,
     Parameters.ROTATION_ENCODER_D_ID,
-    Parameters.ABSOLUTE_ENCODER_D_TARE,
     "D"
   );
 
@@ -140,11 +136,6 @@ public class SwerveSubsystem extends SubsystemBase {
     table.getEntry("ModuleB Angle").setNumber(moduleB.getTurningMotor().getCurrentAngle());
     table.getEntry("ModuleC Angle").setNumber(moduleC.getTurningMotor().getCurrentAngle());
     table.getEntry("ModuleD Angle").setNumber(moduleD.getTurningMotor().getCurrentAngle());
-
-    table.getEntry("ModuleA Tare1").setNumber(moduleA.getTurningMotor().getTareAngle());//angle
-    table.getEntry("ModuleB Tare2").setNumber(moduleB.getTurningMotor().getTareAngle());
-    table.getEntry("ModuleC Tare3").setNumber(moduleC.getTurningMotor().getTareAngle());
-    table.getEntry("ModuleD Tare4").setNumber(moduleD.getTurningMotor().getTareAngle());
 
     table.getEntry("ModuleA Tare").setNumber(modA);//voltage
     table.getEntry("ModuleB Tare").setNumber(modB);

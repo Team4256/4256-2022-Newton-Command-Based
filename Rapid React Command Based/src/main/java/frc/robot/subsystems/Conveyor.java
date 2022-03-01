@@ -22,17 +22,17 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 public class Conveyor extends SubsystemBase {
   private final TalonFX shooterMotor;
-    private final TalonSRX conveyorMotor;
-    private final TalonSRX intakeMotor;
+    private final VictorSPX conveyorMotor;
+    private final VictorSPX intakeMotor;
     private static Conveyor instance = null;
     public DigitalInput intakeSensor;
     public DigitalInput conveyorSensor;
     private static DoubleSolenoid solenoid;
       
     public Conveyor() {
-      intakeMotor = new TalonSRX(Parameters.INTAKE_MOTOR_ID);
+      intakeMotor = new VictorSPX(Parameters.INTAKE_MOTOR_ID);
         shooterMotor = new TalonFX(Parameters.SHOOTER_MOTOR_ID);
-        conveyorMotor = new TalonSRX(Parameters.CONVEYOR_MOTOR_ID);
+        conveyorMotor = new VictorSPX(Parameters.CONVEYOR_MOTOR_ID);
         conveyorSensor = new DigitalInput(Parameters.CONVEYOR_BALL_SENSOR_ID);
         intakeSensor = new DigitalInput(Parameters.INTAKE_BALL_SENSOR_ID);
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.INTAKE_FORWARD_CHANNEL, Parameters.INTAKE_REVERSE_CHANNEL);
@@ -70,7 +70,7 @@ public class Conveyor extends SubsystemBase {
    * apparatus
    */
   public void outtakeBall() {
-      intakeMotor.set(ControlMode.PercentOutput, -Parameters.INTAKE_MOTOR_SPEED);
+      intakeMotor.set(ControlMode.PercentOutput, Parameters.OUTTAKE_MOTOR_SPEED);
   }
 
   /**

@@ -22,16 +22,14 @@ public final class SwerveModule {
 	private double tractionDeltaPathLength = 0.0;
 	private double tractionPreviousPathLength = 0.0;
 	public final PIDController turningPidController;
-  	private final double tareAngle;
 	public String moduleName;
 	
 
 	// This constructor is intended for use with the module which has an encoder on
 	// the traction motor.
 
-	public SwerveModule(int driveMotorId, int turningMotorId, int absoluteEncoderId, double tareAngle, String name) {
+	public SwerveModule(int driveMotorId, int turningMotorId, int absoluteEncoderId, String name) {
 
-        this.tareAngle = tareAngle;
 		moduleName = name;
         driveMotor = new TractionControl(driveMotorId);
         turningMotor = new RotationControl(turningMotorId, absoluteEncoderId);

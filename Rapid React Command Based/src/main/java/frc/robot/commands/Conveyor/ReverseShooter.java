@@ -4,24 +4,26 @@
 
 package frc.robot.commands.Conveyor;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
 
-public class IntakeBall extends CommandBase {
-  private static Conveyor conveyor;
-  private static IntakeBall instance = null;
-  public static synchronized IntakeBall getInstance() {
+public class ReverseShooter extends CommandBase {
+  
+  private static ReverseShooter instance = null;
+  Conveyor conveyor;
+
+  public static synchronized ReverseShooter getInstance() {
     if (instance == null) {
-      instance = new IntakeBall();
+      instance = new ReverseShooter();
     }
     return instance;
   }
-  /** Creates a new ConveyorCmd. */
-  public IntakeBall() {
+  
+public ReverseShooter() {
    this.conveyor = Conveyor.getInstance();
    addRequirements(conveyor);
   }
+
 
   // Called when the command is initially scheduled.
   @Override
@@ -32,14 +34,18 @@ public class IntakeBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.conveyorBeltUp();
-    conveyor.intakeBall();
-    SmartDashboard.putBoolean("intaking", true);
+    conveyor.spinConveyorShooterReverse();
   }
-// Called once the command ends or is interrupted.
+
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     conveyor.stop();
   }
-  
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 }

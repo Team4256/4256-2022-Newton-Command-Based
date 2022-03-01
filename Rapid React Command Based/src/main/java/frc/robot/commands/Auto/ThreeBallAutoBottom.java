@@ -24,8 +24,8 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
-  ShootBalls shootBalls = new ShootBalls(conveyor);
-  IntakeBall intakeBall = new IntakeBall(conveyor);
+  ReverseShooter shootBalls = ReverseShooter.getInstance();
+  IntakeBall intakeBall = IntakeBall.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(

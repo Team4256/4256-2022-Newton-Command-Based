@@ -24,7 +24,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+
 import frc.robot.commands.Auto.*;
+import frc.robot.commands.Conveyor.IntakeBall;
+import frc.robot.commands.Conveyor.OuttakeBall;
+import frc.robot.commands.Conveyor.ReverseShooter;
+import frc.robot.commands.Conveyor.ShootBalls;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
@@ -50,7 +55,10 @@ public class RobotContainer {
   public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
   public final Command twoBallAutoTop = new TwoBallAutoTop();
   public final Command testAuto = new TestAuto();
-
+  public final Command intakeBall = IntakeBall.getInstance();
+  public final Command outtakeBall = OuttakeBall.getInstance();
+  public final Command shootBalls = ShootBalls.getInstance();
+  public final Command reverseShooter = ReverseShooter.getInstance();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(
@@ -72,6 +80,7 @@ public class RobotContainer {
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Competition").add(chooser);
+    
   }
 
   /**
@@ -81,14 +90,29 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //driver Used:b,x,y,up,down,right Unused:left,a,LT,RT,
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
     driver.xButton.whenPressed(() -> swerveSubsystem.stopModules());
-    driver.yButton.whenPressed(() -> swerveSubsystem.driveModules());
+    driver.yButton.whenActive(() -> swerveSubsystem.driveModules());
     driver.dPadUp.whenPressed(
       () -> swerveSubsystem.resetOdometer(new Pose2d(0, 0, new Rotation2d(0)))
     );
     driver.dPadDown.whenPressed(() -> gyro.resetWithOffset());
     driver.dPadRight.whenPressed(() -> gyro.setOffset(0));
+
+    //gunner Used:up,down,a,b,x,y, Unused:LT,RT,left,right,
+    //gunner.dPadUp.whileHeld(() -> Conveyor.getInstance().conveyorBeltUp());
+    //gunner.dPadDown.whileHeld(() -> Conveyor.getInstance().conveyorBeltDown());
+    //gunner.xButton.whileHeld(() -> Conveyor.getInstance().intakeBall());
+    //gunner.yButton.whileHeld(() -> Conveyor.getInstance().outtakeBall());
+    //gunner.aButton.whileHeld(() -> Conveyor.getInstance().spinConveyorShooter());
+    gunner.dPadUp.whenActive(() -> Conveyor.getInstance().conveyorBeltUp());
+    gunner.dPadDown.whenActive(() -> Conveyor.getInstance().conveyorBeltDown());
+    driver.leftTriggerButton.whenHeld(intakeBall);
+    driver.rightTriggerButton.whenHeld(outtakeBall);
+    gunner.rightTriggerButton.whenHeld(shootBalls);
+    gunner.leftTriggerButton.whenHeld(reverseShooter);
+    //gunner.bButton.whileHeld(() -> Conveyor.getInstance().spinConveyorShooterReverse());
   }
 
   /**
