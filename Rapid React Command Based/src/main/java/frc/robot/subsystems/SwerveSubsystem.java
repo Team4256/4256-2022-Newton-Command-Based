@@ -77,6 +77,10 @@ public class SwerveSubsystem extends SubsystemBase {
     gyro.reset();
   }
 
+  public void setXFormation() {
+    
+  }
+
   public double getHeading() {
     return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
   } //  public double getHeading() {

@@ -35,7 +35,7 @@ public class Conveyor extends SubsystemBase {
         conveyorMotor = new VictorSPX(Parameters.CONVEYOR_MOTOR_ID);
         conveyorSensor = new DigitalInput(Parameters.CONVEYOR_BALL_SENSOR_ID);
         intakeSensor = new DigitalInput(Parameters.INTAKE_BALL_SENSOR_ID);
-        solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.INTAKE_FORWARD_CHANNEL, Parameters.INTAKE_REVERSE_CHANNEL);
+        solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.INTAKE_DOWN_CHANNEL, Parameters.INTAKE_UP_CHANNEL);
     }
 
 	public static synchronized Conveyor getInstance() {
@@ -110,7 +110,6 @@ public class Conveyor extends SubsystemBase {
    * shooter
    */
   public void shootCurrentBalls() {
-      conveyorBeltUp();
       spinConveyorShooter();
   }
 

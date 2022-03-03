@@ -7,19 +7,19 @@ package frc.robot.commands.Conveyor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
 
-public class RaiseIntake extends CommandBase {
+public class LowerIntake extends CommandBase {
  
-  private static RaiseIntake instance = null;
+  private static LowerIntake instance = null;
   Conveyor conveyor;
 
-  public static synchronized RaiseIntake getInstance() {
+  public static synchronized LowerIntake getInstance() {
     if (instance == null) {
-      instance = new RaiseIntake();
+      instance = new LowerIntake();
     }
     return instance;
   }
 
-public RaiseIntake() {
+public LowerIntake() {
    this.conveyor = Conveyor.getInstance();
    addRequirements(conveyor);
   }
@@ -31,7 +31,7 @@ public RaiseIntake() {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.raiseIntake();
+    conveyor.lowerIntake();
   }
 
   // Called once the command ends or is interrupted.
@@ -44,3 +44,6 @@ public RaiseIntake() {
     return false;
   }
 }
+
+
+
