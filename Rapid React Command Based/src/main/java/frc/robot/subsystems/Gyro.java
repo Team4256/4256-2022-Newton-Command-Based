@@ -36,14 +36,14 @@ public class Gyro extends AHRS {
 	 * There is a negative because the gyro returns clockwise positive.
 	 * @return gyro heading in the range [0, 360)
 	 */
-	public double getCurrentAngle() {return -Compass.validate((double)getAngle());}
+	public double getCurrentAngle() {return Compass.validate(-(double)getAngle());}
 	
 	public void setOffset(double offset) {
-		this.setAngleAdjustment(offset);
+		this.setAngleAdjustment(-offset);
 	}
 
 	public double getOffset() {
-		return this.getAngleAdjustment();
+		return -this.getAngleAdjustment();
 	}
 
 	public void resetWithOffset() {
@@ -52,10 +52,10 @@ public class Gyro extends AHRS {
 		setOffset(currentHeading);
 		reset();
 	}
-
-	public double getAngleWithOffset() {
-		return getCurrentAngle() + getOffset();
-	}
+	//pretty much wrong because getCurrentAngle includes the offset
+	// public double getAngleWithOffset() {
+	// 	return getCurrentAngle() + getOffset();
+	// }
 	/**
 	 * Uses <code>compass.legalPath(start, end)</code> to find the most efficient arc from <code>getCurrentAngle()</code> to target
 	 * @param target angle, designated in degrees

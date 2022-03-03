@@ -51,7 +51,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
   public TwoBallAutoBottom() { 
     addCommands(
       new InstantCommand(() -> gyro.setOffset(180)),
-      new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
+      new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       command,
       new InstantCommand(() -> swerve.stopModules())
