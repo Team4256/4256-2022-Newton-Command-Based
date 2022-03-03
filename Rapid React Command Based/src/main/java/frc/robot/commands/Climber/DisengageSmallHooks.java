@@ -2,26 +2,28 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Conveyor;
+package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Climber;
 
-public class RaiseIntake extends CommandBase {
+public class DisengageSmallHooks extends CommandBase {
  
-  private static RaiseIntake instance = null;
+  private static DisengageSmallHooks instance = null;
   Conveyor conveyor;
+  Climber climber;
 
-  public static synchronized RaiseIntake getInstance() {
+  public static synchronized DisengageSmallHooks getInstance() {
     if (instance == null) {
-      instance = new RaiseIntake();
+      instance = new DisengageSmallHooks();
     }
     return instance;
   }
 
-public RaiseIntake() {
-   this.conveyor = Conveyor.getInstance();
-   addRequirements(conveyor);
+public DisengageSmallHooks() {
+   this.climber = Climber.getInstance();
+   addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +33,7 @@ public RaiseIntake() {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.raiseIntake();
+    climber.disengageSmallHooks();
   }
 
   // Called once the command ends or is interrupted.

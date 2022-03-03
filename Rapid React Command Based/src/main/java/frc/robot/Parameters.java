@@ -83,8 +83,14 @@ public class Parameters {
   );
 
   // Climber
-  public static final int LEFT_CLIMBER_ID = 27;
-  public static final int RIGHT_CLIMBER_ID = 29;
+  public static final int LEFT_CLIMBER_ID = 29;//27
+  public static final int RIGHT_CLIMBER_ID = 27;//29
+  public static final int SMALL_HOOK_ENGAGE_CHANNEL = 0;//0
+  public static final int SMALL_HOOK_DISENGAGE_CHANNEL = 1;//1
+  public static final int BIG_ARM_DOWN_CHANNEL = 3;//3
+  public static final int BIG_ARM_UP_CHANNEL = 2;//2
+  public static final double CLIMBER_MOTOR_SPEED = .15;
+
 
   // Conveyor
   public static final int INTAKE_MOTOR_ID = 16;
@@ -93,11 +99,11 @@ public class Parameters {
   public static final double INTAKE_MOTOR_SPEED = -0.5;//changed from 0.5
   public static final double OUTTAKE_MOTOR_SPEED = 0.5;//changed from 0.5
   public static final double CONVEYOR_MOTOR_SPEED = 0.5;//changed from 0.5
-  public static final double SHOOTER_MOTOR_SPEED = 0.8;//changed from 0.8
+  public static final double SHOOTER_MOTOR_SPEED = 1.0;//changed from 0.8
   public static final int INTAKE_BALL_SENSOR_ID = 0;
   public static final int CONVEYOR_BALL_SENSOR_ID = 1;
-  public static final int INTAKE_FORWARD_CHANNEL = 0; // get real value
-  public static final int INTAKE_REVERSE_CHANNEL = 1; //get real value
+  public static final int INTAKE_DOWN_CHANNEL = 4;
+  public static final int INTAKE_UP_CHANNEL = 5;
 
 
   public static final double angleEncoderMinVoltage[] = {

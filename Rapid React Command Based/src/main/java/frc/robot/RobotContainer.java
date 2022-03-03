@@ -17,6 +17,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,17 +25,25 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-
+import frc.robot.subsystems.Climber;
 import frc.robot.commands.Auto.*;
+import frc.robot.commands.Climber.DisengageSmallHooks;
+import frc.robot.commands.Climber.EngageSmallHooks;
+import frc.robot.commands.Climber.LowerClimberArms;
+import frc.robot.commands.Climber.LowerClimberHooks;
+import frc.robot.commands.Climber.RaiseClimberArms;
+import frc.robot.commands.Climber.RaiseClimberHooks;
 import frc.robot.commands.Conveyor.IntakeBall;
 import frc.robot.commands.Conveyor.OuttakeBall;
+import frc.robot.commands.Conveyor.LowerIntake;
 import frc.robot.commands.Conveyor.ReverseShooter;
 import frc.robot.commands.Conveyor.ShootBalls;
+import frc.robot.commands.Conveyor.RaiseIntake;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
-import java.util.List;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.Gyro;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -59,6 +68,15 @@ public class RobotContainer {
   public final Command outtakeBall = OuttakeBall.getInstance();
   public final Command shootBalls = ShootBalls.getInstance();
   public final Command reverseShooter = ReverseShooter.getInstance();
+  public final Command raiseIntake = RaiseIntake.getInstance();
+  public final Command lowerIntake = LowerIntake.getInstance();
+  public final Command raiseClimberArms = RaiseClimberArms.getInstance();
+  public final Command lowerClimberArms = LowerClimberArms.getInstance();
+  public final Command engageSmallHooks = EngageSmallHooks.getInstance();
+  public final Command disengageSmallHooks = DisengageSmallHooks.getInstance();
+  public final Command raiseClimberHooks = RaiseClimberHooks.getInstance();
+  public final Command lowerClimberHooks = LowerClimberHooks.getInstance();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     swerveSubsystem.setDefaultCommand(
@@ -93,26 +111,24 @@ public class RobotContainer {
     //driver Used:b,x,y,up,down,right Unused:left,a,LT,RT,
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
     driver.xButton.whenPressed(() -> swerveSubsystem.stopModules());
-    driver.yButton.whenActive(() -> swerveSubsystem.driveModules());
     driver.dPadUp.whenPressed(
       () -> swerveSubsystem.resetOdometer(new Pose2d(0, 0, new Rotation2d(0)))
     );
     driver.dPadDown.whenPressed(() -> gyro.resetWithOffset());
     driver.dPadRight.whenPressed(() -> gyro.setOffset(0));
 
-    //gunner Used:up,down,a,b,x,y, Unused:LT,RT,left,right,
-    //gunner.dPadUp.whileHeld(() -> Conveyor.getInstance().conveyorBeltUp());
-    //gunner.dPadDown.whileHeld(() -> Conveyor.getInstance().conveyorBeltDown());
-    //gunner.xButton.whileHeld(() -> Conveyor.getInstance().intakeBall());
-    //gunner.yButton.whileHeld(() -> Conveyor.getInstance().outtakeBall());
-    //gunner.aButton.whileHeld(() -> Conveyor.getInstance().spinConveyorShooter());
-    gunner.dPadUp.whenActive(() -> Conveyor.getInstance().conveyorBeltUp());
-    gunner.dPadDown.whenActive(() -> Conveyor.getInstance().conveyorBeltDown());
     driver.leftTriggerButton.whenHeld(intakeBall);
     driver.rightTriggerButton.whenHeld(outtakeBall);
+    driver.yButton.whenHeld(raiseIntake);
+    driver.aButton.whenHeld(lowerIntake);
     gunner.rightTriggerButton.whenHeld(shootBalls);
     gunner.leftTriggerButton.whenHeld(reverseShooter);
-    //gunner.bButton.whileHeld(() -> Conveyor.getInstance().spinConveyorShooterReverse());
+    gunner.aButton.whenHeld(raiseClimberArms);
+    gunner.yButton.whenHeld(lowerClimberArms);
+    gunner.rightBumper.whenHeld(engageSmallHooks);
+    gunner.leftBumper.whenHeld(disengageSmallHooks);
+    gunner.dPadUp.whenHeld(raiseClimberHooks);
+    gunner.dPadDown.whenHeld(lowerClimberHooks);
   }
 
   /**
