@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Climber;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Climber;
@@ -33,6 +34,7 @@ public LowerClimberArms() {
   @Override
   public void execute() {
     climber.lowerBigArms();
+    SmartDashboard.putNumber("right climber encoders", climber.getEncoderCounts());
   }
 
   // Called once the command ends or is interrupted.

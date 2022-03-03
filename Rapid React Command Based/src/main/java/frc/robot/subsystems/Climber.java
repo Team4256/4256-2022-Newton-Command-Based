@@ -31,6 +31,8 @@ public class Climber extends SubsystemBase {
         smallHookSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.SMALL_HOOK_DISENGAGE_CHANNEL, Parameters.SMALL_HOOK_ENGAGE_CHANNEL);
         rightClimberMotor = new WPI_TalonFX(Parameters.RIGHT_CLIMBER_ID);
         leftClimberMotor = new WPI_TalonFX(Parameters.LEFT_CLIMBER_ID);
+        leftClimberMotor.setNeutralMode(NeutralMode.Brake);
+        rightClimberMotor.setNeutralMode(NeutralMode.Brake);
     }
 
 	public static synchronized Climber getInstance() {
@@ -62,6 +64,7 @@ public class Climber extends SubsystemBase {
 
   /**
    * Runs the intake to take a ball from the field into the conveyor system
+   * DEFAULT
    */
   public void disengageSmallHooks() {
       smallHookSolenoid.set(Value.kReverse);
@@ -69,7 +72,7 @@ public class Climber extends SubsystemBase {
 
   //right motor is reverse of left
   public void raiseHooks() {
-    //rightClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
+    rightClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
     leftClimberMotor.set(-Parameters.CLIMBER_MOTOR_SPEED);
   }
 
@@ -82,6 +85,10 @@ public class Climber extends SubsystemBase {
   public void stopClimberMotors() {
     rightClimberMotor.set(0);
     leftClimberMotor.set(0);
+  }
+
+  public double getEncoderCounts() {
+      return rightClimberMotor.getSelectedSensorPosition();
   }
 
 }

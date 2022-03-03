@@ -111,6 +111,7 @@ public class Conveyor extends SubsystemBase {
    */
   public void shootCurrentBalls() {
       spinConveyorShooter();
+      conveyorBeltUp();
   }
 
   /**
