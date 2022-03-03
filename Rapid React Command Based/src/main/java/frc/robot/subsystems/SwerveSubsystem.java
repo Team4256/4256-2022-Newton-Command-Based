@@ -78,7 +78,7 @@ public class SwerveSubsystem extends SubsystemBase {
   }
 
   public double getHeading() {
-    return Math.IEEEremainder(gyro.getAngleWithOffset(), 360);
+    return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
   } //  public double getHeading() {
 
   //    return Math.IEEEremainder(gyro.getCurrentAngle(), 360);
@@ -92,9 +92,19 @@ public class SwerveSubsystem extends SubsystemBase {
     return odometer.getPoseMeters();
   }
 
+  // The input parameter 'pose' includes the direction of the path, which we do not want to be
+  //    included in the odometry orientation. Instead, create a new Pose2d variable with constructor
+  //    parameters of pose.getX(), pose.getY(), and getRotation2d(), and pass that to the function.
+  //    getRotation2d() gets used twice. The first one says this is the orientation of the robot. The
+  //    second says this is the reading of our gyro, which should be correct since we set the offset.
+
   public void resetOdometer(Pose2d pose) {
-    odometer.resetPosition(pose, getRotation2d());
+    Pose2d newPose = new Pose2d( pose.getX(), pose.getY(), getRotation2d());
+    odometer.resetPosition(newPose, getRotation2d());
+    
   }
+
+  
 
   public void resetGyro() {
     gyro.reset();
