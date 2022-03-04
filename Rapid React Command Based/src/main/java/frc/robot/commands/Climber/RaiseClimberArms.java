@@ -35,7 +35,7 @@ public RaiseClimberArms() {
   @Override
   public void execute() {
     climber.raiseBigArms();
-    SmartDashboard.putNumber("rightClimberPosition", climber.getEncoderCounts());
+    SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
   }
 
   // Called once the command ends or is interrupted.

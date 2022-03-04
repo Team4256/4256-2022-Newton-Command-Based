@@ -4,8 +4,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Parameters;
+import frc.robot.commands.Conveyor.RaiseIntake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,17 +28,16 @@ public class Conveyor extends SubsystemBase {
     private final VictorSPX conveyorMotor;
     private final VictorSPX intakeMotor;
     private static Conveyor instance = null;
-    public DigitalInput intakeSensor;
     public DigitalInput conveyorSensor;
     private static DoubleSolenoid solenoid;
-      
+    
     public Conveyor() {
       intakeMotor = new VictorSPX(Parameters.INTAKE_MOTOR_ID);
         shooterMotor = new TalonFX(Parameters.SHOOTER_MOTOR_ID);
         conveyorMotor = new VictorSPX(Parameters.CONVEYOR_MOTOR_ID);
         conveyorSensor = new DigitalInput(Parameters.CONVEYOR_BALL_SENSOR_ID);
-        intakeSensor = new DigitalInput(Parameters.INTAKE_BALL_SENSOR_ID);
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.INTAKE_DOWN_CHANNEL, Parameters.INTAKE_UP_CHANNEL);
+        
     }
 
 	public static synchronized Conveyor getInstance() {
@@ -44,6 +46,7 @@ public class Conveyor extends SubsystemBase {
 		} 
 		return instance;
 	}
+
   /**
      * Runs the intake to take a ball from the field into the conveyor system
      */
@@ -79,6 +82,14 @@ public class Conveyor extends SubsystemBase {
    */
   public void conveyorBeltUp() {
       conveyorMotor.set(ControlMode.PercentOutput, Parameters.CONVEYOR_MOTOR_SPEED);
+  }
+
+  public void conveyorBeltUpWithSensor() {
+      if (conveyorSensor.get()) {
+          return;
+      } else{
+          conveyorBeltUp();
+      }
   }
 
   /**
@@ -124,6 +135,13 @@ public class Conveyor extends SubsystemBase {
       conveyorBeltDown();
       spinConveyorShooterReverse();
   }
+
+  public boolean hasBall() {
+      return conveyorSensor.get();
+  } 
+
+
+
   public void stop() {
     conveyorMotor.set(ControlMode.PercentOutput, 0);
     intakeMotor.set(ControlMode.PercentOutput, 0);

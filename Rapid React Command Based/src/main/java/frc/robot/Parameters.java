@@ -1,6 +1,6 @@
 package frc.robot;
 
-import edu.wpi.first.math.controller.PIDController;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -9,7 +9,7 @@ import edu.wpi.first.math.util.Units;
 public class Parameters {
 
   // Controller
-  public static final double CONTROLLER_DEADBAND = 0.25;
+  public static final double CONTROLLER_DEADBAND = 0.2;
 
   // Gyro
   public static final byte GYRO_UPDATE_HZ = 50;
@@ -33,7 +33,7 @@ public class Parameters {
     new Translation2d(-WHEEL_BASE / 2, TRACK_WIDTH / 2),
     new Translation2d(-WHEEL_BASE / 2, -TRACK_WIDTH / 2)
   );
-
+  
   /**
    * Swerve #1 = 
    * Swerve #2 = 1.22
@@ -70,12 +70,13 @@ public class Parameters {
   public static final double MAX_METERS_PER_SECOND = 3.83; // Max Speed TODO
   public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * 2 * Math.PI;
   public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 4;
-  public static final double TELEOP_SPEED_LIMIT_MPS = MAX_METERS_PER_SECOND;
-  public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 2;
+  public static final double TELEOP_SPEED_LIMIT_MPS = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 4;
+  public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 3;
   public static final double MAX_ACCELERATION = 3;
   public static final double TELEOP_MAX_ANGULAR_ACCELERATION = 3;
   public static final double ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS = 1 / 7.04; //gear ratio * encoder conversion *
   public static final double RPS_TO_METERS_PER_SECOND = ENCODER_CONVERSION_TO_REVOLUTIONS_PER_SECONDS * Math.PI * WHEEL_DIAMETER;
+
   // Automomous
   public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints( //
     MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
@@ -90,6 +91,7 @@ public class Parameters {
   public static final int BIG_ARM_DOWN_CHANNEL = 3;//3
   public static final int BIG_ARM_UP_CHANNEL = 2;//2
   public static final double CLIMBER_MOTOR_SPEED = .5;
+  public static final double CLIMBER_MAX_ENCODER_COUNTS = 1; //TODO get actual max encoder counts
 
 
   // Conveyor

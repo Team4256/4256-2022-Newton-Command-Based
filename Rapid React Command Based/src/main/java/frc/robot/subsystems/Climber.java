@@ -4,27 +4,25 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Parameters;
-
+import frc.robot.commands.Climber.DisengageSmallHooks;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import edu.wpi.first.wpilibj.DigitalInput;
+
 public class Climber extends SubsystemBase {
     private static Climber instance = null;
     private static DoubleSolenoid bigArmSolenoid;
     private static DoubleSolenoid smallHookSolenoid;
     private static WPI_TalonFX rightClimberMotor;
     private static WPI_TalonFX leftClimberMotor;
+
       
     public Climber() {
         bigArmSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.BIG_ARM_DOWN_CHANNEL, Parameters.BIG_ARM_UP_CHANNEL);
@@ -33,6 +31,7 @@ public class Climber extends SubsystemBase {
         leftClimberMotor = new WPI_TalonFX(Parameters.LEFT_CLIMBER_ID);
         leftClimberMotor.setNeutralMode(NeutralMode.Brake);
         rightClimberMotor.setNeutralMode(NeutralMode.Brake);
+        
     }
 
 	public static synchronized Climber getInstance() {
@@ -78,6 +77,13 @@ public class Climber extends SubsystemBase {
 
   //right motor is reverse of left
   public void lowerHooks() {
+    
+  //if (getRightMotorEncoderCounts() < Parameters.CLIMBER_MAX_ENCODER_COUNTS || getLeftMotorEncoderCounts() < Parameters.CLIMBER_MAX_ENCODER_COUNTS) {
+    //rightClimberMotor.set(-Parameters.CLIMBER_MOTOR_SPEED);
+    //leftClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
+  //} else{
+    //return;
+  //}
     rightClimberMotor.set(-Parameters.CLIMBER_MOTOR_SPEED);
     leftClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
   }
@@ -87,8 +93,12 @@ public class Climber extends SubsystemBase {
     leftClimberMotor.set(0);
   }
 
-  public double getEncoderCounts() {
-      return rightClimberMotor.getSelectedSensorPosition();
+  public double getRightMotorEncoderCounts() {
+      return rightClimberMotor.getSensorCollection().getIntegratedSensorPosition();
+  }
+
+  public double getLeftMotorEncoderCounts() {
+      return leftClimberMotor.getSensorCollection().getIntegratedSensorPosition();
   }
 
 }

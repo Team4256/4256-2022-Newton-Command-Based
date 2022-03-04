@@ -25,6 +25,8 @@ public class Robot extends TimedRobot {
   public static double gyroHeading = 0.0;
   private RobotContainer m_robotContainer;
   private Gyro gyro = Gyro.getInstance();
+  private Climber climber = Climber.getInstance();
+  private Conveyor conveyor = Conveyor.getInstance();
   
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -52,6 +54,9 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     SmartDashboard.putData("gyro", gyro);
     SmartDashboard.putNumber("gyroOffset", gyro.getOffset());
+    SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
+    SmartDashboard.putNumber("leftClimberPosition", climber.getLeftMotorEncoderCounts());
+    SmartDashboard.putBoolean("hasBall", conveyor.hasBall());
     CommandScheduler.getInstance().run();
   }
 
