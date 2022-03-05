@@ -15,9 +15,6 @@ public class Parameters {
   public static final byte GYRO_UPDATE_HZ = 50;
   public static final double GYRO_OFFSET = 0;
 
-  // Ball Chute
-  public static final int BALL_SENSOR_ID = 0;
-
   // Sensors
   public static final int PROXIMITY_SENSOR_ID = 4;
 
@@ -102,11 +99,9 @@ public class Parameters {
   public static final double OUTTAKE_MOTOR_SPEED = 0.5;//changed from 0.5
   public static final double CONVEYOR_MOTOR_SPEED = 0.5;//changed from 0.5
   public static final double SHOOTER_MOTOR_SPEED = 1.0;//changed from 0.8
-  public static final int INTAKE_BALL_SENSOR_ID = 0;
-  public static final int CONVEYOR_BALL_SENSOR_ID = 1;
+  public static final int CONVEYOR_BALL_SENSOR_ID = 0;
   public static final int INTAKE_DOWN_CHANNEL = 4;
   public static final int INTAKE_UP_CHANNEL = 5;
-
 
   public static final double angleEncoderMinVoltage[] = {
   //   .008544921,

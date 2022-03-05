@@ -37,7 +37,6 @@ public class Conveyor extends SubsystemBase {
         conveyorMotor = new VictorSPX(Parameters.CONVEYOR_MOTOR_ID);
         conveyorSensor = new DigitalInput(Parameters.CONVEYOR_BALL_SENSOR_ID);
         solenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.INTAKE_DOWN_CHANNEL, Parameters.INTAKE_UP_CHANNEL);
-        
     }
 
 	public static synchronized Conveyor getInstance() {
@@ -139,8 +138,6 @@ public class Conveyor extends SubsystemBase {
   public boolean hasBall() {
       return conveyorSensor.get();
   } 
-
-
 
   public void stop() {
     conveyorMotor.set(ControlMode.PercentOutput, 0);

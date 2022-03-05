@@ -90,6 +90,9 @@ public class RobotContainer {
       )
     );
 
+    //conveyor.setDefaultCommand(raiseIntake);
+    //climber.setDefaultCommand(disengageSmallHooks);
+
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
     chooser.addOption("Two Ball Auto Bottom", twoBallAutoBottom);
