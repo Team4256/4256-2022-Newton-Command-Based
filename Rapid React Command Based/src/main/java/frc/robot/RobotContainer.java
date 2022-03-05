@@ -56,9 +56,9 @@ public class RobotContainer {
   private final SwerveSubsystem swerveSubsystem = SwerveSubsystem.getInstance();
   private final Climber climber = Climber.getInstance();
   private final Conveyor conveyor = Conveyor.getInstance();
-
-  public Xbox driver = new Xbox(0);
-  public Xbox gunner = new Xbox(1);
+  public static boolean smallHooksEngaged;
+  public static final Xbox driver = new Xbox(0);
+  public static final Xbox gunner = new Xbox(1);
   Gyro gyro = Gyro.getInstance();
   SendableChooser<Command> chooser = new SendableChooser<>();
   public final Command threeBallAutoBottom = new ThreeBallAutoBottom();
@@ -92,8 +92,8 @@ public class RobotContainer {
       )
     );
 
-    //conveyor.setDefaultCommand(raiseIntake);
-    //climber.setDefaultCommand(disengageSmallHooks);
+    conveyor.setDefaultCommand(raiseIntake);
+    climber.setDefaultCommand(disengageSmallHooks);
 
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
@@ -104,6 +104,7 @@ public class RobotContainer {
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Competition").add(chooser);
+    SmartDashboard.putBoolean("smallHooksEngaged:D", smallHooksEngaged);
   }
 
   /**

@@ -6,10 +6,11 @@ package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Climber;
 
 public class DisengageSmallHooks extends CommandBase {
- 
+  
   private static DisengageSmallHooks instance = null;
   Conveyor conveyor;
   Climber climber;
@@ -34,6 +35,7 @@ public DisengageSmallHooks() {
   @Override
   public void execute() {
     climber.disengageSmallHooks();
+    RobotContainer.smallHooksEngaged = false;
   }
 
   // Called once the command ends or is interrupted.
