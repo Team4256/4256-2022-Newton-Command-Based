@@ -85,7 +85,7 @@ public class Conveyor extends SubsystemBase {
 
   public void conveyorBeltUpWithSensor() {
       if (conveyorSensor.get()) {
-          return;
+          stop();
       } else{
           conveyorBeltUp();
       }

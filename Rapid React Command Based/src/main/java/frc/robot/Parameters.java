@@ -131,7 +131,7 @@ public class Parameters {
    * Swerve #3 = 4.35
    * Swerve #4 = 
    * Swerve #5 = 2.89
-   * Swerve #6 = 
+   * Swerve #6 = 4.86
    * Swerve #7 = 
    * Swerve #8 = 
    * Swerve #9 = 1.00
@@ -142,7 +142,7 @@ public class Parameters {
     // 2.388,
     // 1.355,
     1.22,
-    2.89,
+    4.86,
     4.35,
     1.00
   };

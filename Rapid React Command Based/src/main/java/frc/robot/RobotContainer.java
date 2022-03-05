@@ -132,8 +132,8 @@ public class RobotContainer {
     //climber
     gunner.aButton.whenHeld(raiseClimberArms);
     gunner.yButton.whenHeld(lowerClimberArms);
-    gunner.rightBumper.whenHeld(engageSmallHooks);
-    gunner.leftBumper.whenHeld(disengageSmallHooks);
+    gunner.rightBumper.whenHeld(disengageSmallHooks);
+    gunner.leftBumper.whenHeld(engageSmallHooks);
     gunner.dPadUp.whenHeld(raiseClimberHooks);
     gunner.dPadDown.whenHeld(lowerClimberHooks);
   }
