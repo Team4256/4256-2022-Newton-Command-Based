@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.*;
@@ -29,9 +30,10 @@ public class Robot extends TimedRobot {
   private Gyro gyro = Gyro.getInstance();
   private Climber climber = Climber.getInstance();
   private Conveyor conveyor = Conveyor.getInstance();
+  
   UsbCamera camera1;
   UsbCamera camera2;
-
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -42,7 +44,6 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     camera1 = CameraServer.startAutomaticCapture(0);
     camera2 = CameraServer.startAutomaticCapture(1);
-
     m_robotContainer = new RobotContainer();
   }
 
