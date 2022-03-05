@@ -36,6 +36,7 @@ import frc.robot.commands.Conveyor.LowerIntake;
 import frc.robot.commands.Conveyor.OuttakeBall;
 import frc.robot.commands.Conveyor.RaiseIntake;
 import frc.robot.commands.Conveyor.ReverseShooter;
+import frc.robot.commands.Conveyor.RunShooter;
 import frc.robot.commands.Conveyor.ShootBalls;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.Climber;
@@ -77,6 +78,7 @@ public class RobotContainer {
   public final Command disengageSmallHooks = DisengageSmallHooks.getInstance();
   public final Command raiseClimberHooks = RaiseClimberHooks.getInstance();
   public final Command lowerClimberHooks = LowerClimberHooks.getInstance();
+  public final Command runShooter = RunShooter.getInstance();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
