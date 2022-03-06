@@ -25,6 +25,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   Gyro gyro = Gyro.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
   ReverseShooter shootBalls = ReverseShooter.getInstance();
+  LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
@@ -35,7 +36,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top Red", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -50,17 +51,15 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   /** Creates a new ThreeBallAutoBottom. */
   public TwoBallAutoTop() { 
     addCommands(
-       new InstantCommand(() -> gyro.setOffset(-20)),
+   new InstantCommand(() -> gyro.setOffset(-20)),
       new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       command,
       new InstantCommand(() -> swerve.stopModules())
-      //new InstantCommand(() -> gyro.reset()),
-      //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
-      //new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
-      //new ParallelDeadlineGroup(command, intakeBall),
-      //new InstantCommand(() -> swerve.stopModules()),
-      //new ParallelDeadlineGroup( new WaitCommand(5), shootBalls)
+    // Add the deadline command in the super() call. Add other commands using
+    // addCommands().
+    
+    // addCommands(new FooCommand(), new BarCommand());
     );
   }
 }

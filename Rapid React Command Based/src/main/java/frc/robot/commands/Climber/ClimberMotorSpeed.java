@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Parameters;
 import frc.robot.subsystems.Climber;
@@ -19,6 +20,7 @@ public class ClimberMotorSpeed extends CommandBase {
   public double ySpeedRight;
 
   Climber climber;
+  private static ClimberMotorSpeed instance = null;
   public ClimberMotorSpeed(Climber climber, Supplier<Double> ySpdLeftFunction, Supplier<Double> ySpdRightFunction) {
     this.climber = climber;
     this.ySpdLeftFunction = ySpdLeftFunction;
@@ -59,4 +61,5 @@ public class ClimberMotorSpeed extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
 }

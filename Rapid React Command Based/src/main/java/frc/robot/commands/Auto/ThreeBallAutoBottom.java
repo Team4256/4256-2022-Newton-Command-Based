@@ -25,6 +25,7 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   Gyro gyro = Gyro.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
   ReverseShooter shootBalls = ReverseShooter.getInstance();
+  LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
@@ -55,12 +56,14 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
       // new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       // command,
       // new InstantCommand(() -> swerve.stopModules())
-      new InstantCommand(() -> gyro.setOffset(-110)),
+      new InstantCommand(() -> gyro.setOffset(-17)),
       new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
+      new ParallelDeadlineGroup( new WaitCommand(1), lowerIntake),
       new ParallelDeadlineGroup(command, intakeBall),
       new InstantCommand(() -> swerve.stopModules()),
       new ParallelDeadlineGroup( new WaitCommand(5), shootBalls)
+      
     );
   }
 }

@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.commands.Auto.*;
+import frc.robot.commands.Climber.ClimberMotorSpeed;
 import frc.robot.commands.Climber.DisengageSmallHooks;
 import frc.robot.commands.Climber.EngageSmallHooks;
 import frc.robot.commands.Climber.LowerClimberArms;
@@ -38,6 +39,12 @@ import frc.robot.commands.Conveyor.RaiseIntake;
 import frc.robot.commands.Conveyor.ReverseShooter;
 import frc.robot.commands.Conveyor.RunShooter;
 import frc.robot.commands.Conveyor.ShootBalls;
+import frc.robot.commands.Conveyor2.Conveyor.IntakeBall2;
+import frc.robot.commands.Conveyor2.Conveyor.LowerIntake2;
+import frc.robot.commands.Conveyor2.Conveyor.OuttakeBall2;
+import frc.robot.commands.Conveyor2.Conveyor.RaiseIntake2;
+import frc.robot.commands.Conveyor2.Conveyor.ReverseShooter2;
+import frc.robot.commands.Conveyor2.Conveyor.ShootBalls2;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
@@ -66,12 +73,12 @@ public class RobotContainer {
   public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
   public final Command twoBallAutoTop = new TwoBallAutoTop();
   public final Command testAuto = new TestAuto();
-  public final Command intakeBall = IntakeBall.getInstance();
-  public final Command outtakeBall = OuttakeBall.getInstance();
-  public final Command shootBalls = ShootBalls.getInstance();
-  public final Command reverseShooter = ReverseShooter.getInstance();
-  public final Command raiseIntake = RaiseIntake.getInstance();
-  public final Command lowerIntake = LowerIntake.getInstance();
+  public final Command intakeBall = IntakeBall2.getInstance();
+  public final Command outtakeBall = OuttakeBall2.getInstance();
+  public final Command shootBalls = ShootBalls2.getInstance();
+  public final Command reverseShooter = ReverseShooter2.getInstance();
+  public final Command raiseIntake = RaiseIntake2.getInstance();
+  public final Command lowerIntake = LowerIntake2.getInstance();
   public final Command raiseClimberArms = RaiseClimberArms.getInstance();
   public final Command lowerClimberArms = LowerClimberArms.getInstance();
   public final Command engageSmallHooks = EngageSmallHooks.getInstance();
@@ -80,8 +87,11 @@ public class RobotContainer {
   public final Command lowerClimberHooks = LowerClimberHooks.getInstance();
   public final Command runShooter = RunShooter.getInstance();
 
+  //public final Command climberMotorSpeed = ClimberMotorSpeed.getInstance();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    
     swerveSubsystem.setDefaultCommand(
       new SwerveXboxCmd(
         swerveSubsystem,
@@ -91,9 +101,15 @@ public class RobotContainer {
         () -> !driver.startButton.get()
       )
     );
+    // climber.setDefaultCommand(
+    //     ClimberMotorSpeed climberMotorSpeed = new ClimberMotorSpeed(
+    //     this,
+    //     () -> gunner.getLeftStickY(),
+    //     () -> -gunner.getRightStickY()
+    //   ));
 
-    conveyor.setDefaultCommand(raiseIntake);
-    climber.setDefaultCommand(disengageSmallHooks);
+    //conveyor.setDefaultCommand(raiseIntake);
+    //climber.setDefaultCommand(disengageSmallHooks);
 
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
