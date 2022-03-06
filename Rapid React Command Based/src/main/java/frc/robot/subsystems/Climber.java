@@ -4,23 +4,14 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Parameters;
-import frc.robot.RobotContainer;
-import frc.robot.commands.Climber.ClimberMotorSpeed;
-import frc.robot.commands.Climber.DisengageSmallHooks;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.XboxController;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate.Param;
 
-import java.util.function.Supplier;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -32,7 +23,6 @@ public class Climber extends SubsystemBase {
     private static DoubleSolenoid smallHookSolenoid;
     private static WPI_TalonFX rightClimberMotor;
     private static WPI_TalonFX leftClimberMotor;
-    private static ClimberMotorSpeed climberMotorSpeed;
 
     public Climber() {
         bigArmSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Parameters.BIG_ARM_DOWN_CHANNEL, Parameters.BIG_ARM_UP_CHANNEL);
@@ -41,11 +31,6 @@ public class Climber extends SubsystemBase {
         leftClimberMotor = new WPI_TalonFX(Parameters.LEFT_CLIMBER_ID);
         leftClimberMotor.setNeutralMode(NeutralMode.Brake);
         rightClimberMotor.setNeutralMode(NeutralMode.Brake);
-    //     climberMotorSpeed = new ClimberMotorSpeed(
-    //     this,
-    //     () -> gunner.getLeftStickY(),
-    //     () -> -gunner.getRightStickY()
-    //   );
     }
 
 	public static synchronized Climber getInstance() {
@@ -108,6 +93,14 @@ public class Climber extends SubsystemBase {
   //  leftClimberMotor.set(climberMotorSpeed.ySpeedLeft);
     leftClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
     rightClimberMotor.set(-Parameters.CLIMBER_MOTOR_SPEED);
+  }
+
+  public void rightHookControl(double speed) {
+    rightClimberMotor.set(speed);
+  }
+
+  public void leftHookControl(double speed) {
+    rightClimberMotor.set(speed);
   }
 
   public void stopClimberMotors() {
