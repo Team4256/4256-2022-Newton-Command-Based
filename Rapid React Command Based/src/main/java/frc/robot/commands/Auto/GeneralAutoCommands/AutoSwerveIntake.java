@@ -16,9 +16,8 @@ import frc.robot.commands.Conveyor.ReverseShooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoSwerveIntake extends ParallelDeadlineGroup {
   /** Creates a new AutoIntake. */
-  ReverseShooter shootBalls = ReverseShooter.getInstance();
-  LowerIntake lowerIntake = LowerIntake.getInstance();
-  IntakeBall intakeBall = IntakeBall.getInstance();
+  LowerIntake lowerIntake = new LowerIntake();
+  IntakeBall intakeBall = new IntakeBall();
   PPSwerveControllerCommand command;
   
   //public static synchronized AutoSwerveIntake getInstance() {

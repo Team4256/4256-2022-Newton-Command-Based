@@ -14,7 +14,7 @@ import frc.robot.commands.Conveyor.ShootBalls;
 public class AutoShootBalls extends ParallelDeadlineGroup {
   /** Creates a new AutoIntake. */
   private static AutoLowerIntake instance = null;
-  ShootBalls shootBalls = ShootBalls.getInstance();
+  ShootBalls shootBalls = new ShootBalls();
   
   
   AutoLowerIntake getInstance() {

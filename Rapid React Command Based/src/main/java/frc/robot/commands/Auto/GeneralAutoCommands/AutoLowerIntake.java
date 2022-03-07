@@ -18,10 +18,8 @@ import frc.robot.commands.Conveyor.ReverseShooter;
 public class AutoLowerIntake extends ParallelDeadlineGroup {
   /** Creates a new AutoIntake. */
   private static AutoLowerIntake instance = null;
-  ReverseShooter shootBalls = ReverseShooter.getInstance();
-  LowerIntake lowerIntake = LowerIntake.getInstance();
-  IntakeBall intakeBall = IntakeBall.getInstance();
-  PPSwerveControllerCommand command;
+  //LowerIntake lowerIntake = LowerIntake.getInstance();
+  LowerIntake lowerIntake = new LowerIntake();
 
   public static synchronized AutoLowerIntake getInstance() {
     if (instance == null) {
