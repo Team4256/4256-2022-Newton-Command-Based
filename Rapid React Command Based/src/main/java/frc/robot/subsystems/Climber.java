@@ -96,7 +96,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void rightHookControl(double speed) {
-    rightClimberMotor.set(speed);
+    leftClimberMotor.set(-speed);
   }
 
   public void leftHookControl(double speed) {

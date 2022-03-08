@@ -42,6 +42,8 @@ public class ClimberXboxControl extends CommandBase {
      
      climber.rightHookControl(rightSpeed);
      climber.leftHookControl(leftSpeed);
+     SmartDashboard.putNumber("rightSpeed", rightSpeed);
+     SmartDashboard.putNumber("leftSpeed", leftSpeed);
     
   }
 
