@@ -87,7 +87,7 @@ public class Parameters {
   public static final int SMALL_HOOK_DISENGAGE_CHANNEL = 1;//1
   public static final int BIG_ARM_DOWN_CHANNEL = 3;//3
   public static final int BIG_ARM_UP_CHANNEL = 2;//2
-  public static final double CLIMBER_MOTOR_SPEED = .5;
+  public static final double CLIMBER_MOTOR_SPEED = .7;
   public static final double CLIMBER_MAX_ENCODER_COUNTS = 1; //TODO get actual max encoder counts
 
 
