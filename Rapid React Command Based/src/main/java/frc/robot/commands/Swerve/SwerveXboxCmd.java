@@ -57,6 +57,9 @@ public class SwerveXboxCmd extends CommandBase {
     ySpeed = MathUtil.applyDeadband(ySpeed, Parameters.CONTROLLER_DEADBAND);
     turningSpeed = MathUtil.applyDeadband(turningSpeed, Parameters.CONTROLLER_DEADBAND);
     
+    xSpeed *= Math.signum(xSpeed) * xSpeed;
+    ySpeed *= Math.signum(ySpeed) * ySpeed;
+    turningSpeed *= Math.signum(turningSpeed) * turningSpeed;
   
      // 3. Make the driving smoother
      xSpeed = xLimiter.calculate(xSpeed) * Parameters.TELEOP_SPEED_LIMIT_MPS;

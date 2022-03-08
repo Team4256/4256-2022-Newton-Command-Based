@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Auto.AutoRoutines.TestAuto;
 import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottom;
@@ -138,6 +139,7 @@ public class RobotContainer {
     gunner.leftBumper.whenHeld(engageSmallHooks);
     gunner.dPadUp.whenHeld(raiseClimberHooks);
     gunner.dPadDown.whenHeld(lowerClimberHooks);
+    gunner.startButton.whenHeld(new InstantCommand(() -> climber.resetClimberEncoders()));
 
   }
 

@@ -16,7 +16,6 @@ import frc.robot.commands.Conveyor.ReverseShooter;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoSwerveIntake extends ParallelDeadlineGroup {
   /** Creates a new AutoIntake. */
-  LowerIntake lowerIntake = new LowerIntake();
   IntakeBall intakeBall = new IntakeBall();
   PPSwerveControllerCommand command;
   
@@ -29,6 +28,6 @@ public class AutoSwerveIntake extends ParallelDeadlineGroup {
 
   public AutoSwerveIntake(PPSwerveControllerCommand swerveCommand) {
     super(swerveCommand);
-    addCommands(lowerIntake);
+    addCommands(intakeBall);
   }
 }

@@ -82,13 +82,13 @@ public class Climber extends SubsystemBase {
   //right motor is reverse of left
   public void lowerHooks() {
     
-  //if (getRightMotorEncoderCounts() < Parameters.CLIMBER_MAX_ENCODER_COUNTS || getLeftMotorEncoderCounts() < Parameters.CLIMBER_MAX_ENCODER_COUNTS) {
-    //rightClimberMotor.set(-Parameters.CLIMBER_MOTOR_SPEED);
-    //leftClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
-  //} else{
-    //return;
-  //}
-    //rightClimberMotor.set(InstantCommand(() -> armAdjustmentCmdRight));
+  // if (getRightMotorEncoderCounts() < Parameters.CLIMBER_MAX_ENCODER_COUNTS || getLeftMotorEncoderCounts() < Parameters.CLIMBER_MAX_ENCODER_COUNTS) {
+  //   rightClimberMotor.set(-Parameters.CLIMBER_MOTOR_SPEED);
+  //   leftClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
+  // } else{
+  //   return;
+  // }
+  //   rightClimberMotor.set(InstantCommand(() -> armAdjustmentCmdRight));
   //  rightClimberMotor.set(climberMotorSpeed.ySpeedRight);
   //  leftClimberMotor.set(climberMotorSpeed.ySpeedLeft);
     leftClimberMotor.set(Parameters.CLIMBER_MOTOR_SPEED);
@@ -107,6 +107,12 @@ public class Climber extends SubsystemBase {
     rightClimberMotor.set(0);
     leftClimberMotor.set(0);
   }
+
+  public void resetClimberEncoders() {
+    rightClimberMotor.getSensorCollection().setIntegratedSensorPosition(0, 2);
+    leftClimberMotor.getSensorCollection().setIntegratedSensorPosition(0, 2);
+  }
+
 
   public double getRightMotorEncoderCounts() {
       return rightClimberMotor.getSensorCollection().getIntegratedSensorPosition();
