@@ -14,8 +14,11 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Auto.AutoRoutines.TestAuto;
 import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottom;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottomEdge;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddle;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddleEdge;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTop;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTopEdge;
 import frc.robot.commands.Climber.ClimberXboxControl;
 import frc.robot.commands.Climber.DisengageSmallHooks;
 import frc.robot.commands.Climber.EngageSmallHooks;
@@ -58,6 +61,9 @@ public class RobotContainer {
   public final Command twoBallAutoBottom = new TwoBallAutoBottom();
   public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
   public final Command twoBallAutoTop = new TwoBallAutoTop();
+  public final Command twoBallAutoTopEdge = new TwoBallAutoTopEdge();
+  public final Command twoBallAutoBottomEdge = new TwoBallAutoBottomEdge();
+  public final Command twoBallAutoMiddleEdge = new TwoBallAutoMiddleEdge();
   public final Command testAuto = new TestAuto();
   public final Command intakeBall = IntakeBall2.getInstance();
   public final Command outtakeBall = OuttakeBall2.getInstance();
@@ -97,8 +103,11 @@ public class RobotContainer {
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
     chooser.addOption("Two Ball Auto Bottom", twoBallAutoBottom);
-    chooser.addOption("Two Ball Auto middle", twoBallAutoMiddle);
-    chooser.addOption("Two Ball Auto top", twoBallAutoTop);
+    chooser.addOption("Two Ball Auto Middle", twoBallAutoMiddle);
+    chooser.addOption("Two Ball Auto Top", twoBallAutoTop);
+    chooser.addOption("Two Ball Auto Top Edge", twoBallAutoTopEdge);
+    chooser.addOption("Two Ball Auto Middle Edge", twoBallAutoBottomEdge);
+    chooser.addOption("Two Ball Auto Bottom Edge ", twoBallAutoMiddle);
     chooser.addOption("Test Auto", testAuto);
 
     // Put the chooser on the dashboard

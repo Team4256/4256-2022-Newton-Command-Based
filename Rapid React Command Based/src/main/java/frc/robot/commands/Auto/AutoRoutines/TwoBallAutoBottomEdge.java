@@ -18,12 +18,13 @@ import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
 
-public class TwoBallAutoBottom extends SequentialCommandGroup {
+public class TwoBallAutoBottomEdge extends SequentialCommandGroup {
 
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
   ReverseShooter shootBalls = ReverseShooter.getInstance();
+  LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
@@ -34,7 +35,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball bottom", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball bottom Edge", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -47,21 +48,28 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
-  public TwoBallAutoBottom() { 
+  public TwoBallAutoBottomEdge() { 
+
     addCommands(
-      //new InstantCommand(() -> gyro.setOffset(180)),
+   //new InstantCommand(() -> gyro.setOffset(-20)),
       //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
       //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       //command,
-        //new InstantCommand(() -> swerve.stopModules())
-        new InstantCommand(() -> gyro.setOffset(-20)),
+      //new InstantCommand(() -> swerve.stopModules())
+
+        new InstantCommand(() -> gyro.setOffset(-137)),
         new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
-        new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls()
+
+
+    // Add the deadline command in the super() call. Add other commands using
+    // addCommands().
+    
+    // addCommands(new FooCommand(), new BarCommand());
     );
   }
 }
