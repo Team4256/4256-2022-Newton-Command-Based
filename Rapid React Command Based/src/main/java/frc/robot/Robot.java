@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.*;
@@ -25,9 +26,9 @@ public class Robot extends TimedRobot {
   private Gyro gyro = Gyro.getInstance();
   private Climber climber = Climber.getInstance();
   private Conveyor conveyor = Conveyor.getInstance();
-  private Limelight camera = Limelight.getInstance();
+  private Limelight intakeCam = Limelight.getInstance();
   
-  UsbCamera camera1;
+  UsbCamera shooterCam;
   //UsbCamera camera2;
   
   /**
@@ -38,10 +39,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     
-    
-    camera.setSplitView(); 
+    shooterCam = CameraServer.startAutomaticCapture();
+    intakeCam.setSplitView(); 
     //camera.setPipeline(3); // RED MATCH
-    camera.setPipeline(4); // BLUE MATCH
+    intakeCam.setPipeline(4); // BLUE MATCH
     m_robotContainer = new RobotContainer();
     
   }
