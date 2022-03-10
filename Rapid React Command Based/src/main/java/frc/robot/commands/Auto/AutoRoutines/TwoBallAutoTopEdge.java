@@ -57,7 +57,7 @@ public class TwoBallAutoTopEdge extends SequentialCommandGroup {
       //new InstantCommand(() -> swerve.stopModules())
 
         new InstantCommand(() -> gyro.setOffset(137)),
-        new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
