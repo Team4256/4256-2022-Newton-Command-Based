@@ -57,7 +57,7 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
         //new ParallelDeadlineGroup(command, intakeBall),
         //new InstantCommand(() -> swerve.stopModules()),
         //new ParallelDeadlineGroup(new WaitCommand(5), shootBalls)
-
+        new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-110)),
         new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),

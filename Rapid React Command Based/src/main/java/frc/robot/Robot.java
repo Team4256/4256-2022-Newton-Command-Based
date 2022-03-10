@@ -38,6 +38,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     
     camera.setSplitView(); 
+    camera.setPipeline(3); // RED MATCH
+    //camera.setPipeline(4); // BLUE MATCH
     m_robotContainer = new RobotContainer();
   }
 

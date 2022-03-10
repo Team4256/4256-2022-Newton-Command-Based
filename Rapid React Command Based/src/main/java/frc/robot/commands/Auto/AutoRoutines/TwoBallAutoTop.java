@@ -4,6 +4,8 @@
 
 package frc.robot.commands.Auto.AutoRoutines;
 
+import java.time.Instant;
+
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
@@ -55,7 +57,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
       //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       //command,
       //new InstantCommand(() -> swerve.stopModules())
-
+        new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(159)),
         new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
