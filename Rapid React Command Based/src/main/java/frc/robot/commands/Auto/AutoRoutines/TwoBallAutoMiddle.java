@@ -34,7 +34,7 @@ public class TwoBallAutoMiddle extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball middle", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball middle", 3, 3);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,

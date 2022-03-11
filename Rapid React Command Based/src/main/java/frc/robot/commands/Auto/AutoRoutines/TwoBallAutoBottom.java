@@ -34,7 +34,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball bottom", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball bottom", 3, 3);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -62,7 +62,8 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new AutoShootBalls()
+        new AutoShootBalls(),
+        new InstantCommand(() -> gyro.setOffset(0))
     );
   }
 }

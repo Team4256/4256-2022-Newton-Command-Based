@@ -19,6 +19,7 @@ import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddle;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddleEdge;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTop;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTopEdge;
+import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoFar;
 import frc.robot.commands.Climber.ClimberXboxControl;
 import frc.robot.commands.Climber.DisengageSmallHooks;
 import frc.robot.commands.Climber.EngageSmallHooks;
@@ -64,6 +65,7 @@ public class RobotContainer {
   public final Command twoBallAutoTopEdge = new TwoBallAutoTopEdge();
   public final Command twoBallAutoBottomEdge = new TwoBallAutoBottomEdge();
   public final Command twoBallAutoMiddleEdge = new TwoBallAutoMiddleEdge();
+  public final Command threeBallAutoTopFar = new ThreeBallAutoFar();
   public final Command testAuto = new TestAuto();
   public final Command intakeBall = IntakeBall2.getInstance();
   public final Command outtakeBall = OuttakeBall2.getInstance();
