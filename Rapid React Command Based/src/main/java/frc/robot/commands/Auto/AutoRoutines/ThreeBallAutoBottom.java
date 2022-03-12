@@ -36,7 +36,7 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
       0,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball bottom", 3, 3);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball bottom", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
       autoPath,
       swerve::getPose,
@@ -52,13 +52,13 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
     addCommands(
         new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-111)),
-        new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new AutoShootBalls(),
+        //new AutoShootBalls(),
         new InstantCommand(() -> gyro.setOffset(0))
 
     );

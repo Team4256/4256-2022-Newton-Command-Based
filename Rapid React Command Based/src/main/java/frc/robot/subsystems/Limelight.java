@@ -270,8 +270,8 @@ public class Limelight {
      * Outputs relevant information to the SmartDashboard.
      */
     public synchronized void outputToSmartDashboard() {
-        SmartDashboard.putBoolean("Limelight Is Vision Enabled", isVisionEnabled());
-        SmartDashboard.putBoolean("Limelight Is Split View", isSplitView());
-        SmartDashboard.putBoolean("Limelight Has Target", hasTarget());
+        //SmartDashboard.putBoolean("Limelight Is Vision Enabled", isVisionEnabled());
+        //SmartDashboard.putBoolean("Limelight Is Split View", isSplitView());
+        //SmartDashboard.putBoolean("Limelight Has Target", hasTarget());
     }
 }

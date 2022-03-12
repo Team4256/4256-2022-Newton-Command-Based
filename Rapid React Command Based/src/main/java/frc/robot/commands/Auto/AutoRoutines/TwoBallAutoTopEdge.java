@@ -35,7 +35,7 @@ public class TwoBallAutoTopEdge extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top Edge", 3, 3);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top Edge", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,

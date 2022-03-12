@@ -74,8 +74,8 @@ public class SwerveXboxCmd extends CommandBase {
             // Relative to field
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                     xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
-                    SmartDashboard.putString("Chassis Speeds", chassisSpeeds.toString());
-                    SmartDashboard.putString("Rotation2d", swerveSubsystem.getRotation2d().toString());
+                    //SmartDashboard.putString("Chassis Speeds", chassisSpeeds.toString());
+                    //SmartDashboard.putString("Rotation2d", swerveSubsystem.getRotation2d().toString());
                     
         } else {
             // Relative to robot

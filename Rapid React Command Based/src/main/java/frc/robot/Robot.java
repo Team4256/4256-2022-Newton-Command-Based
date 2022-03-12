@@ -62,9 +62,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     SmartDashboard.putData("gyro", gyro);
-    SmartDashboard.putNumber("gyroOffset", gyro.getOffset());
-    SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
-    SmartDashboard.putNumber("leftClimberPosition", climber.getLeftMotorEncoderCounts());
+    //SmartDashboard.putNumber("gyroOffset", gyro.getOffset());
+    //SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
+    //SmartDashboard.putNumber("leftClimberPosition", climber.getLeftMotorEncoderCounts());
     SmartDashboard.putBoolean("hasBall", conveyor.hasBall());
     CommandScheduler.getInstance().run();
   }

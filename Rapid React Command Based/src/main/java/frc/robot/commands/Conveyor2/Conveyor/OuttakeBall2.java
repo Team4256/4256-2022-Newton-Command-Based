@@ -35,7 +35,6 @@ public OuttakeBall2() {
   public void execute() {
     conveyor.conveyorBeltDown();
     conveyor.outtakeBall();
-    SmartDashboard.putBoolean("outtaking", true);
   }
 // Called once the command ends or is interrupted.
   @Override

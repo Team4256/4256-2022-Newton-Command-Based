@@ -36,7 +36,7 @@ public class ThreeBallAutoFar extends SequentialCommandGroup {
       0,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball bottom", 3, 3);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball bottom", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
       autoPath,
       swerve::getPose,
