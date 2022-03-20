@@ -49,10 +49,14 @@ public class TwoBallAutoMiddle extends SequentialCommandGroup {
   /** Creates a new ThreeBallAutoBottom. */
   public TwoBallAutoMiddle() { 
     addCommands(
-        
-        //new InstantCommand(() -> gyro.reset()),
-        new InstantCommand(() -> gyro.setOffset(-20)),
-        new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
+       //new InstantCommand(() -> gyro.setOffset(180)),
+      //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
+      //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
+      //command,
+      //new InstantCommand(() -> swerve.stopModules())
+      new InstantCommand(() -> gyro.reset()),
+        new InstantCommand(() -> gyro.setOffset(-111)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),

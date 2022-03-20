@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Limelight.CamMode;
@@ -24,9 +26,9 @@ public class Robot extends TimedRobot {
   private Gyro gyro = Gyro.getInstance();
   private Climber climber = Climber.getInstance();
   private Conveyor conveyor = Conveyor.getInstance();
-  private Limelight camera = Limelight.getInstance();
+  private Limelight intakeCam = Limelight.getInstance();
   
-  //UsbCamera camera1;
+  UsbCamera shooterCam;
   //UsbCamera camera2;
   
   /**
@@ -37,8 +39,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     
-    camera.setSplitView(); 
+    shooterCam = CameraServer.startAutomaticCapture(0);
+    intakeCam.setSplitView(); 
+    //camera.setPipeline(3); // RED MATCH
+    //intakeCam.setPipeline(4); // BLUE MATCH
+    intakeCam.setPipeline(0); // NO FILTER
     m_robotContainer = new RobotContainer();
+
   }
 
   /**
@@ -55,9 +62,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     SmartDashboard.putData("gyro", gyro);
-    SmartDashboard.putNumber("gyroOffset", gyro.getOffset());
-    SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
-    SmartDashboard.putNumber("leftClimberPosition", climber.getLeftMotorEncoderCounts());
+    //SmartDashboard.putNumber("gyroOffset", gyro.getOffset());
+    //SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
+    //SmartDashboard.putNumber("leftClimberPosition", climber.getLeftMotorEncoderCounts());
     SmartDashboard.putBoolean("hasBall", conveyor.hasBall());
     CommandScheduler.getInstance().run();
   }

@@ -69,7 +69,7 @@ public class Xbox extends Joystick{
 		if (value < 0) {
 			value = 0;
 		} else if (value > 1) {
-			value = 1;
+		value = 1;
 		}
 		if (type == RumbleType.kLeftRumble) {
 			m_leftRumble = (short) (value * 65535);

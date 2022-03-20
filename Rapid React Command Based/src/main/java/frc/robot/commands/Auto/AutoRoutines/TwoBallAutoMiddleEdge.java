@@ -4,8 +4,6 @@
 
 package frc.robot.commands.Auto.AutoRoutines;
 
-import java.time.Instant;
-
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
@@ -20,7 +18,7 @@ import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
 
-public class TwoBallAutoTop extends SequentialCommandGroup {
+public class TwoBallAutoMiddleEdge extends SequentialCommandGroup {
 
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
@@ -37,7 +35,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball middle Edge", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -50,18 +48,18 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
- public TwoBallAutoTop() { 
+  public TwoBallAutoMiddleEdge() { 
+
     addCommands(
    //new InstantCommand(() -> gyro.setOffset(-20)),
       //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
       //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       //command,
       //new InstantCommand(() -> swerve.stopModules())
-        new InstantCommand(() -> gyro.reset()),
-        new InstantCommand(() -> gyro.setOffset(159)),
+      new InstantCommand(() -> gyro.reset()),
+        new InstantCommand(() -> gyro.setOffset(-137)),
         new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
-        new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),

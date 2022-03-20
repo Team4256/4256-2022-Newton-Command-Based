@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,8 +15,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Auto.AutoRoutines.TestAuto;
 import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottom;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottomEdge;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddle;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddleEdge;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTop;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTopEdge;
+import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoFar;
 import frc.robot.commands.Climber.ClimberXboxControl;
 import frc.robot.commands.Climber.DisengageSmallHooks;
 import frc.robot.commands.Climber.EngageSmallHooks;
@@ -32,6 +37,7 @@ import frc.robot.commands.Conveyor2.Conveyor.ReverseShooter2;
 import frc.robot.commands.Conveyor2.Conveyor.ShootBalls2;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
@@ -49,6 +55,7 @@ public class RobotContainer {
 
   private final SwerveSubsystem swerveSubsystem = SwerveSubsystem.getInstance();
   private final Climber climber = Climber.getInstance();
+  private final Conveyor conveyor = Conveyor.getInstance();
   public static boolean smallHooksEngaged;
   public static final Xbox driver = new Xbox(0);
   public static final Xbox gunner = new Xbox(1);
@@ -58,6 +65,10 @@ public class RobotContainer {
   public final Command twoBallAutoBottom = new TwoBallAutoBottom();
   public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
   public final Command twoBallAutoTop = new TwoBallAutoTop();
+  public final Command twoBallAutoTopEdge = new TwoBallAutoTopEdge();
+  public final Command twoBallAutoBottomEdge = new TwoBallAutoBottomEdge();
+  public final Command twoBallAutoMiddleEdge = new TwoBallAutoMiddleEdge();
+  public final Command threeBallAutoFar = new ThreeBallAutoFar();
   public final Command testAuto = new TestAuto();
   public final Command intakeBall = IntakeBall2.getInstance();
   public final Command outtakeBall = OuttakeBall2.getInstance();
@@ -96,10 +107,16 @@ public class RobotContainer {
 
     configureButtonBindings();
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
+    chooser.addOption("Two Ball Auto Far", threeBallAutoFar);
     chooser.addOption("Two Ball Auto Bottom", twoBallAutoBottom);
-    chooser.addOption("Two Ball Auto middle", twoBallAutoMiddle);
-    chooser.addOption("Two Ball Auto top", twoBallAutoTop);
+    chooser.addOption("Two Ball Auto Middle", twoBallAutoMiddle);
+    chooser.addOption("Two Ball Auto Top", twoBallAutoTop);
+    chooser.addOption("Two Ball Auto Top Edge", twoBallAutoTopEdge);
+    chooser.addOption("Two Ball Auto Middle Edge", twoBallAutoBottomEdge);
+    chooser.addOption("Two Ball Auto Bottom Edge ", twoBallAutoMiddle);
     chooser.addOption("Test Auto", testAuto);
+
+
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Competition").add(chooser);
@@ -114,6 +131,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
 
     // swerve
     driver.bButton.whenPressed(() -> swerveSubsystem.zeroHeading());
@@ -140,6 +158,8 @@ public class RobotContainer {
     gunner.dPadUp.whenHeld(raiseClimberHooks);
     gunner.dPadDown.whenHeld(lowerClimberHooks);
     gunner.startButton.whenHeld(new InstantCommand(() -> climber.resetClimberEncoders()));
+
+  
 
   }
 

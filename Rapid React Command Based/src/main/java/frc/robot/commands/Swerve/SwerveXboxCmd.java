@@ -46,8 +46,7 @@ public class SwerveXboxCmd extends CommandBase {
      double xSpeed = xSpdFunction.get();
      double ySpeed = ySpdFunction.get();
      double turningSpeed = turningSpdFunction.get();
-     SmartDashboard.putNumber("xSpd", xSpeed);
-     SmartDashboard.putNumber("ySpd", ySpeed);
+    
      // 2. Apply deadband
      //xSpeed = Math.abs(xSpeed) > Parameters.CONTROLLER_DEADBAND ? xSpeed : 0.0;
      //ySpeed = Math.abs(ySpeed) > Parameters.CONTROLLER_DEADBAND ? ySpeed : 0.0;
@@ -56,6 +55,7 @@ public class SwerveXboxCmd extends CommandBase {
     xSpeed = MathUtil.applyDeadband(xSpeed, Parameters.CONTROLLER_DEADBAND);
     ySpeed = MathUtil.applyDeadband(ySpeed, Parameters.CONTROLLER_DEADBAND);
     turningSpeed = MathUtil.applyDeadband(turningSpeed, Parameters.CONTROLLER_DEADBAND);
+    
     
     xSpeed *= Math.signum(xSpeed) * xSpeed;
     ySpeed *= Math.signum(ySpeed) * ySpeed;
@@ -67,14 +67,16 @@ public class SwerveXboxCmd extends CommandBase {
      turningSpeed = turningLimiter.calculate(turningSpeed)
              * Parameters.TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND;
 
+            
      // 4. Construct desired chassis speeds
      ChassisSpeeds chassisSpeeds;
         if (fieldOrientedFunction.get()) {
             // Relative to field
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                     xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
-                    SmartDashboard.putString("Chassis Speeds", chassisSpeeds.toString());
-                    SmartDashboard.putString("Rotation2d", swerveSubsystem.getRotation2d().toString());
+                    //SmartDashboard.putString("Chassis Speeds", chassisSpeeds.toString());
+                    //SmartDashboard.putString("Rotation2d", swerveSubsystem.getRotation2d().toString());
+                    
         } else {
             // Relative to robot
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
@@ -84,6 +86,7 @@ public class SwerveXboxCmd extends CommandBase {
 
      // 6. Output each module states to wheels
      swerveSubsystem.setModuleStates(moduleStates);
+     
   }
 
   // Called once the command ends or is interrupted.

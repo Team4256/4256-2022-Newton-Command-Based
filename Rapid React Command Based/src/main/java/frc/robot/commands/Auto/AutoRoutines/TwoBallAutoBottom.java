@@ -47,17 +47,23 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
-  public TwoBallAutoBottom() { 
+   public TwoBallAutoBottom() { 
     addCommands(
-        //new InstantCommand(() -> gyro.reset()),
-        new InstantCommand(() -> gyro.setOffset(-20)),
-        new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
+      //new InstantCommand(() -> gyro.setOffset(180)),
+      //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
+      //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
+      //command,
+        //new InstantCommand(() -> swerve.stopModules())
+        new InstantCommand(() -> gyro.reset()),
+        new InstantCommand(() -> gyro.setOffset(-111)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(-180, 180)),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new AutoShootBalls()
+        new AutoShootBalls(),
+        new InstantCommand(() -> gyro.setOffset(0))
     );
   }
 }

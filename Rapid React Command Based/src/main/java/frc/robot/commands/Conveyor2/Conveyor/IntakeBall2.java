@@ -34,7 +34,6 @@ public class IntakeBall2 extends CommandBase {
   public void execute() {
     conveyor.conveyorBeltUpWithSensor();
     conveyor.intakeBall();
-    SmartDashboard.putBoolean("intaking", true);
   }
 // Called once the command ends or is interrupted.
   @Override

@@ -61,7 +61,7 @@ public final class SwerveModule {
     }
 
     public void setDesiredState(SwerveModuleState state) {
-        if (Math.abs(state.speedMetersPerSecond) < .5
+        if (Math.abs(state.speedMetersPerSecond) < .1
 		) {
             stop();
             return;
