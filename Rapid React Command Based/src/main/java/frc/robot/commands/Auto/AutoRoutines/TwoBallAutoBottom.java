@@ -47,7 +47,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
-  public TwoBallAutoBottom() { 
+   public TwoBallAutoBottom() { 
     addCommands(
       //new InstantCommand(() -> gyro.setOffset(180)),
       //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
