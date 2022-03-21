@@ -48,7 +48,8 @@ public class TestAuto extends SequentialCommandGroup {
     addCommands(
       new InstantCommand(() -> gyro.reset()),
       new InstantCommand(() -> gyro.setOffset(160)),
-      new InstantCommand(() -> thetaController.enableContinuousInput(-180,180)),
+      new InstantCommand(() -> thetaController.enableContinuousInput(0,2*Math.PI)),
+      new InstantCommand(() -> thetaController.reset(Math.toRadians(160))),
       new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       command,
       new InstantCommand(() -> swerve.stopModules())
