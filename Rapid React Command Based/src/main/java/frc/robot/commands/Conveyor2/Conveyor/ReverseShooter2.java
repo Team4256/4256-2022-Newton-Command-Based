@@ -6,11 +6,12 @@ package frc.robot.commands.Conveyor2.Conveyor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Shooter;
 
 public class ReverseShooter2 extends CommandBase {
   
   private static ReverseShooter2 instance = null;
-  Conveyor conveyor;
+  Shooter shooter;
 
   public static synchronized ReverseShooter2 getInstance() {
     if (instance == null) {
@@ -20,8 +21,8 @@ public class ReverseShooter2 extends CommandBase {
   }
   
 public ReverseShooter2() {
-   this.conveyor = Conveyor.getInstance();
-   addRequirements(conveyor);
+   this.shooter = Shooter.getInstance();
+   addRequirements(shooter);
   }
 
 
@@ -34,13 +35,13 @@ public ReverseShooter2() {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    conveyor.spinConveyorShooterReverse();
+    shooter.shootCurrentBalls();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyor.stop();
+    shooter.stop();
   }
 
   // Returns true when the command should end.

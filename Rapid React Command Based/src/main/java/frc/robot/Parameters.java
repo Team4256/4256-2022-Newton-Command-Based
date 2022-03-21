@@ -97,7 +97,7 @@ public class Parameters {
   public static final int CONVEYOR_MOTOR_ID = 15;
   public static final double INTAKE_MOTOR_SPEED = -0.5;//changed from 0.5
   public static final double OUTTAKE_MOTOR_SPEED = 1.0;//changed from 0.5
-  public static final double CONVEYOR_MOTOR_SPEED = 0.5;//changed from 0.5
+  public static final double CONVEYOR_MOTOR_SPEED = 0.6;//changed from 0.5
   public static final double SHOOTER_MOTOR_SPEED = 1.0;//changed from 0.8
   public static final int CONVEYOR_BALL_SENSOR_ID = 0;
   public static final int INTAKE_DOWN_CHANNEL = 4;
@@ -137,12 +137,8 @@ public class Parameters {
    * Swerve #9 = 1.00
    */
   public static final double angleEncoderTareVoltage[] = {
-    // 3.4033,
-    // 2.877,
-    // 2.388,
-    // 1.355,
     1.22,
-    1.06,
+    1.07,
     4.35,
     1.00
   };

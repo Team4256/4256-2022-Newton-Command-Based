@@ -7,11 +7,12 @@ package frc.robot.commands.Conveyor2.Conveyor;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Shooter;
 
 public class ShootBalls2 extends CommandBase {
-  
+
   private static ShootBalls2 instance = null;
-  Conveyor conveyor;
+  Shooter shooter;
 
   public static synchronized ShootBalls2 getInstance() {
     if (instance == null) {
@@ -19,32 +20,26 @@ public class ShootBalls2 extends CommandBase {
     }
     return instance;
   }
-  
-public ShootBalls2() {
-   this.conveyor = Conveyor.getInstance();
-   addRequirements(conveyor);
-  }
 
+  public ShootBalls2() {
+    this.shooter = Shooter.getInstance();
+    addRequirements(shooter);
+  }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() { 
-    conveyor.spinConveyorShooter();
-    new WaitCommand(1);
-    conveyor.conveyorBeltUp();
-    
+  public void execute() {
+    shooter.shooterWithOverride();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    conveyor.stop();
+    shooter.stop();
   }
 
   // Returns true when the command should end.
