@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.Auto.AutoRoutines.FiveBallAuto;
 import frc.robot.commands.Auto.AutoRoutines.TestAuto;
 import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottom;
@@ -61,6 +62,7 @@ public class RobotContainer {
   public static final Xbox gunner = new Xbox(1);
   Gyro gyro = Gyro.getInstance();
   SendableChooser<Command> chooser = new SendableChooser<>();
+  public final Command fiveBallAuto = new FiveBallAuto();
   public final Command threeBallAutoBottom = new ThreeBallAutoBottom();
   public final Command twoBallAutoBottom = new TwoBallAutoBottom();
   public final Command twoBallAutoMiddle = new TwoBallAutoMiddle();
@@ -106,8 +108,9 @@ public class RobotContainer {
             );
 
     configureButtonBindings();
+    chooser.addOption("Five Ball Auto", fiveBallAuto);
     chooser.setDefaultOption("Three Ball Auto Bottom", threeBallAutoBottom);
-    chooser.addOption("Two Ball Auto Far", threeBallAutoFar);
+    chooser.addOption("Three Ball Auto Far", threeBallAutoFar);
     chooser.addOption("Two Ball Auto Bottom", twoBallAutoBottom);
     chooser.addOption("Two Ball Auto Middle", twoBallAutoMiddle);
     chooser.addOption("Two Ball Auto Top", twoBallAutoTop);
@@ -115,8 +118,6 @@ public class RobotContainer {
     chooser.addOption("Two Ball Auto Middle Edge", twoBallAutoBottomEdge);
     chooser.addOption("Two Ball Auto Bottom Edge ", twoBallAutoMiddle);
     chooser.addOption("Test Auto", testAuto);
-
-
 
     // Put the chooser on the dashboard
     Shuffleboard.getTab("Competition").add(chooser);

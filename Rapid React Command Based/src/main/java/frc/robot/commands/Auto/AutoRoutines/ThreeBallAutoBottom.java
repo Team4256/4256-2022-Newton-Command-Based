@@ -31,7 +31,7 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   PIDController xController = new PIDController(1, 0, 0);
   PIDController yController = new PIDController(1, 0, 0);
   ProfiledPIDController thetaController = new ProfiledPIDController(
-      5,
+      6,
       0,
       0,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
@@ -52,12 +52,14 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
     addCommands(
         new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-111)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
+        new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        //new AutoShootBalls(),
+        new AutoShootBalls(),
         new InstantCommand(() -> gyro.setOffset(0))
 
     );

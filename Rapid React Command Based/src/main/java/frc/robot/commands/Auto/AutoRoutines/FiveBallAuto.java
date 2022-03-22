@@ -18,7 +18,7 @@ import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
 
-public class ThreeBallAutoFar extends SequentialCommandGroup {
+public class FiveBallAuto extends SequentialCommandGroup {
 
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
@@ -36,9 +36,19 @@ public class ThreeBallAutoFar extends SequentialCommandGroup {
       0,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball far", 1, 1);
-  PPSwerveControllerCommand command = new PPSwerveControllerCommand(
-      autoPath,
+  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("3 ball bottom", 2.5, 2.5);
+  PPSwerveControllerCommand command1 = new PPSwerveControllerCommand(
+      autoPath1,
+      swerve::getPose,
+      Parameters.DRIVE_KINEMATICS,
+      xController,
+      yController,
+      thetaController,
+      swerve::setModuleStates,
+      swerve);
+  PathPlannerTrajectory autoPath2 = PathPlanner.loadPath("3 ball far", 2.5, 2.5);
+  PPSwerveControllerCommand command2 = new PPSwerveControllerCommand(
+      autoPath2,
       swerve::getPose,
       Parameters.DRIVE_KINEMATICS,
       xController,
@@ -48,16 +58,18 @@ public class ThreeBallAutoFar extends SequentialCommandGroup {
       swerve);
 
   /** Creates a new ThreeBallAutoBottom. */
-  public ThreeBallAutoFar() {
+  public FiveBallAuto() {
     addCommands(
         new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-111)),
         new InstantCommand(() -> thetaController.enableContinuousInput(0,2*Math.PI)),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
-        new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
+        new InstantCommand(() -> swerve.resetOdometer(autoPath1.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),
-        new AutoSwerveIntake(command),
+        new AutoSwerveIntake(command1),
+        new AutoShootBalls(),
+        new AutoSwerveIntake(command2),
         new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls(),
         new InstantCommand(() -> gyro.setOffset(0))
