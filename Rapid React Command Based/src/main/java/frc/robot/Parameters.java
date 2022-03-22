@@ -67,6 +67,7 @@ public class Parameters {
   public static final double MAX_METERS_PER_SECOND = 3.83; // Max Speed TODO
   public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * 2 * Math.PI;
   public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 4;
+  public static final double MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 2;
   public static final double TELEOP_SPEED_LIMIT_MPS = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 4;
   public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 3;//2
   public static final double MAX_ACCELERATION = 3;
@@ -77,7 +78,7 @@ public class Parameters {
   // Automomous
   public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints( //
     MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
-    MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
+    MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
   );
 
   // Climber

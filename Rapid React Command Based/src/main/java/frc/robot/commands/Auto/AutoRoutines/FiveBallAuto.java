@@ -31,12 +31,12 @@ public class FiveBallAuto extends SequentialCommandGroup {
   PIDController xController = new PIDController(1, 0, 0);
   PIDController yController = new PIDController(1, 0, 0);
   ProfiledPIDController thetaController = new ProfiledPIDController(
-      5,
+      2,
       0,
       0,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("3 ball bottom", 2.5, 2.5);
+  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 1, 1);
   PPSwerveControllerCommand command1 = new PPSwerveControllerCommand(
       autoPath1,
       swerve::getPose,
@@ -46,7 +46,8 @@ public class FiveBallAuto extends SequentialCommandGroup {
       thetaController,
       swerve::setModuleStates,
       swerve);
-  PathPlannerTrajectory autoPath2 = PathPlanner.loadPath("3 ball far", 2.5, 2.5);
+
+  PathPlannerTrajectory autoPath2 = PathPlanner.loadPath("5 ball 2", 1, 1);
   PPSwerveControllerCommand command2 = new PPSwerveControllerCommand(
       autoPath2,
       swerve::getPose,

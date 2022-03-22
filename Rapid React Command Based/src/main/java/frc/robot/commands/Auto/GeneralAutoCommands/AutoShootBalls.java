@@ -16,7 +16,6 @@ public class AutoShootBalls extends ParallelDeadlineGroup {
   private static AutoLowerIntake instance = null;
   ShootBalls shootBalls = new ShootBalls();
   
-  
   AutoLowerIntake getInstance() {
     if (instance == null) {
       instance = new AutoLowerIntake();
@@ -25,7 +24,7 @@ public class AutoShootBalls extends ParallelDeadlineGroup {
   }
   
   public AutoShootBalls() {
-    super(new WaitCommand(2));
+    super(new WaitCommand(1));
     addCommands(shootBalls);
   }
 }
