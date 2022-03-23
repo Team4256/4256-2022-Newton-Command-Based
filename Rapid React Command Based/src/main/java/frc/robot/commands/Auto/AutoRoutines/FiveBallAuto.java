@@ -28,15 +28,15 @@ public class FiveBallAuto extends SequentialCommandGroup {
   IntakeBall intakeBall = IntakeBall.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
 
-  PIDController xController = new PIDController(1, 0, 0);
-  PIDController yController = new PIDController(1, 0, 0);
+  PIDController xController = new PIDController(2, 0, .5);
+  PIDController yController = new PIDController(2, 0, .5);
   ProfiledPIDController thetaController = new ProfiledPIDController(
-      2,
-      0,
-      0,
+      4,
+      .3,
+      .3,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 1, 1);
+  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 3, 3);
   PPSwerveControllerCommand command1 = new PPSwerveControllerCommand(
       autoPath1,
       swerve::getPose,
@@ -47,7 +47,7 @@ public class FiveBallAuto extends SequentialCommandGroup {
       swerve::setModuleStates,
       swerve);
 
-  PathPlannerTrajectory autoPath2 = PathPlanner.loadPath("5 ball 2", 1, 1);
+  PathPlannerTrajectory autoPath2 = PathPlanner.loadPath("5 ball 2", 3, 3);
   PPSwerveControllerCommand command2 = new PPSwerveControllerCommand(
       autoPath2,
       swerve::getPose,
@@ -70,6 +70,7 @@ public class FiveBallAuto extends SequentialCommandGroup {
         new AutoLowerIntake(),
         new AutoSwerveIntake(command1),
         new AutoShootBalls(),
+        new InstantCommand(() -> thetaController.reset(Math.toRadians(-114))),
         new AutoSwerveIntake(command2),
         new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls(),

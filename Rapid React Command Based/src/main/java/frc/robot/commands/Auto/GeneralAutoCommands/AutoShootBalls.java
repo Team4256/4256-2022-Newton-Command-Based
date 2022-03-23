@@ -24,7 +24,7 @@ public class AutoShootBalls extends ParallelDeadlineGroup {
   }
   
   public AutoShootBalls() {
-    super(new WaitCommand(1));
+    super(new WaitCommand(1.5));
     addCommands(shootBalls);
   }
 }

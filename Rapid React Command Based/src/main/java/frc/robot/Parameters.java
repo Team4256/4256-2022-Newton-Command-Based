@@ -77,8 +77,8 @@ public class Parameters {
 
   // Automomous
   public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints( //
-    MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
-    MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
+    2 * MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
+    2 * MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
   );
 
   // Climber
