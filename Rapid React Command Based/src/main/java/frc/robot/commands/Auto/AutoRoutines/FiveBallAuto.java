@@ -10,7 +10,9 @@ import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.*;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoLowerIntake;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
@@ -28,15 +30,15 @@ public class FiveBallAuto extends SequentialCommandGroup {
   IntakeBall intakeBall = IntakeBall.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
 
-  PIDController xController = new PIDController(2, 0, .5);
-  PIDController yController = new PIDController(2, 0, .5);
+  PIDController xController = new PIDController(2, 0, .9);
+  PIDController yController = new PIDController(2, 0, .9);
   ProfiledPIDController thetaController = new ProfiledPIDController(
       4,
       .3,
       .3,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 3, 3);
+  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 3.5, 3.5);
   PPSwerveControllerCommand command1 = new PPSwerveControllerCommand(
       autoPath1,
       swerve::getPose,
@@ -69,6 +71,8 @@ public class FiveBallAuto extends SequentialCommandGroup {
         new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command1),
+        new ParallelDeadlineGroup(new WaitCommand(.2), new InstantCommand(() -> swerve.stopModules())),
+        new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls(),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-114))),
         new AutoSwerveIntake(command2),

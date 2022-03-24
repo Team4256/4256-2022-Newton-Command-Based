@@ -77,8 +77,8 @@ public class Parameters {
 
   // Automomous
   public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints( //
-    2 * MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
-    2 * MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
+    1000 * MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
+    1000 * MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED
   );
 
   // Climber
@@ -96,7 +96,7 @@ public class Parameters {
   public static final int INTAKE_MOTOR_ID = 16;
   public static final int SHOOTER_MOTOR_ID = 26;
   public static final int CONVEYOR_MOTOR_ID = 15;
-  public static final double INTAKE_MOTOR_SPEED = -0.5;//changed from 0.5
+  public static final double INTAKE_MOTOR_SPEED = -1.0;//changed from 0.5
   public static final double OUTTAKE_MOTOR_SPEED = 1.0;//changed from 0.5
   public static final double CONVEYOR_MOTOR_SPEED = 0.6;//changed from 0.5
   public static final double SHOOTER_MOTOR_SPEED = 1.0;//changed from 0.8

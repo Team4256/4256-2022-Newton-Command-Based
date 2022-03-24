@@ -96,8 +96,8 @@ public class Conveyor extends SubsystemBase {
 
   public void conveyorBeltUpWithSensor() {
     if (conveyorSensor.get()) {
-      RobotContainer.driver.setRumble(1, 1);
-      RobotContainer.gunner.setRumble(1, 1);
+      //RobotContainer.driver.setRumble(1, 1);
+      //RobotContainer.gunner.setRumble(1, 1);
       stop();
     } else {
       RobotContainer.driver.setRumble(0, 0);
