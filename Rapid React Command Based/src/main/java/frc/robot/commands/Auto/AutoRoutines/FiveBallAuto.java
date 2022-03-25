@@ -30,15 +30,15 @@ public class FiveBallAuto extends SequentialCommandGroup {
   IntakeBall intakeBall = IntakeBall.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
 
-  PIDController xController = new PIDController(2, 0, .9);
-  PIDController yController = new PIDController(2, 0, .9);
+  PIDController xController = new PIDController(2, 0, 1);
+  PIDController yController = new PIDController(2, 0, 1);
   ProfiledPIDController thetaController = new ProfiledPIDController(
       4,
       .3,
       .3,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 3.5, 3.5);
+  PathPlannerTrajectory autoPath1 = PathPlanner.loadPath("5 ball 1", 4.5, 4.5);
   PPSwerveControllerCommand command1 = new PPSwerveControllerCommand(
       autoPath1,
       swerve::getPose,
@@ -74,7 +74,7 @@ public class FiveBallAuto extends SequentialCommandGroup {
         new ParallelDeadlineGroup(new WaitCommand(.2), new InstantCommand(() -> swerve.stopModules())),
         new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls(),
-        new InstantCommand(() -> thetaController.reset(Math.toRadians(-114))),
+        new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new AutoSwerveIntake(command2),
         new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls(),
