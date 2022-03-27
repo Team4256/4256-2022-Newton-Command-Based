@@ -64,11 +64,11 @@ public class Parameters {
   public static final double ANGLE_C_TARE = 3.840; // Aft Left
   public static final double ANGLE_D_TARE = 6.723; // Aft Right
   
-  public static final double MAX_METERS_PER_SECOND = 3.83; // Max Speed TODO
+  public static final double MAX_METERS_PER_SECOND = 4.5; // Max Speed TODO
   public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * 2 * Math.PI;
   public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 4;
   public static final double MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 2;
-  public static final double TELEOP_SPEED_LIMIT_MPS = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 4;
+  public static final double TELEOP_SPEED_LIMIT_MPS = MAX_METERS_PER_SECOND;
   public static final double TELEOP_ANGULAR_SPEED_LIMIT_RADIANS_PER_SECOND = MAX_ANGULAR_SPEED_RADIANS_PER_SECOND / 3;//2
   public static final double MAX_ACCELERATION = 3;
   public static final double TELEOP_MAX_ANGULAR_ACCELERATION = 2.5;//3

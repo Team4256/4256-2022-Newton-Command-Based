@@ -28,15 +28,15 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   IntakeBall intakeBall = IntakeBall.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
 
-  PIDController xController = new PIDController(1, 0, 0);
-  PIDController yController = new PIDController(1, 0, 0);
+  PIDController xController = new PIDController(1.6, 0, 1.1);
+  PIDController yController = new PIDController(1.6, 0, 1.1);
   ProfiledPIDController thetaController = new ProfiledPIDController(
-      6,
+      5,
       0,
-      0,
+      .5,
       Parameters.THETA_CONTROLLER_CONSTRAINTS);
 
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("3 ball bottom", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("5 ball 1", 4.5, 4.5);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
       autoPath,
       swerve::getPose,
@@ -61,7 +61,6 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
         new InstantCommand(() -> swerve.stopModules()),
         new AutoShootBalls(),
         new InstantCommand(() -> gyro.setOffset(0))
-
     );
   }
 }
