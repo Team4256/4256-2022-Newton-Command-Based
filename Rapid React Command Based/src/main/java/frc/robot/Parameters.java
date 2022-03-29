@@ -32,16 +32,18 @@ public class Parameters {
   );
   
   /**
-   * Swerve #1 = 
+   * Swerve #1 = 1.99
    * Swerve #2 = 1.22
    * Swerve #3 = 4.35
    * Swerve #4 = 
    * Swerve #5 = 2.89
    * Swerve #6 = 
-   * Swerve #7 = 
-   * Swerve #8 = 
+   * Swerve #7 = 4.20
+   * Swerve #8 = 1.14
    * Swerve #9 = 1.00
+   * Swerve #10 = 3.49
    */
+  
   public static final int ROTATION_MOTOR_A_ID = 11; // Front Left //all done 2022
   public static final int ROTATION_MOTOR_B_ID = 12; // Front Right
   public static final int ROTATION_MOTOR_C_ID = 13; // AFT Left

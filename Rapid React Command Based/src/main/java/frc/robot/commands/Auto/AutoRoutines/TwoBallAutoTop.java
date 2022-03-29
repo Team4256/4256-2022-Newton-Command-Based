@@ -28,16 +28,16 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   ReverseShooter shootBalls = ReverseShooter.getInstance();
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
-    PIDController xController = new PIDController(1, 0, 0);
-    PIDController yController = new PIDController(1, 0, 0);
+    PIDController xController = new PIDController(1.5, 0, 0.4);
+    PIDController yController = new PIDController(1.5, 0, 0.4);
     ProfiledPIDController thetaController = new ProfiledPIDController(
       5,
       0,
-      0,
+      0.5,
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("2 ball top", 4.5, 4.5);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
