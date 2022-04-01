@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.Auto.AutoRoutines.FiveBallAuto;
+import frc.robot.commands.Auto.AutoRoutines.MoveBackBottomEdge;
+import frc.robot.commands.Auto.AutoRoutines.MoveBackBottomHub;
+import frc.robot.commands.Auto.AutoRoutines.MoveBackTopEdge;
+import frc.robot.commands.Auto.AutoRoutines.MoveBackTopHub;
 import frc.robot.commands.Auto.AutoRoutines.TestAuto;
 import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottom;
@@ -72,6 +76,10 @@ public class RobotContainer {
   public final Command twoBallAutoBottomEdge = new TwoBallAutoBottomEdge();
   public final Command twoBallAutoMiddleEdge = new TwoBallAutoMiddleEdge();
   public final Command threeBallAutoFar = new ThreeBallAutoFar();
+  public final Command moveBackBottomEdge = new MoveBackBottomEdge();
+  public final Command moveBackBottomHub = new MoveBackBottomHub();
+  public final Command moveBackTopEdge = new MoveBackTopEdge();
+  public final Command moveBackTopHub = new MoveBackTopHub();
   public final Command testAuto = new TestAuto();
   public final Command intakeBall = IntakeBall2.getInstance();
   public final Command outtakeBall = OuttakeBall2.getInstance();
@@ -118,6 +126,10 @@ public class RobotContainer {
     chooser.addOption("Two Ball Auto Top Edge", twoBallAutoTopEdge);
     chooser.addOption("Two Ball Auto Middle Edge", twoBallAutoBottomEdge);
     chooser.addOption("Two Ball Auto Bottom Edge ", twoBallAutoMiddle);
+    chooser.addOption("Move Back Bottom Edge", moveBackBottomEdge);
+    chooser.addOption("Move Back Bottom Hub", moveBackBottomHub);
+    chooser.addOption("Move Back Top Edge", moveBackTopEdge);
+    chooser.addOption("Move Back Top Hub", moveBackTopHub);
     chooser.addOption("Test Auto", testAuto);
 
     // Put the chooser on the dashboard

@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -18,7 +19,7 @@ import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
 
-public class TwoBallAutoBottom extends SequentialCommandGroup {
+public class MoveBackTopEdge extends SequentialCommandGroup {
 
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
@@ -47,7 +48,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
-   public TwoBallAutoBottom() { 
+   public MoveBackTopEdge() { 
     addCommands(
       //new InstantCommand(() -> gyro.setOffset(180)),
       //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),

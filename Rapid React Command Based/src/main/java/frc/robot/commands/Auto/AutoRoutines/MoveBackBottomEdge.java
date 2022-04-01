@@ -1,3 +1,5 @@
+
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -18,7 +20,7 @@ import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
 
-public class TwoBallAutoBottom extends SequentialCommandGroup {
+public class MoveBackBottomEdge extends SequentialCommandGroup {
 
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
@@ -34,7 +36,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
-  PathPlannerTrajectory autoPath = PathPlanner.loadPath("move back top edge", 1, 1);
+  PathPlannerTrajectory autoPath = PathPlanner.loadPath("move back bottom edge", 1, 1);
   PPSwerveControllerCommand command = new PPSwerveControllerCommand(
     autoPath,
     swerve::getPose,
@@ -47,7 +49,7 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
   );
 
   /** Creates a new ThreeBallAutoBottom. */
-   public TwoBallAutoBottom() { 
+   public MoveBackBottomEdge() { 
     addCommands(
       //new InstantCommand(() -> gyro.setOffset(180)),
       //new InstantCommand(() -> thetaController.enableContinuousInput(0, 360)),
@@ -63,8 +65,8 @@ public class TwoBallAutoBottom extends SequentialCommandGroup {
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new AutoShootBalls(),
         new InstantCommand(() -> gyro.setOffset(0))
     );
   }
 }
+

@@ -66,7 +66,7 @@ public class Parameters {
   public static final double ANGLE_C_TARE = 3.840; // Aft Left
   public static final double ANGLE_D_TARE = 6.723; // Aft Right
   
-  public static final double MAX_METERS_PER_SECOND = 4.5; // Max Speed TODO
+  public static final double MAX_METERS_PER_SECOND = 3.83; // Max Speed TODO
   public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = 2 * 2 * Math.PI;
   public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 4;
   public static final double MAX_AUTO_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED =  Math.PI / 2;
@@ -90,7 +90,7 @@ public class Parameters {
   public static final int SMALL_HOOK_DISENGAGE_CHANNEL = 1;//1
   public static final int BIG_ARM_DOWN_CHANNEL = 3;//3
   public static final int BIG_ARM_UP_CHANNEL = 2;//2
-  public static final double CLIMBER_MOTOR_SPEED = .5;
+  public static final double CLIMBER_MOTOR_SPEED = .65;
   public static final double CLIMBER_MAX_ENCODER_COUNTS = 1; //TODO get actual max encoder counts
 
   // Conveyor
@@ -133,16 +133,17 @@ public class Parameters {
    * Swerve #3 = 4.35
    * Swerve #4 = 
    * Swerve #5 = 2.89
-   * Swerve #6 = 4.86
+   * Swerve #6 = 4.31
    * Swerve #7 = 
    * Swerve #8 = 
    * Swerve #9 = 1.00
    */
+  //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=9
   public static final double angleEncoderTareVoltage[] = {
     1.22,
-    1.07,
-    4.35,
-    1.00
+    1.01,
+    4.31,
+    0.99
   };
 
   // Aligner tolerances

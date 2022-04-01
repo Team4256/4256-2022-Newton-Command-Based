@@ -28,8 +28,8 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   IntakeBall intakeBall = IntakeBall.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
 
-  PIDController xController = new PIDController(2, 0, 1);
-  PIDController yController = new PIDController(2, 0, 1);
+  PIDController xController = new PIDController(1.5, 0, .4);
+  PIDController yController = new PIDController(1.5, 0, .4);
   ProfiledPIDController thetaController = new ProfiledPIDController(
       5,
       0,

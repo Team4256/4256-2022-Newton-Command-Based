@@ -65,7 +65,7 @@ public class FiveBallAuto extends SequentialCommandGroup {
     addCommands(
         new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-111)),
-        new InstantCommand(() -> thetaController.enableContinuousInput(0,2*Math.PI)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath1.getInitialPose())),
         new AutoShootBalls(),
