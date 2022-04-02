@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.*;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoBeltUp;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoLowerIntake;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
@@ -52,17 +53,29 @@ public class ThreeBallAutoFar extends SequentialCommandGroup {
   /** Creates a new ThreeBallAutoBottom. */
   public ThreeBallAutoFar() {
     addCommands(
+        //new InstantCommand(() -> gyro.reset()),
+        //new InstantCommand(() -> gyro.setOffset(-111)),
+        //new InstantCommand(() -> thetaController.enableContinuousInput(0,2*Math.PI)),
+        //new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
+        //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
+        //new AutoShootBalls(),
+        //new AutoLowerIntake(),
+        //new AutoSwerveIntake(command),
+        //new ParallelDeadlineGroup(new WaitCommand(.2), new InstantCommand(() -> swerve.stopModules())),
+        //new AutoShootBalls(),
+        //new InstantCommand(() -> gyro.setOffset(0))
         new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-111)),
-        new InstantCommand(() -> thetaController.enableContinuousInput(0,2*Math.PI)),
+        new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
-        new ParallelDeadlineGroup(new WaitCommand(.2), new InstantCommand(() -> swerve.stopModules())),
-        new AutoShootBalls(),
-        new InstantCommand(() -> gyro.setOffset(0))
+        new InstantCommand(() -> swerve.stopModules()),
+        new ParallelDeadlineGroup(new WaitCommand(.5), shootBalls),
+        new AutoBeltUp(),
+        new InstantCommand(() -> gyro.setOffset(0))    
     );
   }
 }

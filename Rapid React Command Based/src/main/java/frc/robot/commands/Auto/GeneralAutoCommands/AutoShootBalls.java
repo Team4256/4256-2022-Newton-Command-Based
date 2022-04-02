@@ -5,7 +5,9 @@
 package frc.robot.commands.Auto.GeneralAutoCommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.Conveyor.BeltUp;
 import frc.robot.commands.Conveyor.ShootBalls;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -15,7 +17,8 @@ public class AutoShootBalls extends ParallelDeadlineGroup {
   /** Creates a new AutoIntake. */
   private static AutoLowerIntake instance = null;
   ShootBalls shootBalls = new ShootBalls();
-  
+  AutoBeltUp beltUp = new AutoBeltUp();
+
   AutoLowerIntake getInstance() {
     if (instance == null) {
       instance = new AutoLowerIntake();
@@ -27,4 +30,5 @@ public class AutoShootBalls extends ParallelDeadlineGroup {
     super(new WaitCommand(1));
     addCommands(shootBalls);
   }
+  
 }

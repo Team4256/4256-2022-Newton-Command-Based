@@ -33,7 +33,9 @@ import frc.robot.commands.Climber.LowerClimberArms;
 import frc.robot.commands.Climber.LowerClimberHooks;
 import frc.robot.commands.Climber.RaiseClimberArms;
 import frc.robot.commands.Climber.RaiseClimberHooks;
+import frc.robot.commands.Conveyor.BeltUp;
 import frc.robot.commands.Conveyor.RunShooter;
+import frc.robot.commands.Conveyor.ShootBalls;
 import frc.robot.commands.Conveyor2.Conveyor.IntakeBall2;
 import frc.robot.commands.Conveyor2.Conveyor.LowerIntake2;
 import frc.robot.commands.Conveyor2.Conveyor.OuttakeBall2;
@@ -94,6 +96,8 @@ public class RobotContainer {
   public final Command raiseClimberHooks = RaiseClimberHooks.getInstance();
   public final Command lowerClimberHooks = LowerClimberHooks.getInstance();
   public final Command runShooter = RunShooter.getInstance();
+  public final Command shootWithDelay = ShootBalls.getInstance();
+  public final Command beltUp = BeltUp.getInstance();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -161,8 +165,8 @@ public class RobotContainer {
     driver.aButton.whenHeld(lowerIntake);
 
     // shooter
-    gunner.rightTriggerButton.whenHeld(shootBalls);
-    gunner.leftTriggerButton.whenHeld(reverseShooter);
+    gunner.rightTriggerButton.whenHeld(runShooter);
+    gunner.leftTriggerButton.whenHeld(beltUp);
 
     // climber
     gunner.aButton.whenHeld(raiseClimberArms);
@@ -172,8 +176,6 @@ public class RobotContainer {
     gunner.dPadUp.whenHeld(raiseClimberHooks);
     gunner.dPadDown.whenHeld(lowerClimberHooks);
     gunner.startButton.whenHeld(new InstantCommand(() -> climber.resetClimberEncoders()));
-
-  
 
   }
 
