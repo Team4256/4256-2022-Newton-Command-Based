@@ -112,8 +112,8 @@ public class Parameters {
   //   0.026855466,
   0.021,
   0.017,
-  0.010,
-  0.011
+  0.017,
+  0.018
    };
   public static final double angleEncoderMaxVoltage[] = {
     // 4.921874496,
@@ -122,8 +122,8 @@ public class Parameters {
     // 4.887694812,
     4.951,
     4.952,
-    4.952,
-    4.949
+    4.94,
+    4.95
   };
   // COMPETITION ROBOT
   //ensure swerves are on analog 0-3
@@ -138,12 +138,12 @@ public class Parameters {
    * Swerve #8 = 
    * Swerve #9 = 1.00
    */
-  //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=9
+  //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=8
   public static final double angleEncoderTareVoltage[] = {
     1.22,
     1.01,
-    4.31,
-    0.99
+    1.16,
+    4.2
   };
 
   // Aligner tolerances

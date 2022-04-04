@@ -28,7 +28,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
-  ReverseShooter shootBalls = ReverseShooter.getInstance();
+  AutoBeltUp shootBalls = AutoBeltUp.getInstance();
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
     PIDController xController = new PIDController(1.5, 0, 0.4);
@@ -80,7 +80,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new ParallelDeadlineGroup(new WaitCommand(.5), shootBalls),
+        new ParallelDeadlineGroup(new WaitCommand(.5), new ShootBalls()),
         new AutoBeltUp(),
         new InstantCommand(() -> gyro.setOffset(0))    
 

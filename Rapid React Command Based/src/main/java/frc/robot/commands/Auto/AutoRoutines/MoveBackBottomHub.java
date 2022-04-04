@@ -77,7 +77,7 @@ public class MoveBackBottomHub extends SequentialCommandGroup {
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new ParallelDeadlineGroup(new WaitCommand(.5), shootBalls),
+        new ParallelDeadlineGroup(new WaitCommand(.5), new ShootBalls()),
         new AutoBeltUp(),
         new InstantCommand(() -> gyro.setOffset(0))    
     );
