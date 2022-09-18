@@ -33,7 +33,9 @@ import frc.robot.commands.Climber.LowerClimberArms;
 import frc.robot.commands.Climber.LowerClimberHooks;
 import frc.robot.commands.Climber.RaiseClimberArms;
 import frc.robot.commands.Climber.RaiseClimberHooks;
+import frc.robot.commands.Conveyor.BeltUp;
 import frc.robot.commands.Conveyor.RunShooter;
+import frc.robot.commands.Conveyor.ShootBalls;
 import frc.robot.commands.Conveyor2.Conveyor.IntakeBall2;
 import frc.robot.commands.Conveyor2.Conveyor.LowerIntake2;
 import frc.robot.commands.Conveyor2.Conveyor.OuttakeBall2;
@@ -180,8 +182,6 @@ public class RobotContainer {
     gunner.dPadUp.whenHeld(raiseClimberHooks);
     gunner.dPadDown.whenHeld(lowerClimberHooks);
     gunner.startButton.whenHeld(new InstantCommand(() -> climber.resetClimberEncoders()));
-
-  
 
   }
 

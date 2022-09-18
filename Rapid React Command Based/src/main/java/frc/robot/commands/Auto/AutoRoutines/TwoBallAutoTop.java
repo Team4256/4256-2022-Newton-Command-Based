@@ -12,8 +12,11 @@ import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.*;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoBeltUp;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoLowerIntake;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
@@ -25,7 +28,7 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
   SwerveSubsystem swerve = SwerveSubsystem.getInstance();
   Gyro gyro = Gyro.getInstance();
   Conveyor conveyor = Conveyor.getInstance();
-  ReverseShooter shootBalls = ReverseShooter.getInstance();
+  AutoBeltUp shootBalls = AutoBeltUp.getInstance();
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
     PIDController xController = new PIDController(1.5, 0, 0.4);
@@ -57,17 +60,29 @@ public class TwoBallAutoTop extends SequentialCommandGroup {
       //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
       //command,
       //new InstantCommand(() -> swerve.stopModules())
+       // new InstantCommand(() -> gyro.reset()),
+        //new InstantCommand(() -> gyro.setOffset(159)),
+        //new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
+        //new InstantCommand(() -> thetaController.reset(Math.toRadians(159))),
+        //new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
+        //new AutoShootBalls(),
+        //new AutoLowerIntake(),
+        //new AutoSwerveIntake(command),
+        //new InstantCommand(() -> swerve.stopModules()),
+        //new AutoShootBalls()
+
         new InstantCommand(() -> gyro.reset()),
-        new InstantCommand(() -> gyro.setOffset(159)),
+        new InstantCommand(() -> gyro.setOffset(-111)),
         new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
-        new InstantCommand(() -> thetaController.reset(Math.toRadians(159))),
+        new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
         new AutoShootBalls(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new AutoShootBalls()
-
+        new ParallelDeadlineGroup(new WaitCommand(.5), new ShootBalls()),
+        new AutoBeltUp(),
+        new InstantCommand(() -> gyro.setOffset(0))    
 
     // Add the deadline command in the super() call. Add other commands using
     // addCommands().

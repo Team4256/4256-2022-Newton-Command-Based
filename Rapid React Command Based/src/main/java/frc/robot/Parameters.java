@@ -143,7 +143,7 @@ public class Parameters {
    * Swerve #9 = 1.00
    *Swerve #10 = 2.29
    */
-  //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=9
+  //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=8
   public static final double angleEncoderTareVoltage[] = {
     3.21,
     2.29,

@@ -5,27 +5,25 @@
 package frc.robot.commands.Conveyor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Conveyor;
 
-public class ShootBalls extends CommandBase {
+public class BeltUp extends CommandBase {
   
-  private static ShootBalls instance = null;
+  private static BeltUp instance = null;
   Conveyor conveyor;
 
-  public static synchronized ShootBalls getInstance() {
+  public static synchronized BeltUp getInstance() {
     if (instance == null) {
-      instance = new ShootBalls();
+      instance = new BeltUp();
     }
     return instance;
   }
   
-public ShootBalls() {
+public BeltUp() {
    this.conveyor = Conveyor.getInstance();
    addRequirements(conveyor);
   }
+
 
   // Called when the command is initially scheduled.
   @Override
@@ -35,9 +33,9 @@ public ShootBalls() {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() { 
+  public void execute() {
+    conveyor.conveyorBeltUp();
     conveyor.spinConveyorShooter();
-    //conveyor.conveyorBeltUp();
   }
 
   // Called once the command ends or is interrupted.
@@ -52,3 +50,4 @@ public ShootBalls() {
     return false;
   }
 }
+
