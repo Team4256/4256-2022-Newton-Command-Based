@@ -9,19 +9,19 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Shooter;
 
-public class ShootBalls2 extends CommandBase {
+public class ShootHigh2 extends CommandBase {
 
-  private static ShootBalls2 instance = null;
+  private static ShootHigh2 instance = null;
   Shooter shooter;
 
-  public static synchronized ShootBalls2 getInstance() {
+  public static synchronized ShootHigh2 getInstance() {
     if (instance == null) {
-      instance = new ShootBalls2();
+      instance = new ShootHigh2();
     }
     return instance;
   }
 
-  public ShootBalls2() {
+  public ShootHigh2() {
     this.shooter = Shooter.getInstance();
     addRequirements(shooter);
   }
@@ -33,12 +33,7 @@ public class ShootBalls2 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if (shooter.isShootingHigh()) {
-    //   shooter.ShootWithOverride();
-    // } else {
-
-    // }
-    shooter.shooterWithOverride();
+    shooter.spinOuterShooterHigh();
   }
 
   // Called once the command ends or is interrupted.

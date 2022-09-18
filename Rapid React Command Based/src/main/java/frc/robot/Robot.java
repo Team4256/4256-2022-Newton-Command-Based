@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
   private Climber climber = Climber.getInstance();
   private Conveyor conveyor = Conveyor.getInstance();
   private Limelight intakeCam = Limelight.getInstance();
+  private Shooter shooter = Shooter.getInstance();
   
   UsbCamera shooterCam;
   //UsbCamera camera2;
@@ -66,6 +67,7 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putNumber("rightClimberPosition", climber.getRightMotorEncoderCounts());
     //SmartDashboard.putNumber("leftClimberPosition", climber.getLeftMotorEncoderCounts());
     SmartDashboard.putBoolean("hasBall", conveyor.hasBall());
+    SmartDashboard.putBoolean("Shoooting High", shooter.isShootingHigh());
     CommandScheduler.getInstance().run();
   }
 

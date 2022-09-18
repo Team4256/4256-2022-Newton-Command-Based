@@ -28,11 +28,17 @@ import frc.robot.commands.Conveyor.RaiseIntake;
 public class Shooter extends SubsystemBase {
 
   private final TalonFX shooterMotor;
+  private final TalonSRX leftOuterShooterMotor;
+  private final TalonSRX rightOuterShooterMotor;
   private static Shooter instance = null;
   private static Conveyor conveyor = Conveyor.getInstance();
+  private static Boolean isShootingHigh = false;
 
   public Shooter() {
     shooterMotor = new TalonFX(Parameters.SHOOTER_MOTOR_ID);
+    leftOuterShooterMotor = new TalonSRX(Parameters.LEFT_OUTER_SHOOTER_MOTOR_ID);
+    rightOuterShooterMotor = new TalonSRX(Parameters.RIGHT_OUTER_SHOOTER_MOTOR_ID);
+    
   }
 
   public static synchronized Shooter getInstance() {
@@ -47,11 +53,26 @@ public class Shooter extends SubsystemBase {
     shooterMotor.set(ControlMode.PercentOutput, Parameters.SHOOTER_MOTOR_SPEED);
   }
 
+  public void spinOuterShooterHigh() {
+    leftOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
+    rightOuterShooterMotor.set(ControlMode.PercentOutput, -Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
+     conveyor.spinConveyorShooter();
+     //
+     conveyor.conveyorBeltUp();
+  }
+
+  public void spinOuterShooterLow() {
+    leftOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_LOW_SPEED);
+    rightOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_LOW_SPEED);
+  }
 
   public void shooterWithOverride() {
-    spinConveyorShooter();
+    //spinConveyorShooter();
     conveyor.conveyorBeltUp();
+    //spinOuterShooterHigh();
+
   }
+
 
   /**
    * Spins the shooter belt on the conveyor system backwards so the ball goes back
@@ -64,12 +85,17 @@ public class Shooter extends SubsystemBase {
     );
   }
 
+  public Boolean isShootingHigh() {
+    return isShootingHigh;
+  }
+
   /**
    * Intakes a ball, runs the ball through the conveyor system and out throught he
    * shooter
    */
   public void shootCurrentBalls() {
     spinConveyorShooter();
+    spinOuterShooterHigh();
   }
 
   /**
@@ -81,8 +107,19 @@ public class Shooter extends SubsystemBase {
     spinConveyorShooterReverse();
   }
 
+  public void setShootHigh() {
+    isShootingHigh = true;
+  }
+
+  public void setShootLow() {
+    isShootingHigh = false;
+  }
+
 
   public void stop() {
     shooterMotor.set(ControlMode.PercentOutput, 0);
+    leftOuterShooterMotor.set(ControlMode.PercentOutput, 0);
+    rightOuterShooterMotor.set(ControlMode.PercentOutput, 0);
+    conveyor.stop();
   }
 }

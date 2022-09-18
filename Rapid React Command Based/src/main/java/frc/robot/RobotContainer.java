@@ -40,10 +40,12 @@ import frc.robot.commands.Conveyor2.Conveyor.OuttakeBall2;
 import frc.robot.commands.Conveyor2.Conveyor.RaiseIntake2;
 import frc.robot.commands.Conveyor2.Conveyor.ReverseShooter2;
 import frc.robot.commands.Conveyor2.Conveyor.ShootBalls2;
+import frc.robot.commands.Conveyor2.Conveyor.ShootHigh2;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Gyro;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Xbox;
 
@@ -62,6 +64,7 @@ public class RobotContainer {
   private final SwerveSubsystem swerveSubsystem = SwerveSubsystem.getInstance();
   private final Climber climber = Climber.getInstance();
   private final Conveyor conveyor = Conveyor.getInstance();
+  private final Shooter shooter = Shooter.getInstance();
   public static boolean smallHooksEngaged;
   public static final Xbox driver = new Xbox(0);
   public static final Xbox gunner = new Xbox(1);
@@ -94,6 +97,7 @@ public class RobotContainer {
   public final Command raiseClimberHooks = RaiseClimberHooks.getInstance();
   public final Command lowerClimberHooks = LowerClimberHooks.getInstance();
   public final Command runShooter = RunShooter.getInstance();
+  public final Command shootHigh = ShootHigh2.getInstance();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -162,7 +166,11 @@ public class RobotContainer {
 
     // shooter
     gunner.rightTriggerButton.whenHeld(shootBalls);
+    
+    //gunner.rightTriggerButton.whenHeld(shootHigh);
     gunner.leftTriggerButton.whenHeld(reverseShooter);
+    gunner.dPadRight.whenPressed(() -> shooter.setShootHigh());
+    gunner.dPadLeft.whenPressed(() -> shooter.setShootLow());
 
     // climber
     gunner.aButton.whenHeld(raiseClimberArms);

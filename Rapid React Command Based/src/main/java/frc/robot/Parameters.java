@@ -97,10 +97,14 @@ public class Parameters {
   public static final int INTAKE_MOTOR_ID = 16;
   public static final int SHOOTER_MOTOR_ID = 26;
   public static final int CONVEYOR_MOTOR_ID = 15;
+  public static final int LEFT_OUTER_SHOOTER_MOTOR_ID = 30; //TODO get real ID
+  public static final int RIGHT_OUTER_SHOOTER_MOTOR_ID = 31; //TODO get real ID
   public static final double INTAKE_MOTOR_SPEED = -1.0;//changed from 0.5
   public static final double OUTTAKE_MOTOR_SPEED = 1.0;//changed from 0.5
   public static final double CONVEYOR_MOTOR_SPEED = 1.0;//changed from 0.5
-  public static final double SHOOTER_MOTOR_SPEED = 1.0;//changed from 0.8
+  public static final double SHOOTER_MOTOR_SPEED = 1;//changed from 0.8
+  public static final double OUTER_SHOOTER_MOTOR_HIGH_SPEED = -1;//TODO get actual needed speeds
+  public static final double OUTER_SHOOTER_MOTOR_LOW_SPEED = .2;//TODO get actual needed speeds
   public static final int CONVEYOR_BALL_SENSOR_ID = 0;
   public static final int INTAKE_DOWN_CHANNEL = 4;
   public static final int INTAKE_UP_CHANNEL = 5;
@@ -110,40 +114,41 @@ public class Parameters {
   //   .020751951,
   //   0.01220703,
   //   0.026855466,
-  0.021,
-  0.017,
-  0.010,
-  0.011
+  0.0037,
+  0.0110,
+  0.0208,
+  0.01010
    };
   public static final double angleEncoderMaxVoltage[] = {
     // 4.921874496,
     // 4.921874496,
     // 4.913329475000001,
     // 4.887694812,
-    4.951,
-    4.952,
-    4.952,
-    4.949
+    4.880,
+    4.9231,
+    4.9243,
+    4.9243
   };
   // COMPETITION ROBOT
   //ensure swerves are on analog 0-3
   /**
-   * Swerve #1 = 
+   * Swerve #1 = 3.21
    * Swerve #2 = 1.22
-   * Swerve #3 = 4.35
+   * Swerve #3 = 0.68
    * Swerve #4 = 
-   * Swerve #5 = 2.89
+   * Swerve #5 = 2.91
    * Swerve #6 = 4.31
    * Swerve #7 = 
    * Swerve #8 = 
    * Swerve #9 = 1.00
+   *Swerve #10 = 2.29
    */
   //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=9
   public static final double angleEncoderTareVoltage[] = {
-    1.22,
-    1.01,
-    4.31,
-    0.99
+    3.21,
+    2.29,
+    2.91,
+    0.68
   };
 
   // Aligner tolerances
