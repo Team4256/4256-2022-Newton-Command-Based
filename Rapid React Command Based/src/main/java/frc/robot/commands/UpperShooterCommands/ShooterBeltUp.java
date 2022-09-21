@@ -2,44 +2,45 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Conveyor2.Conveyor;
+package frc.robot.commands.UpperShooterCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.Shooter;
 
-public class ShootHigh2 extends CommandBase {
+public class ShooterBeltUp extends CommandBase {
+  
+  private static ShooterBeltUp instance = null;
+  Conveyor conveyor;
 
-  private static ShootHigh2 instance = null;
-  Shooter shooter;
-
-  public static synchronized ShootHigh2 getInstance() {
+  public static synchronized ShooterBeltUp getInstance() {
     if (instance == null) {
-      instance = new ShootHigh2();
+      instance = new ShooterBeltUp();
     }
     return instance;
   }
-
-  public ShootHigh2() {
-    this.shooter = Shooter.getInstance();
-    addRequirements(shooter);
+  
+public ShooterBeltUp() {
+   this.conveyor = Conveyor.getInstance();
+   addRequirements(conveyor);
   }
+
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.spinOuterShooterHigh();
+    conveyor.spinConveyorShooter();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.stop();
+    conveyor.stop();
   }
 
   // Returns true when the command should end.
@@ -48,3 +49,4 @@ public class ShootHigh2 extends CommandBase {
     return false;
   }
 }
+

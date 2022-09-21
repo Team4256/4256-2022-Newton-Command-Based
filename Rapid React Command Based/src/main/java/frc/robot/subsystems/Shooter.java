@@ -56,9 +56,9 @@ public class Shooter extends SubsystemBase {
   public void spinOuterShooterHigh() {
     leftOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
     rightOuterShooterMotor.set(ControlMode.PercentOutput, -Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
-     conveyor.spinConveyorShooter();
-     //
-     conveyor.conveyorBeltUp();
+    //  conveyor.spinConveyorShooter();
+    //  //
+    //  conveyor.conveyorBeltUp();
   }
 
   public void spinOuterShooterLow() {

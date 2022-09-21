@@ -42,8 +42,9 @@ import frc.robot.commands.Conveyor2.Conveyor.OuttakeBall2;
 import frc.robot.commands.Conveyor2.Conveyor.RaiseIntake2;
 import frc.robot.commands.Conveyor2.Conveyor.ReverseShooter2;
 import frc.robot.commands.Conveyor2.Conveyor.ShootBalls2;
-import frc.robot.commands.Conveyor2.Conveyor.ShootHigh2;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
+import frc.robot.commands.UpperShooterCommands.ShootHigh2;
+import frc.robot.commands.UpperShooterCommands.ShootHighWithDelay;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Gyro;
@@ -100,6 +101,7 @@ public class RobotContainer {
   public final Command lowerClimberHooks = LowerClimberHooks.getInstance();
   public final Command runShooter = RunShooter.getInstance();
   public final Command shootHigh = ShootHigh2.getInstance();
+  public final Command shootHighWithDelay = new ShootHighWithDelay();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -167,8 +169,8 @@ public class RobotContainer {
     driver.aButton.whenHeld(lowerIntake);
 
     // shooter
-    gunner.rightTriggerButton.whenHeld(shootBalls);
-    
+    //gunner.rightTriggerButton.whenHeld(shootBalls);
+    gunner.rightTriggerButton.whenHeld(shootHighWithDelay);
     //gunner.rightTriggerButton.whenHeld(shootHigh);
     gunner.leftTriggerButton.whenHeld(reverseShooter);
     gunner.dPadRight.whenPressed(() -> shooter.setShootHigh());

@@ -125,6 +125,7 @@ public class Conveyor extends SubsystemBase {
     shooterMotor.set(ControlMode.PercentOutput, Parameters.SHOOTER_MOTOR_SPEED);
   }
 
+  
   /**
    * Spins the shooter belt on the conveyor system backwards so the ball goes back
    * into the rest of the conveyor system
