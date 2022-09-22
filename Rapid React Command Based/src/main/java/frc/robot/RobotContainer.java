@@ -170,7 +170,7 @@ public class RobotContainer {
 
     // shooter
     //gunner.rightTriggerButton.whenHeld(shootBalls);
-    gunner.rightTriggerButton.whenHeld(shootHighWithDelay);
+    gunner.rightTriggerButton.whenPressed(shootHighWithDelay);
     //gunner.rightTriggerButton.whenHeld(shootHigh);
     gunner.leftTriggerButton.whenHeld(reverseShooter);
     gunner.dPadRight.whenPressed(() -> shooter.setShootHigh());

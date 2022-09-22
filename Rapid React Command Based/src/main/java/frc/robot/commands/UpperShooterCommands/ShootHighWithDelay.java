@@ -18,8 +18,9 @@ public class ShootHighWithDelay extends SequentialCommandGroup {
     
     public ShootHighWithDelay () {
         addCommands(
-            new ParallelDeadlineGroup(new SpinOuterShooter(), new WaitCommand(1)),
-            new ParallelDeadlineGroup(shooterBeltUp, new SpinOuterShooter(), new WaitCommand(1))
+            new ParallelDeadlineGroup(new SpinOuterShooter(), new WaitCommand(1))
+            //new ParallelDeadlineGroup(new ShooterBeltUp(), new SpinOuterShooter(), new WaitCommand(1))
+        
         );
     }
 }

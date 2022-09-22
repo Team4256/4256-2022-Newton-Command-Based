@@ -103,7 +103,7 @@ public class Parameters {
   public static final double OUTTAKE_MOTOR_SPEED = 1.0;//changed from 0.5
   public static final double CONVEYOR_MOTOR_SPEED = 1.0;//changed from 0.5
   public static final double SHOOTER_MOTOR_SPEED = 1;//changed from 0.8
-  public static final double OUTER_SHOOTER_MOTOR_HIGH_SPEED = -1;//TODO get actual needed speeds
+  public static final double OUTER_SHOOTER_MOTOR_HIGH_SPEED = -.21;//TODO get actual needed speeds
   public static final double OUTER_SHOOTER_MOTOR_LOW_SPEED = .2;//TODO get actual needed speeds
   public static final int CONVEYOR_BALL_SENSOR_ID = 0;
   public static final int INTAKE_DOWN_CHANNEL = 4;
