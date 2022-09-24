@@ -33,6 +33,7 @@ public class Shooter extends SubsystemBase {
   private static Shooter instance = null;
   private static Conveyor conveyor = Conveyor.getInstance();
   private static Boolean isShootingHigh = false;
+  
 
   public Shooter() {
     shooterMotor = new TalonFX(Parameters.SHOOTER_MOTOR_ID);
@@ -56,14 +57,13 @@ public class Shooter extends SubsystemBase {
   public void spinOuterShooterHigh() {
     leftOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
     rightOuterShooterMotor.set(ControlMode.PercentOutput, -Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
-    //  conveyor.spinConveyorShooter();
-    //  //
-    //  conveyor.conveyorBeltUp();
+    
   }
+
 
   public void spinOuterShooterLow() {
     leftOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_LOW_SPEED);
-    rightOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_LOW_SPEED);
+    rightOuterShooterMotor.set(ControlMode.PercentOutput, -Parameters.OUTER_SHOOTER_MOTOR_LOW_SPEED);
   }
 
   public void shooterWithOverride() {
@@ -94,8 +94,16 @@ public class Shooter extends SubsystemBase {
    * shooter
    */
   public void shootCurrentBalls() {
-    spinConveyorShooter();
-    spinOuterShooterHigh();
+
+    if (isShootingHigh) {
+      spinConveyorShooter();
+      spinOuterShooterHigh();
+    } else {
+      spinConveyorShooter();
+      spinOuterShooterLow();
+    }
+
+    
   }
 
   /**
