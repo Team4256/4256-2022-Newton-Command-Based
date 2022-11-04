@@ -17,9 +17,11 @@ import frc.robot.*;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoBeltUp;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoLowerIntake;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsHigh;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsLow;
 
 public class ThreeBallAutoBottom extends SequentialCommandGroup {
 
@@ -29,6 +31,7 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
   ShootBalls shootBalls = ShootBalls.getInstance();
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
+  AutoShootBallsHigh shootBallsHigh = AutoShootBallsHigh.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
 
   PIDController xController = new PIDController(1, 0, 0);
@@ -58,11 +61,12 @@ public class ThreeBallAutoBottom extends SequentialCommandGroup {
         new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
-        new AutoShootBalls(),
+        //new AutoShootBallsLow(),
+        new AutoShootBallsHigh(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new ParallelDeadlineGroup(new WaitCommand(.5), shootBalls),
+        new ParallelDeadlineGroup(new WaitCommand(.5), new AutoShootBallsLow()),
         new AutoBeltUp(),
         new InstantCommand(() -> gyro.setOffset(0))    
     );

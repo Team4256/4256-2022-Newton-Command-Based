@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.*;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoLowerIntake;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsHigh;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
@@ -29,6 +30,7 @@ public class FiveBallAuto extends SequentialCommandGroup {
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
   AutoLowerIntake autoIntake = AutoLowerIntake.getInstance();
+  AutoShootBallsHigh shootBallsHigh = AutoShootBallsHigh.getInstance();
 
   PIDController xController = new PIDController(1.5, 0, 0.4);
   PIDController yController = new PIDController(1.5, 0, 0.4);

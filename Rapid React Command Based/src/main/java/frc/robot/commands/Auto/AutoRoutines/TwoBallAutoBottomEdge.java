@@ -20,6 +20,8 @@ import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsHigh;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsLow;
 
 public class TwoBallAutoBottomEdge extends SequentialCommandGroup {
 
@@ -29,6 +31,7 @@ public class TwoBallAutoBottomEdge extends SequentialCommandGroup {
   ReverseShooter shootBalls = ReverseShooter.getInstance();
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
+  AutoShootBallsHigh shootBallsHigh = AutoShootBallsHigh.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(
@@ -74,11 +77,12 @@ public class TwoBallAutoBottomEdge extends SequentialCommandGroup {
         new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
-        new AutoShootBalls(),
+        //new AutoShootBallsHigh(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
+        new AutoShootBallsHigh(),
         new InstantCommand(() -> swerve.stopModules()),
-        new ParallelDeadlineGroup(new WaitCommand(.5), new ShootBalls()),
+        new ParallelDeadlineGroup(new WaitCommand(.5), new AutoShootBallsLow()),
         new AutoBeltUp(),
         new InstantCommand(() -> gyro.setOffset(0))    
 

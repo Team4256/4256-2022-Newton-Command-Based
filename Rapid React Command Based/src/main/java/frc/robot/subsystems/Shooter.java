@@ -73,7 +73,11 @@ public class Shooter extends SubsystemBase {
 
   }
 
-
+  public void reverseChute() {
+    leftOuterShooterMotor.set(ControlMode.PercentOutput, -Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
+    rightOuterShooterMotor.set(ControlMode.PercentOutput, Parameters.OUTER_SHOOTER_MOTOR_HIGH_SPEED);
+    conveyor.runConveyorSystemReverse();
+  }
   /**
    * Spins the shooter belt on the conveyor system backwards so the ball goes back
    * into the rest of the conveyor system
@@ -113,6 +117,7 @@ public class Shooter extends SubsystemBase {
    */
   public void runConveyorSystemReverse() {
     spinConveyorShooterReverse();
+    reverseChute();
   }
 
   public void setShootHigh() {

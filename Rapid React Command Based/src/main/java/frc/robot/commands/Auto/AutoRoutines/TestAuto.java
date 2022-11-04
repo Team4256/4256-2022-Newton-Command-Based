@@ -12,6 +12,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.*;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsHigh;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
 
@@ -22,6 +23,7 @@ public class TestAuto extends SequentialCommandGroup {
   Conveyor conveyor = Conveyor.getInstance();
   ReverseShooter shootBalls = ReverseShooter.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
+  AutoShootBallsHigh shootBallsHigh = AutoShootBallsHigh.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(

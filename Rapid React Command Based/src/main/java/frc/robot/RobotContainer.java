@@ -21,6 +21,7 @@ import frc.robot.commands.Auto.AutoRoutines.TestAuto;
 import frc.robot.commands.Auto.AutoRoutines.ThreeBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottom;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottomEdge;
+import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoBottomHigh;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddle;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoMiddleEdge;
 import frc.robot.commands.Auto.AutoRoutines.TwoBallAutoTop;
@@ -43,6 +44,7 @@ import frc.robot.commands.Conveyor2.Conveyor.RaiseIntake2;
 import frc.robot.commands.Conveyor2.Conveyor.ReverseShooter2;
 import frc.robot.commands.Conveyor2.Conveyor.ShootBalls2;
 import frc.robot.commands.Swerve.SwerveXboxCmd;
+import frc.robot.commands.UpperShooterCommands.ReverseChute;
 import frc.robot.commands.UpperShooterCommands.ShootHigh2;
 import frc.robot.commands.UpperShooterCommands.ShootHighWithDelay;
 import frc.robot.subsystems.Climber;
@@ -86,6 +88,7 @@ public class RobotContainer {
   public final Command moveBackBottomHub = new MoveBackBottomHub();
   public final Command moveBackTopEdge = new MoveBackTopEdge();
   public final Command moveBackTopHub = new MoveBackTopHub();
+  public final Command twoBallAutoHigh = new TwoBallAutoBottomHigh();
   public final Command testAuto = new TestAuto();
   public final Command intakeBall = IntakeBall2.getInstance();
   public final Command outtakeBall = OuttakeBall2.getInstance();
@@ -102,6 +105,7 @@ public class RobotContainer {
   public final Command runShooter = RunShooter.getInstance();
   public final Command shootHigh = ShootHigh2.getInstance();
   public final Command shootHighWithDelay = new ShootHighWithDelay();
+  public final Command reverseChute = new ReverseChute();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -138,6 +142,7 @@ public class RobotContainer {
     chooser.addOption("Move Back Bottom Hub", moveBackBottomHub);
     chooser.addOption("Move Back Top Edge", moveBackTopEdge);
     chooser.addOption("Move Back Top Hub", moveBackTopHub);
+    chooser.addOption("Two Ball Auto Bottom High", twoBallAutoHigh);
     chooser.addOption("Test Auto", testAuto);
 
     // Put the chooser on the dashboard
@@ -167,6 +172,8 @@ public class RobotContainer {
     driver.rightTriggerButton.whenHeld(outtakeBall);
     driver.yButton.whenHeld(raiseIntake);
     driver.aButton.whenHeld(lowerIntake);
+    driver.dPadDown.whenHeld(reverseChute);
+    
 
     // shooter
     //gunner.rightTriggerButton.whenHeld(shootBalls);

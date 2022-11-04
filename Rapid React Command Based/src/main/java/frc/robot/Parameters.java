@@ -103,7 +103,7 @@ public class Parameters {
   public static final double OUTTAKE_MOTOR_SPEED = 1.0;//changed from 0.5
   public static final double CONVEYOR_MOTOR_SPEED = 1.0;//changed from 0.5
   public static final double SHOOTER_MOTOR_SPEED = 1;//changed from 0.8
-  public static final double OUTER_SHOOTER_MOTOR_HIGH_SPEED = -.65;//TODO get actual needed speeds (.21)
+  public static final double OUTER_SHOOTER_MOTOR_HIGH_SPEED = -.58;//TODO get actual needed speeds (.6)
   public static final double OUTER_SHOOTER_MOTOR_LOW_SPEED = -.2;//TODO get actual needed speeds
   public static final int CONVEYOR_BALL_SENSOR_ID = 0;
   public static final int INTAKE_DOWN_CHANNEL = 4;
@@ -145,10 +145,10 @@ public class Parameters {
    */
   //CURRENT COMPETITON SWERVES: A=2, B=6 , C=3, D=8
   public static final double angleEncoderTareVoltage[] = {
-    1.22,
-    1.11,
-    1.18,
-    4.25
+    1.21,
+    1.07,
+    1.12,
+    4.24
   };
 
   // Aligner tolerances

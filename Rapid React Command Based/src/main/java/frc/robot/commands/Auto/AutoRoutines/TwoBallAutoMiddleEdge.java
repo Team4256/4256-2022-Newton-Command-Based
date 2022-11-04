@@ -17,9 +17,11 @@ import frc.robot.*;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoBeltUp;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoLowerIntake;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBalls;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsHigh;
 import frc.robot.commands.Auto.GeneralAutoCommands.AutoSwerveIntake;
 import frc.robot.commands.Conveyor.*;
 import frc.robot.subsystems.*;
+import frc.robot.commands.Auto.GeneralAutoCommands.AutoShootBallsLow;
 
 public class TwoBallAutoMiddleEdge extends SequentialCommandGroup {
 
@@ -29,12 +31,13 @@ public class TwoBallAutoMiddleEdge extends SequentialCommandGroup {
   ReverseShooter shootBalls = ReverseShooter.getInstance();
   LowerIntake lowerIntake = LowerIntake.getInstance();
   IntakeBall intakeBall = IntakeBall.getInstance();
+  AutoShootBallsHigh shootBallsHigh = AutoShootBallsHigh.getInstance();
     PIDController xController = new PIDController(1, 0, 0);
     PIDController yController = new PIDController(1, 0, 0);
     ProfiledPIDController thetaController = new ProfiledPIDController(
       5,
       0,
-      0,
+      0.5,
       Parameters.THETA_CONTROLLER_CONSTRAINTS
     );
     
@@ -69,16 +72,17 @@ public class TwoBallAutoMiddleEdge extends SequentialCommandGroup {
         //new InstantCommand(() -> swerve.stopModules()),
         //new AutoShootBalls()
 
+        
         new InstantCommand(() -> gyro.reset()),
         new InstantCommand(() -> gyro.setOffset(-111)),
         new InstantCommand(() -> thetaController.enableContinuousInput(0, 2*Math.PI)),
         new InstantCommand(() -> thetaController.reset(Math.toRadians(-111))),
         new InstantCommand(() -> swerve.resetOdometer(autoPath.getInitialPose())),
-        new AutoShootBalls(),
+        new AutoShootBallsLow(),
         new AutoLowerIntake(),
         new AutoSwerveIntake(command),
         new InstantCommand(() -> swerve.stopModules()),
-        new ParallelDeadlineGroup(new WaitCommand(.5), new ShootBalls()),
+        new ParallelDeadlineGroup(new WaitCommand(.5), new AutoShootBallsLow()),
         new AutoBeltUp(),
         new InstantCommand(() -> gyro.setOffset(0))    
 
